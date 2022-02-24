@@ -9,9 +9,11 @@ export default {
         menuList: [],
 
         editableTabsValue: 'SystemIndex',
+        // editableTabsValue: '',
         editableTabs: [{
             title: '首页',
             name: 'SystemIndex',
+            // name: '',
         }]
     },
     mutations: {

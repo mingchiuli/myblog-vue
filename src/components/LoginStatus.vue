@@ -13,6 +13,7 @@
 </template>
 
 <script>
+
 export default {
   name: "LoginStatus",
   data() {
@@ -34,7 +35,8 @@ export default {
     },
 
     backStage() {
-      this.$router.push('/sys/')
+      const name = this.$store.state.menus.editableTabsValue
+      this.$router.push({name: name})
     },
 
 
