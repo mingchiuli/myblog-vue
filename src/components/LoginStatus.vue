@@ -31,7 +31,7 @@ export default {
     },
 
     add() {
-      this.$router.push('/blog/add')
+      this.$router.push({name: 'BlogAdd'})
     },
 
     backStage() {

@@ -10,12 +10,10 @@
           :fetch-suggestions="querySearchAsync"
           placeholder="请输入内容"
           @select="handleSelect"
-          clearable style="width: 15%;margin-top: 10px;margin-left: 65%;"
-      ></el-autocomplete>
+          clearable style="width: 15%;margin-top: 10px;margin-left: 65%;"></el-autocomplete>
 
       <el-button @click="searchKeyword" type="success" plain style="margin-top: 10px;font-size: smaller;" icon="el-icon-search"></el-button>
     </div>
-
 
     <div class="m-content" v-if="year === 0">
       <h1>日志</h1>
@@ -28,7 +26,6 @@
     </div>
 
     <LoginStatus></LoginStatus>
-
 
     <div class="block">
       <el-timeline>

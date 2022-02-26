@@ -24,10 +24,6 @@ export default {
         return
       }
 
-      // if (activeName === 'SystemIndex') {
-      //   return
-      // }
-
       if (activeName === targetName) {
         tabs.forEach((tab, index) => {
           if (tab.name === targetName) {

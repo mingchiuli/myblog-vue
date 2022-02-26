@@ -397,6 +397,11 @@ export default {
           message: '恭喜你，操作成功',
           type: 'success',
           onClose:() => {
+
+            if ((this.current - 1) * this.size + 1 === this.total) {
+              this.current--;
+            }
+
             this.getAllBlogs()
           }
         });

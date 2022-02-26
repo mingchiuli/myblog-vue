@@ -4,8 +4,8 @@ import store from './store'
 import router from './router'
 
 
-// axios.defaults.baseURL = "http://localhost:8081"
-axios.defaults.baseURL = "http://81.68.192.120:8081"
+axios.defaults.baseURL = "http://localhost:8081"
+// axios.defaults.baseURL = "http://81.68.192.120:8081"
 
 const request = axios.create({
     timeout: 5000
@@ -19,10 +19,9 @@ request.interceptors.request.use(config => {
 
 request.interceptors.response.use(response => {
 
-    console.log(response)
-
     let res = response.data;
 
+    //controller里直接return Result.fail的话在这里
     if (res.code === 200) {
       return response
     } else {
@@ -50,12 +49,19 @@ request.interceptors.response.use(response => {
 
       //error.response.data: tomcat的错误页面html
 
+      //经过全局异常处理的话，result会抛到这里面
+      if (error.response.data) {
 
-      if(error.response.status === 401) {
-          store.commit("REMOVE_INFO")
-          router.push("/login")
+          if (error.response.data.code === 401) {
+              store.commit("REMOVE_INFO")
+              router.push("/login")
+          }
+
+          Element.Message.error(error.response.data.msg, {duration: 3 * 1000})
+          return Promise.reject(error)
       }
 
+      //不在controller里的异常，如果没有处理就抛到这里
       Element.Message.error(error.message, {duration: 3 * 1000})
       return Promise.reject(error)
   }

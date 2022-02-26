@@ -7,16 +7,21 @@ export default {
     state: {
 
         menuList: [],
+        hasRoutes: false,
 
-        editableTabsValue: 'SystemIndex',
+        editableTabsValue: 'SystemWebs',
         editableTabs: [{
             title: '首页',
-            name: 'SystemIndex',
+            name: 'SystemWebs',
         }]
     },
     mutations: {
         setMenuList(state, menus) {
             state.menuList = menus
+        },
+
+        changeRouteStatus(state, hasRoutes) {
+            state.hasRoutes = hasRoutes
         },
 
         addTab(state, tab) {
@@ -35,11 +40,12 @@ export default {
 
         resetState: (state) => {
             state.menuList = []
+            state.hasRoutes = false
 
-            state.editableTabsValue = 'SystemIndex'
+            state.editableTabsValue = 'SystemWebs'
             state.editableTabs = [{
-                title: '首页',
-                name: 'SystemIndex',
+                title: '收藏检索',
+                name: 'SystemWebs',
             }]
         }
 

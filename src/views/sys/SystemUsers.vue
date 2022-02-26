@@ -111,12 +111,12 @@
           <el-button v-if="scope.row.monitor === 1 && scope.row.id !== 1" type="text" @click="roleKick(scope.row.id)">踢掉</el-button>
           <el-divider v-if="scope.row.monitor === 1 && scope.row.id !== 1" direction="vertical"></el-divider>
           <el-button type="text" @click="infoHandle(scope.row.id)">信息</el-button>
-          <el-divider direction="vertical" v-if="scope.row.id !== 1"></el-divider>
+          <el-divider direction="vertical"></el-divider>
 
 
           <template>
             <el-popconfirm title="这是一段内容确定删除吗？" @confirm="delHandle(scope.row.id)">
-              <el-button type="text" slot="reference" v-if="scope.row.id !== 1" style="color: indianred;">删除</el-button>
+              <el-button type="text" slot="reference" style="color: indianred;">删除</el-button>
             </el-popconfirm>
           </template>
 
@@ -528,6 +528,8 @@ export default {
     },
 
     delHandle(id) {
+
+
       const ids = [];
 
       if (id) {
@@ -547,6 +549,11 @@ export default {
           message: '删除成功',
           type: 'success',
           onClose:() => {
+
+            if ((this.current - 1) * this.size + 1 === this.total) {
+              this.current--;
+            }
+
             this.getUserList()
           }
         });

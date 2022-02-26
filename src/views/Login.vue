@@ -2,12 +2,9 @@
   <div>
 
     <el-container>
-<!--      <el-header style="margin-top: 50px; text-align: center; font-size: xx-large;">-->
       <el-header style="text-align: center; font-size: xx-large;">
-<!--        <img class="mlogo" src="http://localhost:8080/a.png" alt="">-->
         :)
       </el-header>
-<!--      <el-main style="margin-top: 80px">-->
       <el-main style="margin-top: 8%;margin-left: 20%;height: 100%">
         <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
           <el-form-item label="用户名" prop="username" style="width: 70%">
@@ -69,6 +66,24 @@
     },
     methods: {
 
+      menuToRoute(menu) {
+        if (!menu.component) {
+          return null
+        }
+
+        let route = {
+          name: menu.name,
+          path: menu.path,
+          meta: {
+            icon: menu.icon,
+            title: menu.title
+          }
+        }
+        route.component = () => import('@/views/' + menu.component +'.vue')
+
+        return route
+      },
+
       getCaptcha() {
         this.$axios.get('/captcha').then(res => {
 
@@ -94,8 +109,7 @@
               _this.$store.commit("SET_TOKEN", jwt)
               _this.$store.commit("SET_LOGIN", true)
 
-
-              _this.$router.push("/blogs/1")
+              _this.$router.push('blogs/1')
 
             })
 

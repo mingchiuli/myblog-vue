@@ -2,9 +2,6 @@
     <div>
 
       <div>
-        <div style="height: 45px">
-          <Sider style="width: 0; margin-left: 10%;margin-top: 5px"></Sider>
-        </div>
         <h1 style="text-align: center;">路由错误</h1>
         <hr>
         <div class="mbody">

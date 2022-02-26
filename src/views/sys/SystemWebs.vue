@@ -106,8 +106,8 @@
     <el-pagination class="mpage"
                    background
                    layout="prev, pager, next"
-                   :current-page="currentPage"
-                   :page-size="pageSize"
+                   :current-page="current"
+                   :page-size="size"
                    :total="total"
                    @current-change=pageSelect>
     </el-pagination>
@@ -120,8 +120,8 @@ export default {
   name: "SystemWebs",
   data() {
     return {
-      currentPage: 1,
-      pageSize: 9,
+      current: 1,
+      size: 9,
       webHits: '',
       loading: false,
       total: 0,
@@ -207,9 +207,9 @@ export default {
       }
 
       this.webs = res.data.data.records
-      this.currentPage = res.data.data.current
+      this.current = res.data.data.current
       this.total = res.data.data.total
-      this.pageSize = res.data.data.size
+      this.size = res.data.data.size
 
 
       this.webs.forEach((item) => {
@@ -347,18 +347,18 @@ export default {
       window.open().location.href = link
     },
 
-    pageSelect(currentPage) {
+    pageSelect(current) {
       if (this.webHits !== '') {
         if (sessionStorage.getItem('myToken')) {
-          this.$axios.get('/searchWebsiteAuth/' + currentPage + '?keyword=' + this.webHits, {
+          this.$axios.get('/searchWebsiteAuth/' + current + '?keyword=' + this.webHits, {
             headers: {
               "Authorization": sessionStorage.getItem("myToken")
             }
           }).then(res => {
             this.webs = res.data.data.records
-            this.currentPage = res.data.data.current
+            this.current = res.data.data.current
             this.total = res.data.data.total
-            this.pageSize = res.data.data.size
+            this.size = res.data.data.size
 
             this.webs.forEach((item) => {
               item.created = item.created.replace('T', ' ')
@@ -367,11 +367,11 @@ export default {
             this.loading = false
           })
         } else {
-          this.$axios.get('/searchWebsite/' + currentPage + '?keyword=' + this.webHits).then(res => {
+          this.$axios.get('/searchWebsite/' + current + '?keyword=' + this.webHits).then(res => {
             this.webs = res.data.data.records
-            this.currentPage = res.data.data.current
+            this.current = res.data.data.current
             this.total = res.data.data.total
-            this.pageSize = res.data.data.size
+            this.size = res.data.data.size
 
             this.webs.forEach((item) => {
               item.created = item.created.replace('T', ' ')
@@ -381,7 +381,7 @@ export default {
           })
         }
       } else {
-        this.getWebList(currentPage)
+        this.getWebList(current)
       }
     },
 
@@ -403,16 +403,16 @@ export default {
     },
 
 
-    getWebList(currentPage) {
+    getWebList(current) {
       const _this = this
 
       this.loading = true
 
-      this.$axios.get('/searchRecent/' + currentPage).then(res => {
+      this.$axios.get('/searchRecent/' + current).then(res => {
         _this.webs = res.data.data.records
-        _this.currentPage = res.data.data.current
+        _this.current = res.data.data.current
         _this.total = res.data.data.total
-        _this.pageSize = res.data.data.size
+        _this.size = res.data.data.size
 
         for (let i = 0; i < _this.webs.length; i++) {
           _this.webs[i].created = _this.webs[i].created.replace('T', ' ')

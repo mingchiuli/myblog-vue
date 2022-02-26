@@ -1,12 +1,6 @@
 import Vue from 'vue'
 import BlogDetail from '../views/BlogDetail.vue'
 import Intro from '../views/Intro.vue'
-import SystemIndex from "../views/sys/SystemIndex";
-import SystemUsers from "../views/sys/SystemUsers";
-import SystemBlogs from "../views/sys/SystemBlogs";
-import SystemBooks from "../views/sys/SystemBooks";
-import SystemDeleted from "../views/sys/SystemDeleted";
-import SystemLogs from "../views/sys/SystemLogs";
 import Cooperate from "@/views/Cooperate";
 import VueRouter from 'vue-router';
 import SystemWebs from "@/views/sys/SystemWebs";
@@ -22,64 +16,13 @@ const routes = [
     component: () => import('@/views/System'),
     children: [
       {
-        path: '/',
-        name: 'SystemIndex',
-        component: () => import('@/views/sys/SystemIndex'),
-        meta: {
-          title: '访问统计',
-          requireAuth: true,
-        }
-      },
-      {
-        path: 'users',
-        name: 'SystemUsers',
-        component: () => import('@/views/sys/SystemUsers'),
-        meta: {
-          requireAuth: true,
-          title: '账号管理'
-        }
-      },
-      {
-        path: 'blogs',
-        name: 'SystemBlogs',
-        component: () => import('@/views/sys/SystemBlogs'),
-        meta: {
-          title: '日志管理',
-          requireAuth: true
-        }
-      },
-      {
-        path: 'deleted',
-        name: 'SystemDeleted',
-        component: () => import('@/views/sys/SystemDeleted'),
-        meta: {
-          title: '删除管理',
-          requireAuth: true
-        }
-      },
-      {
-        path: 'books',
-        name: 'SystemBooks',
-        component: () => import('@/views/sys/SystemBooks'),
-        title: '下载书籍'
-      },
-      {
-        path: 'logs',
-        name: 'SystemLogs',
-        component: () => import('@/views/sys/SystemLogs'),
-        meta: {
-          title: '系统日志',
-          requireAuth: true
-        }
-      },
-      {
-        path: 'webs',
         name: 'SystemWebs',
+        path: 'webs',
         component: () => import('@/views/sys/SystemWebs'),
         meta: {
           title: '收藏检索',
         }
-      }
+      },
     ]
   },
   {
