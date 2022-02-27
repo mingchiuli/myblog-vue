@@ -4,8 +4,8 @@ import store from './store'
 import router from './router'
 
 
-axios.defaults.baseURL = "http://localhost:8081"
-// axios.defaults.baseURL = "http://81.68.192.120:8081"
+// axios.defaults.baseURL = "http://localhost:8081"
+axios.defaults.baseURL = "http://81.68.192.120:8081"
 
 const request = axios.create({
     timeout: 5000

@@ -17,15 +17,6 @@
               <span>{{menu.title}}</span>
             </template>
 
-<!--            <router-link @click="to(item.url)" v-for="item in menu.children">-->
-<!--              <el-menu-item :index="item.name" @click="selectMenu(item)">-->
-<!--                <template slot="title">-->
-<!--                  <i :class="item.icon"></i>-->
-<!--                  <span slot="title">{{item.title}}</span>-->
-<!--                </template>-->
-<!--              </el-menu-item>-->
-<!--            </router-link>-->
-
             <a @click="to(item.name)" v-for="item in menu.children">
               <el-menu-item :index="item.name" @click="selectMenu(item)">
                 <template slot="title">

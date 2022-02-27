@@ -52,9 +52,11 @@ router.beforeEach((to, from, next) => {
   } else if (to.matched.some(record => record.meta.requireAuth) && !sessionStorage.getItem("myToken")) {
 
     next({path: '/login'})
+
   }
 
   next()
+
 })
 // // 导航转成路由
 const menuToRoute = (menu) => {

@@ -197,7 +197,7 @@ export default {
           body: this[target] === '' ? ' ' : this[target]
         })
       } catch (e) {
-
+        console.log(e)
       }
     },
 
@@ -484,6 +484,7 @@ export default {
             headers: { Authorization: sessionStorage.getItem("myToken") },
           })
         } catch (e) {
+          console.log(e)
         }
         stompClient.deactivate()
       }

@@ -38,7 +38,7 @@
       <li style="text-align: center">Secret Garden《Winter Poem》</li>
 
       <p style="text-align: center">
-        <img style="width: 700px; height: 400px" src="../../public/746311-20191023220441012-897312309.jpg" class="mImg" alt="">
+        <img style="width: 50%; height: 30%" src="../../public/746311-20191023220441012-897312309.jpg" class="mImg" alt="">
       </p>
       <li style="text-align: center">博客园抠的《不知道从哪来的图片》</li>
     </div>

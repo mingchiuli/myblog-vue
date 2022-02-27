@@ -175,7 +175,7 @@
 					orderNum: [
 						{required: true, message: '请填入排序号', trigger: 'blur'}
 					],
-					statu: [
+					status: [
 						{required: true, message: '请选择状态', trigger: 'blur'}
 					]
 				},
