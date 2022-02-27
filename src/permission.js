@@ -9,8 +9,6 @@ router.beforeEach((to, from, next) => {
 
   let hasRoute = store.state.menus.hasRoutes
 
-
-
   if (token && !hasRoute) { // 判断该路由是否需要登录权限
 
     axios.get("/sys/menu/nav", {
@@ -25,21 +23,12 @@ router.beforeEach((to, from, next) => {
       // 动态绑定路由
       let newRoutes = router.options.routes
 
-      res.data.data.forEach(menu => {
-        if (menu.children) {
-          menu.children.forEach(e => {
+      let data = res.data.data
 
-            // 转成路由
-            let route = menuToRoute(e)
-
-            // 吧路由添加到路由管理中
-            if (route) {
-              newRoutes[0].children.push(route)
-            }
-
-          })
-        }
+      data.forEach(item => {
+        recursive(item, newRoutes)
       })
+
 
       newRoutes.forEach(item => {
         router.addRoute(item)
@@ -78,3 +67,24 @@ const menuToRoute = (menu) => {
 
   return route
 }
+
+// 算法优化，递归构建路由
+const recursive = (data, newRoutes) => {
+
+  if (data.children) {
+    data.children.forEach(item => {
+      recursive(item, newRoutes)
+    })
+  }
+
+  let route = menuToRoute(data)
+
+  if (route) {
+    newRoutes[0].children.push(route)
+  }
+
+}
+
+
+
+

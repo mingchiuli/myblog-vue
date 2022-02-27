@@ -215,7 +215,6 @@ export default {
             }
           }
 
-
           for (let i = 0; i < count; i++) {
 
             if (num !== i) {

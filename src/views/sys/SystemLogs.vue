@@ -90,7 +90,6 @@ export default {
 
       stompClient.webSocketFactory = function () {
         //因为服务端监听的是/sysLog路径下面的请求，所以跟服务端保持一致
-        // return new SockJS("http://127.0.0.1:8081" + '/sysLog', null, {
           return new SockJS(GLOBAL.url + '/sysLog', null, {
           timeout: 10000
         });

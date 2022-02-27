@@ -15,6 +15,7 @@
 				stripe
 				default-expand-all
 				:tree-props="{children: 'children', hasChildren: 'hasChildren'}">
+<!--      hasChildren在tableData没有也可以先写上-->
 
 			<el-table-column
 					prop="title"
@@ -194,6 +195,7 @@
         }).then(res => {
 
 					this.tableData = res.data.data
+
 				})
 			},
 			submitForm(formName) {
