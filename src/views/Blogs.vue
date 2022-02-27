@@ -5,14 +5,15 @@
       <Sider style="width: 0;margin-left: 10%;"></Sider>
 
       <el-autocomplete
+          v-if="isPC"
           v-model="input"
           @keyup.enter.native="searchKeyword"
           :fetch-suggestions="querySearchAsync"
           placeholder="请输入内容"
           @select="handleSelect"
-          clearable style="width: 15%;margin-top: 10px;margin-left: 65%;"></el-autocomplete>
+          clearable style="width: 15%;margin-top: 10px;margin-left: 65%"></el-autocomplete>
 
-      <el-button @click="searchKeyword" type="success" plain style="margin-top: 10px;font-size: smaller;" icon="el-icon-search"></el-button>
+      <el-button v-if="isPC" @click="searchKeyword" type="success" plain style="margin-top: 10px;font-size: smaller;" icon="el-icon-search"></el-button>
     </div>
 
     <div class="m-content" v-if="year === 0">
@@ -72,10 +73,18 @@
         count: 0,
         loading: false,
         searchAbstract: [],
-        timeout: null
+        timeout: null,
+        isPC: false
       }
     },
     methods: {
+
+      isPCorMobile() {
+        this.flag =  navigator.userAgent.match(/(phone|pod|iPhone|iPod|ios|Android|Moblie|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowerNG|WebOS|Symbian|Windows Phone)/i);
+        if (this.flag === null) {
+          this.isPC = true;
+        }
+      },
 
       querySearchAsyncCommon(res, cb) {
         let raw = res.data.data.records
@@ -280,6 +289,10 @@
       }
 
       this.forCreated()
+    },
+
+    mounted() {
+      this.isPCorMobile()
     },
 
     watch: {
