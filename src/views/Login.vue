@@ -7,15 +7,15 @@
       </el-header>
       <el-main style="margin-top: 8%;margin-left: 20%;height: 100%">
         <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
-          <el-form-item label="用户名" prop="username" style="width: 70%">
+          <el-form-item label="用户名" prop="username" style="width: 400px">
             <el-input v-model="ruleForm.username"></el-input>
           </el-form-item>
-          <el-form-item label="密码" prop="password" style="width: 70%">
+          <el-form-item label="密码" prop="password" style="width: 400px">
             <el-input type="password" v-model="ruleForm.password"></el-input>
           </el-form-item>
           <el-form-item label="验证码" prop="code"  style="width: 380px;">
             <div style="display: flex; flex-direction: row">
-              <el-input v-model="ruleForm.code"  style="width: 50%; float: bottom" maxlength="5"></el-input>
+              <el-input v-model="ruleForm.code"  style="width: 200px; float: bottom" maxlength="5"></el-input>
               <el-image :src="captchaImg" class="captchaImg" @click="getCaptcha"></el-image>
             </div>
           </el-form-item>

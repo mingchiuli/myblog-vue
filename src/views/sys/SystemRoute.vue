@@ -63,7 +63,9 @@
 			</el-table-column>
 			<el-table-column
 					prop="icon"
-					label="操作">
+					label="操作"
+          align="center"
+          fixed="right">
 
 				<template slot-scope="scope">
 					<el-button type="text" @click="editHandle(scope.row.menuId)">编辑</el-button>
@@ -71,7 +73,7 @@
 
 					<template>
 						<el-popconfirm title="这是一段内容确定删除吗？" @confirm="delHandle(scope.row.menuId)">
-							<el-button type="text" slot="reference">删除</el-button>
+							<el-button type="text" slot="reference" style="color: indianred">删除</el-button>
 						</el-popconfirm>
 					</template>
 
