@@ -1,11 +1,13 @@
 <template>
 	<div>
-		<el-form :inline="true">
+		<el-form :inline="true" @submit.native.prevent>
 			<el-form-item label="搜索查询">
 				<el-input
 						v-model="searchForm.name"
 						placeholder="名称"
-						clearable>
+						clearable
+            @keyup.enter.native="getRoleList">
+
 				</el-input>
 			</el-form-item>
 
@@ -35,28 +37,33 @@
 
 			<el-table-column
 					type="selection"
-					width="55">
+					width="55"
+          align="center">
 			</el-table-column>
 
 			<el-table-column
 					prop="name"
 					label="名称"
-					width="120">
+					width="120"
+          align="center">
 			</el-table-column>
 			<el-table-column
 					prop="code"
 					label="唯一编码"
-					show-overflow-tooltip>
+					show-overflow-tooltip
+          align="center">
 			</el-table-column>
 			<el-table-column
 					prop="remark"
 					label="描述"
-					show-overflow-tooltip>
+					show-overflow-tooltip
+          align="center">
 			</el-table-column>
 
 			<el-table-column
 					prop="status"
-					label="状态">
+					label="状态"
+          align="center">
 				<template slot-scope="scope">
 					<el-tag size="small" v-if="scope.row.status === 0" type="success">正常</el-tag>
 					<el-tag size="small" v-else-if="scope.row.status === 1" type="danger">禁用</el-tag>

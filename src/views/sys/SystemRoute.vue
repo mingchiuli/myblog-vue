@@ -21,17 +21,20 @@
 					prop="title"
 					label="名称"
 					sortable
-					width="180">
+					width="180"
+          align="center">
 			</el-table-column>
 
 			<el-table-column
 					prop="icon"
-					label="图标">
+					label="图标"
+          align="center">
 			</el-table-column>
 
 			<el-table-column
 					prop="type"
-					label="类型">
+					label="类型"
+          align="center">
 				<template slot-scope="scope">
 					<el-tag size="small" v-if="scope.row.type === 0">目录</el-tag>
 					<el-tag size="small" v-else-if="scope.row.type === 1" type="success">菜单</el-tag>
@@ -42,19 +45,23 @@
 
 			<el-table-column
 					prop="url"
-					label="菜单URL">
+					label="菜单URL"
+          align="center">
 			</el-table-column>
 			<el-table-column
 					prop="component"
-					label="菜单组件">
+					label="菜单组件"
+          align="center">
 			</el-table-column>
 			<el-table-column
 					prop="orderNum"
-					label="排序号">
+					label="排序号"
+          align="center">
 			</el-table-column>
 			<el-table-column
 					prop="status"
-					label="状态">
+					label="状态"
+          align="center">
 				<template slot-scope="scope">
 					<el-tag size="small" v-if="scope.row.status === 0" type="success">正常</el-tag>
 					<el-tag size="small" v-else-if="scope.row.status === 1" type="danger">禁用</el-tag>
