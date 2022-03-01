@@ -7,6 +7,7 @@
         <h4 style="margin-left: 15%; margin-top: 10%;color: black">BackStage</h4>
 
         <el-menu
+            v-if="this.$store.state.hasLogin"
             :default-active="this.$store.state.menus.editableTabsValue"
             class="el-menu-vertical-demo"
             active-text-color="#ffd04b">
@@ -25,7 +26,22 @@
                 </template>
               </el-menu-item>
             </a>
+          </el-submenu>
+        </el-menu>
 
+
+        <el-menu
+            v-if="!this.$store.state.hasLogin"
+            :default-active="this.$store.state.menus.editableTabsValue"
+            class="el-menu-vertical-demo"
+            ref="menu"
+            active-text-color="#ffd04b">
+          <el-submenu index="2">
+            <template slot="title">
+              <i class="el-icon-magic-stick"></i>
+              <span>工具管理</span>
+            </template>
+            <el-menu-item index="SystemWebs" @click="selectMenu({name: 'SystemWebs', title: '收藏检索'})"><i class="el-icon-link"></i>收藏检索</el-menu-item>
           </el-submenu>
         </el-menu>
 
