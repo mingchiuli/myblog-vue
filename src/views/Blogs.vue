@@ -136,8 +136,13 @@
               confirmButtonText: '确定',
               cancelButtonText: '取消',
             }).then(({ value }) => {
+              this.$axios.get('/blogToken/' + id + '/' + value).then(res => {
+                if (res.data.code === 200) {
+                  this.$router.push('/blog/' + id + '?token=' + value)
+                }
+              })
 
-              _this.$router.push('/blog/' + id + '?token=' + value)
+
 
             }).catch(() => {
               this.$message({

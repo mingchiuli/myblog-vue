@@ -101,6 +101,10 @@ const routes = [
     path: '/blog/:blogId',
     name: 'BlogDetail',
     component: BlogDetail,
+    meta: {
+      requireAuth: true,
+      title: '编辑博客'
+    }
   },
   {
     path: '/blog/:blogId/edit',

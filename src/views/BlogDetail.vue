@@ -329,7 +329,7 @@ export default {
       if (node && node.parent) {
         node.parent.expanded = true
       }
-
+      //展开他的所有父节点
       if (node.parent)
       this.expand(node.parent)
     }

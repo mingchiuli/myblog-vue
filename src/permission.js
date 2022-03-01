@@ -25,6 +25,7 @@ router.beforeEach((to, from, next) => {
 
       let data = res.data.data
 
+      //递归构建路由
       data.forEach(item => {
         recursive(item, newRoutes)
       })
@@ -38,7 +39,7 @@ router.beforeEach((to, from, next) => {
       store.commit("changeRouteStatus", hasRoute)
 
     })
-  } else if (to.matched.some(record => record.meta.requireAuth) && !sessionStorage.getItem("myToken")) {
+  } else if (from.name !== 'Blogs' && to.matched.some(record => record.meta.requireAuth) && !sessionStorage.getItem("myToken")) {
 
     next({path: '/login'})
 
