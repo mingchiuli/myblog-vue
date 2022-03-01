@@ -15,6 +15,7 @@ import 'mavon-editor/dist/css/index.css'
 
 import "./permission"
 import router from './router'
+import 'default-passive-events'
 
 Vue.use(Element)
 Vue.use(mavonEditor)
