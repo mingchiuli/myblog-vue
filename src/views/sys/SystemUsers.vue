@@ -98,6 +98,9 @@
           label="角色"
           width="80"
           align="center">
+        <template slot-scope="scope">
+          <el-tag size="small" type="primary">{{ scope.row.role }}</el-tag>
+        </template>
       </el-table-column>
 
       <el-table-column
@@ -160,7 +163,17 @@
         </el-form-item>
 
         <el-form-item label="角色" prop="role" label-width="100px">
-          <el-input v-model="editForm.role" autocomplete="off"></el-input>
+<!--          <el-input v-model="editForm.role" autocomplete="off"></el-input>-->
+
+          <el-select v-model="editForm.role" placeholder="请选择">
+            <el-option
+                v-for="item in roleList"
+                :key="item.code"
+                :label="item.name"
+                :value="item.code">
+            </el-option>
+          </el-select>
+
         </el-form-item>
 
         <el-form-item label="头像" prop="avatar" label-width="100px">
@@ -206,7 +219,17 @@
         </el-form-item>
 
         <el-form-item label="角色" prop="role" label-width="100px">
-          <el-input v-model="infoForm.role" autocomplete="off"></el-input>
+
+          <el-select v-model="infoForm.role" placeholder="请选择">
+            <el-option
+                v-for="item in roleList"
+                :key="item.code"
+                :label="item.name"
+                :value="item.code">
+            </el-option>
+          </el-select>
+
+<!--          <el-input v-model="infoForm.role" autocomplete="off"></el-input>-->
         </el-form-item>
 
         <el-form-item label="头像" prop="avatar" label-width="100px">
@@ -280,6 +303,11 @@ export default {
       status: 1,
       loading: false,
 
+
+      roleSelected: '',
+      roleList: [],
+
+
       editForm: {},
       passwordForm: {},
       infoForm: {},
@@ -330,9 +358,25 @@ export default {
 
   created() {
     this.getUserList()
+    this.getRoleList()
   },
 
   methods: {
+
+    getRoleList() {
+      this.$axios.get('sys/role/list', {params: {
+          name: '',
+          current: 1,
+          size: 99
+        },
+        headers: {
+          "Authorization": sessionStorage.getItem("myToken")
+        }
+      }).then(res => {
+        this.roleList = res.data.data.records
+        console.log(res)
+      })
+    },
 
     submitForm(formName) {
       this.$refs[formName].validate((valid) => {
