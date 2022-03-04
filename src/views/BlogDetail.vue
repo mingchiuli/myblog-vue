@@ -273,7 +273,7 @@ export default {
             "Authorization": sessionStorage.getItem("myToken")
           }
         }).then(res => {
-          window.history.back()
+          this.$router.push('/blogs/1')
         })
       }).catch(() => {
         this.$message({
@@ -299,7 +299,7 @@ export default {
 
       this.catalogue.forEach(item => {
         let dist = scrolled - item.dist
-        if (dist > 0) {
+        if (dist > -41) {
           temp = item
           return
         }
