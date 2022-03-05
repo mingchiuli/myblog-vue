@@ -257,7 +257,7 @@ export default {
       const position = $(id).offset();
       position.top = position.top - 40;
 
-      $("html,body").animate({ scrollTop: position.top }, 500);
+      $("html,body").animate({ scrollTop: position.top }, 0);
     },
 
     deleteBlog() {
