@@ -5,7 +5,7 @@ import store from "./store"
 // 路由判断登录 根据路由配置文件的参数
 router.beforeEach((to, from, next) => {
 
-  const token = sessionStorage.getItem("myToken")
+  const token = localStorage.getItem("myToken")
 
   let hasRoute = store.state.menus.hasRoutes
 
@@ -13,7 +13,7 @@ router.beforeEach((to, from, next) => {
 
     axios.get("/sys/menu/nav", {
       headers: {
-        Authorization: sessionStorage.getItem("myToken")
+        Authorization: localStorage.getItem("myToken")
       }
     }).then(res => {
 
@@ -39,7 +39,7 @@ router.beforeEach((to, from, next) => {
       store.commit("changeRouteStatus", hasRoute)
 
     })
-  } else if (from.name !== 'Blogs' && to.matched.some(record => record.meta.requireAuth) && !sessionStorage.getItem("myToken")) {
+  } else if (from.name !== 'Blogs' && to.matched.some(record => record.meta.requireAuth) && !localStorage.getItem("myToken")) {
 
     next({path: '/login'})
 

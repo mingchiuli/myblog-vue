@@ -124,7 +124,7 @@
       }
     },
     created() {
-      if (sessionStorage.getItem('myToken')) {
+      if (localStorage.getItem('myToken')) {
         this.$router.push('/blogs/1')
         return
       }

@@ -41,7 +41,7 @@ export default {
   },
 
   created() {
-    if (sessionStorage.getItem('myToken')) {
+    if (localStorage.getItem('myToken')) {
       this.avatar = this.$store.state.myUserInfo.avatar
       this.username = this.$store.state.myUserInfo.username
     }

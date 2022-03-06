@@ -41,7 +41,7 @@ export default {
     show() {
       this.$axios.get('/startMQ', {
         headers: {
-          "Authorization": sessionStorage.getItem("myToken")
+          "Authorization": localStorage.getItem("myToken")
         }
       }).then(res => {
       })
@@ -78,7 +78,7 @@ export default {
       const _this = this
 
       stompClient = new Client({
-        connectHeaders: {"Authorization": sessionStorage.getItem("myToken")},
+        connectHeaders: {"Authorization": localStorage.getItem("myToken")},
         debug: function (str) {
           //debug日志，调试时候开启
           // console.log(str);
@@ -124,7 +124,7 @@ export default {
 
         this.$axios.get('/stopMQ', {
           headers: {
-            "Authorization": sessionStorage.getItem("myToken")
+            "Authorization": localStorage.getItem("myToken")
           }
         }).then(res => {
           stompClient.deactivate()

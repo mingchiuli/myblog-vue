@@ -44,7 +44,7 @@ export default {
       const _this = this
       _this.$axios.get("/logout", {
         headers: {
-          "Authorization": sessionStorage.getItem("myToken")
+          "Authorization": localStorage.getItem("myToken")
         }
       }).then(res => {
         _this.$store.commit("REMOVE_INFO")

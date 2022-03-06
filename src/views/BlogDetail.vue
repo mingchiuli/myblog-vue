@@ -270,7 +270,7 @@ export default {
       }).then(() => {
         this.$axios.post('/deleteBlogs', ids, {
           headers: {
-            "Authorization": sessionStorage.getItem("myToken")
+            "Authorization": localStorage.getItem("myToken")
           }
         }).then(res => {
           this.$router.push('/blogs/1')
@@ -343,14 +343,14 @@ export default {
   },
   created() {
 
-    if (JSON.parse(sessionStorage.getItem("myUserInfo")) && JSON.parse(sessionStorage.getItem("myUserInfo")).role === 'admin') {
+    if (JSON.parse(localStorage.getItem("myUserInfo")) && JSON.parse(localStorage.getItem("myUserInfo")).role === 'admin') {
 
       this.$store.state.hasLogin = true
       this.loading = true
       const blogId = this.$route.params.blogId
       this.$axios.get('/blogAuthorized/' + blogId, {
         headers: {
-          "Authorization": sessionStorage.getItem("myToken")
+          "Authorization": localStorage.getItem("myToken")
         }
       }).then(res => {
 

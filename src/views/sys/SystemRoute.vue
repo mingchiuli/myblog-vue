@@ -199,7 +199,7 @@
 			getMenuTree() {
 				this.$axios.get("/sys/menu/list", {
           headers: {
-            "Authorization": sessionStorage.getItem("myToken")
+            "Authorization": localStorage.getItem("myToken")
           }
         }).then(res => {
 
@@ -212,7 +212,7 @@
 					if (valid) {
 						this.$axios.post('/sys/menu/' + (this.editForm.menuId?'update' : 'save'), this.editForm, {
               headers: {
-                "Authorization": sessionStorage.getItem("myToken")
+                "Authorization": localStorage.getItem("myToken")
               }
             })
 							.then(res => {
@@ -237,7 +237,7 @@
 			editHandle(id) {
 				this.$axios.get('/sys/menu/info/' + id, {
           headers: {
-            "Authorization": sessionStorage.getItem("myToken")
+            "Authorization": localStorage.getItem("myToken")
           }
         }).then(res => {
 					this.editForm = res.data.data
@@ -256,7 +256,7 @@
 			delHandle(id) {
 				this.$axios.post("/sys/menu/delete/" + id, {
           headers: {
-            "Authorization": sessionStorage.getItem("myToken")
+            "Authorization": localStorage.getItem("myToken")
           }
         }).then(res => {
 					this.$message({

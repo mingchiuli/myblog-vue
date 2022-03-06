@@ -68,7 +68,7 @@
             const _this = this
             this.$axios.post('/blog/edit', this.ruleForm, {
               headers: {
-                "Authorization": sessionStorage.getItem("myToken")
+                "Authorization": localStorage.getItem("myToken")
               }
             }).then(res => {
               console.log(res)
@@ -101,7 +101,7 @@
           url: '/upload',
           method: 'post',
           data: formdata,
-          headers: { 'Content-Type': 'multipart/form-data',"Authorization": sessionStorage.getItem("myToken")},
+          headers: { 'Content-Type': 'multipart/form-data',"Authorization": localStorage.getItem("myToken")},
         }).then((url) => {
           // 第二步.将返回的url替换到文本原位置![...](0) -> ![...](url)
           // $vm.$img2Url 详情见本页末尾
@@ -118,7 +118,7 @@
           url: '/delfile',
           method: 'delete',
           data: formdata,
-          headers: { 'Content-Type': 'multipart/form-data',"Authorization": sessionStorage.getItem("myToken")},
+          headers: { 'Content-Type': 'multipart/form-data',"Authorization": localStorage.getItem("myToken")},
         })
         .catch(res => {
           console.log(res)
@@ -139,10 +139,10 @@
       const blogId = this.$route.params.blogId
       console.log(blogId)
       const _this = this
-      if(blogId && sessionStorage.getItem("myUserInfo") && JSON.parse(sessionStorage.getItem("myUserInfo")).role === 'admin') {
+      if(blogId && localStorage.getItem("myUserInfo") && JSON.parse(localStorage.getItem("myUserInfo")).role === 'admin') {
         this.$axios.get('/blogAuthorized/' + blogId, {
           headers: {
-            "Authorization": sessionStorage.getItem("myToken")
+            "Authorization": localStorage.getItem("myToken")
           }
         }).then(res => {
 
@@ -150,7 +150,7 @@
 
           _this.loading = false
         })
-      } else if (blogId && sessionStorage.getItem("myUserInfo")) {
+      } else if (blogId && localStorage.getItem("myUserInfo")) {
         this.$axios.get('/blog/' + blogId).then(res => {
 
           this.assignData(res)
@@ -160,16 +160,16 @@
       } else {
         this.$axios.get('/addNewBlog', {
           headers: {
-            "Authorization": sessionStorage.getItem("myToken")
+            "Authorization": localStorage.getItem("myToken")
           }
         }).then(res => {
           const id = res.data.data
 
-          if (JSON.parse(sessionStorage.getItem("myUserInfo")).role === 'admin') {
+          if (JSON.parse(localStorage.getItem("myUserInfo")).role === 'admin') {
 
             _this.$axios.get('/blogAuthorized/' + id, {
               headers: {
-                "Authorization": sessionStorage.getItem("myToken")
+                "Authorization": localStorage.getItem("myToken")
               }
             }).then(res => {
 

@@ -370,7 +370,7 @@ export default {
           size: 99
         },
         headers: {
-          "Authorization": sessionStorage.getItem("myToken")
+          "Authorization": localStorage.getItem("myToken")
         }
       }).then(res => {
         this.roleList = res.data.data.records
@@ -391,7 +391,7 @@ export default {
           }
           this.$axios.post('/addUser', this.editForm, {
             headers: {
-              "Authorization": sessionStorage.getItem("myToken")
+              "Authorization": localStorage.getItem("myToken")
             }
           }).then(res => {
                 this.$message({
@@ -426,7 +426,7 @@ export default {
           }
           this.$axios.post('/modifyPassword', this.passwordForm, {
             headers: {
-              "Authorization": sessionStorage.getItem("myToken")
+              "Authorization": localStorage.getItem("myToken")
             }
           }).then(res => {
             this.$message({
@@ -454,7 +454,7 @@ export default {
         if (valid) {
           this.$axios.post('/addUser', this.infoForm, {
             headers: {
-              "Authorization": sessionStorage.getItem("myToken")
+              "Authorization": localStorage.getItem("myToken")
             }
           }).then(res => {
             this.$message({
@@ -500,7 +500,7 @@ export default {
     roleKick(id) {
       this.$axios.get('/roleKick/' + id, {
         headers: {
-          "Authorization": sessionStorage.getItem("myToken")
+          "Authorization": localStorage.getItem("myToken")
         }
       }).then(res => {
         this.$message({
@@ -519,7 +519,7 @@ export default {
 
       this.$axios.get('/getInfoById/' + id, {
         headers: {
-          "Authorization": sessionStorage.getItem("myToken")
+          "Authorization": localStorage.getItem("myToken")
         }
       }).then(res => {
         this.infoForm = res.data.data
@@ -529,7 +529,7 @@ export default {
     passwordHandle(id) {
       this.$axios.get('/getInfoById/' + id, {
         headers: {
-          "Authorization": sessionStorage.getItem("myToken")
+          "Authorization": localStorage.getItem("myToken")
         }
       }).then(res => {
         this.passwordForm = res.data.data
@@ -546,7 +546,7 @@ export default {
           size: this.size
         },
         headers: {
-          "Authorization": sessionStorage.getItem("myToken")
+          "Authorization": localStorage.getItem("myToken")
         }
       }).then(res => {
 
@@ -585,7 +585,7 @@ export default {
       }
       this.$axios.post("/deleteUsers", ids, {
         headers: {
-          "Authorization": sessionStorage.getItem("myToken")
+          "Authorization": localStorage.getItem("myToken")
         }
       }).then(res => {
         this.$message({

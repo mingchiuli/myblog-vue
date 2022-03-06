@@ -22,11 +22,11 @@
 
 <script>
 
-import Sider from "@/components/Sider";
 import Utterances from "@/components/Utterances";
+
 export default {
   name: "NotFound",
-  components: {Utterances, Sider},
+  components: {Utterances},
   data() {
     return {
       url: ''
@@ -58,31 +58,12 @@ export default {
   margin-bottom: 3.5%;
 }
 
-.mItem {
-  text-align: center;
-  font-size: medium;
-}
-
-.mBr {
-  margin-bottom: 1%;
-  margin-top: 1%;
-}
-
 .mTitle {
   margin-bottom: 2%;
   margin-top: 2%;
   font-size: larger;
   text-align: center;
 }
-
-
-.mContent {
-  text-align: center;
-  margin-bottom: 1%;
-  margin-top: 1%;
-  font-size: medium;
-}
-
 
 
 h2 {

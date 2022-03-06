@@ -230,7 +230,7 @@ export default {
 
           this.$axios.post('/blog/edit', this.ruleForm, {
             headers: {
-              "Authorization": sessionStorage.getItem("myToken")
+              "Authorization": localStorage.getItem("myToken")
             }
           }).then(res => {
             console.log(res)
@@ -281,7 +281,7 @@ export default {
         url: '/upload',
         method: 'post',
         data: formdata,
-        headers: { 'Content-Type': 'multipart/form-data',"Authorization": sessionStorage.getItem("myToken")},
+        headers: { 'Content-Type': 'multipart/form-data',"Authorization": localStorage.getItem("myToken")},
       }).then((url) => {
         // 第二步.将返回的url替换到文本原位置![...](0) -> ![...](url)
         // $vm.$img2Url 详情见本页末尾
@@ -298,7 +298,7 @@ export default {
         url: '/delfile',
         method: 'delete',
         data: formdata,
-        headers: { 'Content-Type': 'multipart/form-data',"Authorization": sessionStorage.getItem("myToken")},
+        headers: { 'Content-Type': 'multipart/form-data',"Authorization": localStorage.getItem("myToken")},
       }).catch(res => {
         console.log(res)
       })
@@ -309,14 +309,14 @@ export default {
       this.loading = true
       this.$axios.get('/blogWSCooperate/' + this.$route.params.blogId + '/' + this.$route.params.coNumber,{
         headers: {
-          "Authorization": sessionStorage.getItem("myToken")
+          "Authorization": localStorage.getItem("myToken")
         }
       }).then(res => {
 
         const blog = res.data.data.blog
         const users = res.data.data.users
 
-        let username = JSON.parse(sessionStorage.getItem("myUserInfo")).username;
+        let username = JSON.parse(localStorage.getItem("myUserInfo")).username;
         this.username = username
 
         for (let i = 0; i < users.length; i++) {
@@ -363,7 +363,7 @@ export default {
       // }
       // this.stompClient = Stomp.client(socket);
       stompClient = new Client({
-        connectHeaders: {"Authorization": sessionStorage.getItem("myToken")},
+        connectHeaders: {"Authorization": localStorage.getItem("myToken")},
         debug: function (str) {
           //debug日志，调试时候开启
           // console.log(str);
@@ -396,7 +396,7 @@ export default {
             let user = users[i]
             this['user' + user.number] = true
 
-            let username = JSON.parse(sessionStorage.getItem("myUserInfo")).username;
+            let username = JSON.parse(localStorage.getItem("myUserInfo")).username;
 
             if (username === user.username) {
               this.user = user
@@ -439,10 +439,10 @@ export default {
 
         //subscribe用不了this.user.id，原因见博客
         //由此得到一个设计思路：在stompClient.onConnect以前，你就必须把stompClient.subscribe('/user/' + this.user.id + '/queue/chat'
-        //所需要的user赋值完，也就是stompClient.publish去初始化聊天室的过程应该提前，否则就必须通过sessionStorage去拿参数了
+        //所需要的user赋值完，也就是stompClient.publish去初始化聊天室的过程应该提前，否则就必须通过localStorage去拿参数了
         //可以把初始化聊天室的过程放到axios请求中，stompClient.onConnect只放订阅内容。
         //以后进行修改
-        // stompClient.subscribe('/user/' + JSON.parse(sessionStorage.getItem("myUserInfo")).id + '/queue/chat', (res) => {
+        // stompClient.subscribe('/user/' + JSON.parse(localStorage.getItem("myUserInfo")).id + '/queue/chat', (res) => {
         stompClient.subscribe('/user/' + this.user.id + '/queue/chat', (res) => {
 
           let obj = JSON.parse(res.body)
@@ -480,7 +480,7 @@ export default {
         try {
           stompClient.publish({
             destination: '/app/destroy/' + this.blogId,
-            headers: { Authorization: sessionStorage.getItem("myToken") },
+            headers: { Authorization: localStorage.getItem("myToken") },
           })
         } catch (e) {
           console.log(e)

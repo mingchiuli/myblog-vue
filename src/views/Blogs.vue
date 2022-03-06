@@ -130,7 +130,7 @@
         const _this = this
         this.$axios.get('/blogStatus/' + id).then(res => {
           const status = res.data.data
-          if ((status === 1 && !sessionStorage.getItem("myToken")) || (status === 1 && JSON.parse(sessionStorage.getItem("myUserInfo")).role !== 'admin')) {
+          if ((status === 1 && !localStorage.getItem("myToken")) || (status === 1 && JSON.parse(localStorage.getItem("myUserInfo")).role !== 'admin')) {
 
             this.$prompt('请输入阅读密钥', '提示', {
               confirmButtonText: '确定',
@@ -289,7 +289,7 @@
 
     created() {
 
-      if (sessionStorage.getItem('myToken')) {
+      if (localStorage.getItem('myToken')) {
         this.$store.state.hasLogin = true
       }
 

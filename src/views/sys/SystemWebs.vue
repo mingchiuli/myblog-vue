@@ -174,7 +174,7 @@ export default {
   },
 
   created() {
-    if (sessionStorage.getItem('myToken')) {
+    if (localStorage.getItem('myToken')) {
       this.$store.state.hasLogin = true
     }
 
@@ -221,11 +221,11 @@ export default {
       if (this.webHits === '') {
         this.getWebList(1)
       } else {
-        if (sessionStorage.getItem("myToken") && this.$store.state.myUserInfo.role === 'admin') {
+        if (localStorage.getItem("myToken") && this.$store.state.myUserInfo.role === 'admin') {
           this.loading = true
           this.$axios.get('/searchWebsiteAuth/' + 1 + '?keyword=' + this.webHits, {
             headers: {
-              "Authorization": sessionStorage.getItem("myToken")
+              "Authorization": localStorage.getItem("myToken")
             }
           }).then(res => {
 
@@ -245,7 +245,7 @@ export default {
     delWeb(id) {
       this.$axios.get('/deleteWebsite/' + id, {
         headers: {
-          "Authorization": sessionStorage.getItem("myToken")
+          "Authorization": localStorage.getItem("myToken")
         }
       }).then(res => {
         this.$message({
@@ -263,7 +263,7 @@ export default {
     editWeb(id) {
       this.$axios.get('/getWebInfo/' + id, {
         headers: {
-          "Authorization": sessionStorage.getItem("myToken")
+          "Authorization": localStorage.getItem("myToken")
         }
       }).then(res => {
         this.infoForm = res.data.data
@@ -274,9 +274,16 @@ export default {
     submitForm(formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
+          let token = ''
+          if (sessionStorage.getItem("myToken")) {
+            token = sessionStorage.getItem("myToken")
+          } else {
+            token = localStorage.getItem("myToken")
+          }
+
           this.$axios.post('/addWebsite', this.editForm, {
             headers: {
-              "Authorization": sessionStorage.getItem("myToken")
+              "Authorization": token
             }
           }).then(res => {
             this.$message({
@@ -298,12 +305,12 @@ export default {
       });
     },
 
-    submitInfoForm(formName) {
+     submitInfoForm(formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
           this.$axios.post('/modifyWebsite', this.infoForm, {
             headers: {
-              "Authorization": sessionStorage.getItem("myToken")
+              "Authorization": localStorage.getItem("myToken")
             }
           }).then(res => {
             this.$message({
@@ -349,10 +356,10 @@ export default {
 
     pageSelect(current) {
       if (this.webHits !== '') {
-        if (sessionStorage.getItem('myToken')) {
+        if (localStorage.getItem('myToken')) {
           this.$axios.get('/searchWebsiteAuth/' + current + '?keyword=' + this.webHits, {
             headers: {
-              "Authorization": sessionStorage.getItem("myToken")
+              "Authorization": localStorage.getItem("myToken")
             }
           }).then(res => {
             this.webs = res.data.data.records
@@ -388,7 +395,7 @@ export default {
     editHandle(id) {
       this.$axios.get('/recoverBlogs/' + id + '/' + this.userId, {
         headers: {
-          "Authorization": sessionStorage.getItem("myToken")
+          "Authorization": localStorage.getItem("myToken")
         }
       }).then(res => {
         this.$message({

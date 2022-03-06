@@ -8,7 +8,7 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     myToken: '',
-    myUserInfo: JSON.parse(sessionStorage.getItem("myUserInfo")),
+    myUserInfo: JSON.parse(localStorage.getItem("myUserInfo")),
     users: [],
     hasLogin: false,
     title: '',
@@ -18,12 +18,12 @@ export default new Vuex.Store({
     // set
     SET_TOKEN: (state, token) => {
       state.myToken = token
-      sessionStorage.setItem("myToken", token)
+      localStorage.setItem("myToken", token)
     }
     ,
     SET_USERINFO: (state, userInfo) => {
       state.myUserInfo = userInfo
-      sessionStorage.setItem("myUserInfo", JSON.stringify(userInfo))
+      localStorage.setItem("myUserInfo", JSON.stringify(userInfo))
     },
 
     SET_USERS: (state, users) => {
@@ -37,8 +37,8 @@ export default new Vuex.Store({
     REMOVE_INFO: (state) => {
       state.myToken = ''
       state.myUserInfo = {}
-      sessionStorage.setItem("myToken", '')
-      sessionStorage.setItem("myUserInfo", JSON.stringify(''))
+      localStorage.setItem("myToken", '')
+      localStorage.setItem("myUserInfo", JSON.stringify(''))
       state.users = []
       state.hasLogin = false
     }

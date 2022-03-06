@@ -219,7 +219,7 @@
 
 			this.$axios.get('/sys/menu/list', {
         headers: {
-          "Authorization": sessionStorage.getItem("myToken")
+          "Authorization": localStorage.getItem("myToken")
         }
       }).then(res => {
 				this.permTreeData = res.data.data
@@ -262,7 +262,7 @@
 						size: this.size
 					},
           headers: {
-            "Authorization": sessionStorage.getItem("myToken")
+            "Authorization": localStorage.getItem("myToken")
           }
 				}).then(res => {
 					this.tableData = res.data.data.records
@@ -277,7 +277,7 @@
 					if (valid) {
 						this.$axios.post('/sys/role/' + (this.editForm.id ? 'update' : 'save'), this.editForm, {
               headers: {
-                "Authorization": sessionStorage.getItem("myToken")
+                "Authorization": localStorage.getItem("myToken")
               }
             }).then(res => {
 								this.$message({
@@ -302,7 +302,7 @@
 			editHandle(id) {
 				this.$axios.get('/sys/role/info/' + id, {
           headers: {
-            "Authorization": sessionStorage.getItem("myToken")
+            "Authorization": localStorage.getItem("myToken")
           }
         }).then(res => {
           console.log(res.data.data)
@@ -327,7 +327,7 @@
 
 				this.$axios.post("/sys/role/delete", ids, {
           headers: {
-            "Authorization": sessionStorage.getItem("myToken")
+            "Authorization": localStorage.getItem("myToken")
           }
         }).then(res => {
 					this.$message({
@@ -353,7 +353,7 @@
 
 				this.$axios.get("/sys/role/info/" + id, {
           headers: {
-            "Authorization": sessionStorage.getItem("myToken")
+            "Authorization": localStorage.getItem("myToken")
           }
         }).then(res => {
 
@@ -371,7 +371,7 @@
 
 				this.$axios.post('/sys/role/perm/' + this.permForm.id, menuIds, {
           headers: {
-            "Authorization": sessionStorage.getItem("myToken")
+            "Authorization": localStorage.getItem("myToken")
           }
         }).then(res => {
 					this.$message({

@@ -205,7 +205,7 @@ export default {
           size: this.size
         },
         headers: {
-          "Authorization": sessionStorage.getItem("myToken")
+          "Authorization": localStorage.getItem("myToken")
         }
       }).then(res => {
 
@@ -233,7 +233,7 @@ export default {
       const _this = this
       this.$axios.get('/getBlogToken', {
         headers: {
-          "Authorization": sessionStorage.getItem("myToken")
+          "Authorization": localStorage.getItem("myToken")
         }
       }).then(res => {
         this.$alert(res.data.data, '阅读密钥', {
@@ -243,7 +243,7 @@ export default {
 
               _this.$axios.get('/setBlogToken', {
                 headers: {
-                  "Authorization": sessionStorage.getItem("myToken")
+                  "Authorization": localStorage.getItem("myToken")
                 }
               }).then(res => {
                 this.$message({
@@ -275,7 +275,7 @@ export default {
       const _this = this
       this.$axios.get('/coStatus/' + id, {
         headers: {
-          "Authorization": sessionStorage.getItem("myToken")
+          "Authorization": localStorage.getItem("myToken")
         }
       }).then(res => {
         _this.coDisabled = res.data.data
@@ -292,7 +292,7 @@ export default {
       }
       this.$axios.get('/modifyBlogStatus/' + id + '/' + status, {
         headers: {
-          "Authorization": sessionStorage.getItem("myToken")
+          "Authorization": localStorage.getItem("myToken")
         }
       }).then(res => {
         this.$message({
@@ -327,7 +327,7 @@ export default {
           size: this.size
         },
         headers: {
-          "Authorization": sessionStorage.getItem("myToken")
+          "Authorization": localStorage.getItem("myToken")
         }
       }).then(res => {
 
@@ -389,7 +389,7 @@ export default {
 
       this.$axios.post("/deleteBlogs", ids, {
         headers: {
-          "Authorization": sessionStorage.getItem("myToken")
+          "Authorization": localStorage.getItem("myToken")
         }
       }).then(res => {
         this.$message({

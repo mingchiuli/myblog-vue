@@ -120,7 +120,7 @@ export default {
     editHandle(id) {
       this.$axios.get('/recoverBlogs/' + id + '/' + this.userId, {
         headers: {
-          "Authorization": sessionStorage.getItem("myToken")
+          "Authorization": localStorage.getItem("myToken")
         }
       }).then(res => {
         this.$message({
@@ -146,7 +146,7 @@ export default {
           size: this.size
         },
         headers: {
-          "Authorization": sessionStorage.getItem("myToken")
+          "Authorization": localStorage.getItem("myToken")
         }
       }).then(res => {
 
@@ -192,7 +192,7 @@ export default {
 
       this.$axios.post("/deleteBlogs", ids, {
         headers: {
-          "Authorization": sessionStorage.getItem("myToken")
+          "Authorization": localStorage.getItem("myToken")
         }
       }).then(res => {
         this.$message({
