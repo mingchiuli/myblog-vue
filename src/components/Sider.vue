@@ -129,7 +129,7 @@ export default {
 };
 </script>
 
-<style>
+<style lang="less">
 
 .el-drawer__header {
   font-size: 20px;
@@ -149,8 +149,8 @@ export default {
   font-size: xx-large;
 }
 
-span.el-tree-node__label {
-  font-size: 18px;
+.el-tree-node__label {
+  font-size: 16px;
 }
 
 

@@ -1,9 +1,7 @@
 <template>
   <div>
     <div v-if="flag">
-      <div style="height: 45px">
-        <Sider style="width: 0; margin-left: 10%;"></Sider>
-      </div>
+      <Sider style="width: 0; margin-left: 10%;"></Sider>
       <h1 style="text-align: center;">简历</h1>
       <hr>
       <div class="mbody">
