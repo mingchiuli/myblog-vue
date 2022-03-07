@@ -6,22 +6,25 @@
         title="mingchiuli"
         :visible.sync="drawer"
         :direction="direction"
-        size="250px"
+        size="400px"
         :before-close="handleClose">
 
-      <el-avatar :size="60" :src="avatar" style="margin-left: 35%"></el-avatar>
+      <el-avatar :size="80" :src="avatar" style="margin-left: 40%"></el-avatar>
 
-      <div style="margin-left: 30%; font-family: 'Kaiti SC',serif">百川東到海</div>
-      <div style="margin-left: 30%; font-family: 'Kaiti SC',serif">何時復西歸</div>
+      <div style="margin-left: 40%; font-family: 'Kaiti SC',serif">百川東到海</div>
+      <div style="margin-left: 40%; font-family: 'Kaiti SC',serif">何時復西歸</div>
 
       <el-tree
           :data="data"
+          :indent="30"
           :props="defaultProps"
           accordion
           @node-click="handleNodeClick">
       </el-tree>
 
     </el-drawer>
+
+
 
   </div>
 </template>

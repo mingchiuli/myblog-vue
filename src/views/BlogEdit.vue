@@ -4,23 +4,32 @@
 
     <div class="m-content">
 
-      <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
+      <el-form :model="contentForm" :rules="rules" ref="contentForm" label-width="100px" class="demo-contentForm">
         <el-form-item label="标题" prop="title">
-          <el-input v-model="ruleForm.title"></el-input>
+          <el-input v-model="contentForm.title"></el-input>
         </el-form-item>
 
 <!--        el-form-item的prop="description"疑似没用-->
         <el-form-item label="摘要" prop="description">
-          <el-input type="textarea" v-model="ruleForm.description"></el-input>
+          <el-input type="textarea" v-model="contentForm.description"></el-input>
+        </el-form-item>
+
+        <el-image :src="contentForm.link" style="width: 30%">
+        </el-image>
+        <div>封面预览</div>
+        <br/>
+
+        <el-form-item label="封面" prop="link" v-loading="loading">
+          <el-input v-model="contentForm.link"></el-input>
         </el-form-item>
 
         <el-form-item label="内容" prop="content" v-loading="loading">
-          <mavon-editor v-model="ruleForm.content" :ishljs = "true" ref="md" code-style="androidstudio" @imgAdd="imgAdd" @imgDel="imgDel"></mavon-editor>
+          <mavon-editor v-model="contentForm.content" :ishljs = "true" ref="md" code-style="androidstudio" @imgAdd="imgAdd" @imgDel="imgDel"></mavon-editor>
         </el-form-item>
 
         <el-form-item>
-          <el-button type="primary" @click="submitForm('ruleForm')">立即创建</el-button>
-          <el-button @click="resetForm('ruleForm')">重置</el-button>
+          <el-button type="primary" @click="submitForm('contentForm')">立即创建</el-button>
+          <el-button @click="resetForm('contentForm')">重置</el-button>
         </el-form-item>
       </el-form>
 
@@ -36,11 +45,12 @@
     components: {Footer},
     data() {
       return {
-        ruleForm: {
+        contentForm: {
           id: '',
           title: '',
           description: '',
           content: '',
+          link: ''
         },
         created: '',
         loading: false,
@@ -66,7 +76,7 @@
         this.$refs[formName].validate((valid) => {
           if (valid) {
             const _this = this
-            this.$axios.post('/blog/edit', this.ruleForm, {
+            this.$axios.post('/blog/edit', this.contentForm, {
               headers: {
                 "Authorization": localStorage.getItem("myToken")
               }
@@ -75,7 +85,7 @@
               _this.$alert('操作成功', '提示', {
                 confirmButtonText: '确定',
                 callback: action => {
-                  _this.$router.push('/blog/' + this.ruleForm.id)
+                  _this.$router.push('/blog/' + this.contentForm.id)
                 }
               });
 
@@ -127,10 +137,11 @@
 
       assignData(res) {
         const blog = res.data.data
-        this.ruleForm.id = blog.id
-        this.ruleForm.title = blog.title
-        this.ruleForm.description = blog.description
-        this.ruleForm.content = blog.content
+        this.contentForm.id = blog.id
+        this.contentForm.title = blog.title
+        this.contentForm.description = blog.description
+        this.contentForm.content = blog.content
+        this.contentForm.link = blog.link
         this.created = blog.created
       }
     },

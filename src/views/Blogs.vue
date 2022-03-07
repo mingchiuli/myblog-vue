@@ -32,6 +32,7 @@
       <el-timeline>
         <el-timeline-item :timestamp="blog.created" placement="top" v-for="blog in blogs" color="#0bbd87">
           <el-card class="el-card" v-loading="loading">
+            <img :src="blog.link ? blog.link : 'https://fuss10.elemecdn.com/3/28/bbf893f792f03a54408b3b7a7ebf0jpeg.jpeg'" class="image" alt="">
             <h4>
               <el-link style="color: black" type="info" plain @click="blogStatus(blog.id)">{{blog.title}}</el-link>
             </h4>
@@ -79,6 +80,16 @@
     },
     methods: {
 
+      blogsCommon(res) {
+        this.blogs = res.data.data.records
+        for (let i = 0; i < this.blogs.length; i++) {
+          this.blogs[i].created = this.blogs[i].created.substring(0, 10)
+        }
+        this.currentPage = res.data.data.current
+        this.total = res.data.data.total
+        this.pageSize = res.data.data.size
+      },
+
       isPCorMobile() {
         this.flag =  navigator.userAgent.match(/(phone|pod|iPhone|iPod|ios|Android|Moblie|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowerNG|WebOS|Symbian|Windows Phone)/i);
         if (this.flag === null) {
@@ -88,14 +99,11 @@
 
       querySearchAsyncCommon(res, cb) {
         let raw = res.data.data.records
-
-        console.log(raw)
         let results = this.transSearchContent(raw)
-        console.log(results)
         clearTimeout(this.timeout);
         this.timeout = setTimeout(() => {
           cb(results);
-        }, 500);
+        }, 300);
       },
 
       querySearchAsync(input, cb) {
@@ -127,7 +135,6 @@
       },
 
       blogStatus(id) {
-        const _this = this
         this.$axios.get('/blogStatus/' + id).then(res => {
           const status = res.data.data
           if ((status === 1 && !localStorage.getItem("myToken")) || (status === 1 && JSON.parse(localStorage.getItem("myUserInfo")).role !== 'admin')) {
@@ -152,7 +159,7 @@
             });
 
           } else {
-            _this.$router.push({name: 'BlogDetail', params: {blogId: id}})
+            this.$router.push({name: 'BlogDetail', params: {blogId: id}})
           }
         })
       },
@@ -168,43 +175,30 @@
 
       pageByYear(currentPage) {
         this.loading = true
-        const _this = this
-        _this.$axios.get("/blogsByYear/" + this.year + "/" + currentPage).then(res => {
-          _this.blogs = res.data.data.records
-          for (let i = 0; i < _this.blogs.length; i++) {
-            _this.blogs[i].created = _this.blogs[i].created.substring(0, 10)
-          }
-          _this.currentPage = res.data.data.current
-          _this.total = res.data.data.total
-          _this.pageSize = res.data.data.size
+        this.$axios.get("/blogsByYear/" + this.year + "/" + currentPage).then(res => {
+
+          this.blogsCommon(res)
 
           //更换页码后强制浏览器回到顶端
           $("html,body").animate({ scrollTop: 0}, 200);
-          _this.$router.push("/blogs/" + this.year + "/" + currentPage)
-          _this.loading = false
+          this.$router.push("/blogs/" + this.year + "/" + currentPage)
+          this.loading = false
         })
       },
 
       page(currentPage) {
         this.loading = true
         this.year = 0
-        const _this = this
-        _this.$axios.get("/blogs/" + currentPage).then(res => {
-          _this.blogs = res.data.data.records
-          for (let i = 0; i < _this.blogs.length; i++) {
-            _this.blogs[i].created = _this.blogs[i].created.substring(0, 10)
-          }
+        this.$axios.get("/blogs/" + currentPage).then(res => {
 
-          _this.currentPage = res.data.data.current
-          _this.total = res.data.data.total
-          _this.pageSize = res.data.data.size
+          this.blogsCommon(res)
           //更换页码后强制浏览器回到顶端
           $("html,body").animate({ scrollTop: 0}, 200);
 
           // document.body.scrollTop = document.documentElement.scrollTop = 0
           // vue不会重复执行created()之类的钩子函数，如果只是参数值变化，页面不会重复刷新，所以不影响效率，仅仅是地址栏改变
-          _this.$router.push("/blogs/" + currentPage)
-          _this.loading = false
+          this.$router.push("/blogs/" + currentPage)
+          this.loading = false
         })
       },
 
@@ -230,37 +224,29 @@
           return
         }
 
-        this.blogs = res.data.data.records
-
-        for (let i = 0; i < this.blogs.length; i++) {
-          this.blogs[i].created = this.blogs[i].created.replace('T', ' ')
-        }
-        this.currentPage = res.data.data.current
-        this.total = res.data.data.total
-        this.pageSize = res.data.data.size
+        this.blogsCommon(res)
 
         $("html,body").animate({ scrollTop: 0}, 200);
       },
 
       searchSorted(currentPage) {
         this.loading = true
-        const _this = this
         if (this.year !== 0) {
           //按年份搜索
-          this.$axios.get('/searchByYear/' + currentPage + '/' + _this.year + '?keyword=' + this.input).then(res => {
+          this.$axios.get('/searchByYear/' + currentPage + '/' + this.year + '?keyword=' + this.input).then(res => {
 
             this.searchSortedCommon(res)
 
-            _this.$router.push("/blogs/" + _this.year + '/' + currentPage)
-            _this.loading = false
+            this.$router.push("/blogs/" + this.year + '/' + currentPage)
+            this.loading = false
           })
         } else {
           //不按年份搜索
           this.$axios.get('/search/' + currentPage + '?keyword=' + this.input).then(res => {
 
             this.searchSortedCommon(res)
-            _this.$router.push("/blogs/" + currentPage)
-            _this.loading = false
+            this.$router.push("/blogs/" + currentPage)
+            this.loading = false
           })
         }
       },
@@ -269,11 +255,10 @@
       forCreated() {
 
         if (this.$route.params.year) {
-          const _this = this
           this.year = this.$route.params.year
 
           this.$axios.get('/getCountByYear/' + this.year).then(res => {
-            _this.count = res.data.data
+            this.count = res.data.data
           })
 
           this.currentPage = this.$route.params.currentPage
@@ -316,10 +301,9 @@
         this.year = 0
 
         if (this.$route.params.year) {
-          const _this = this
           this.year = this.$route.params.year
 
-          this.$axios.get('/getCountByYear/' + _this.year).then(res => {
+          this.$axios.get('/getCountByYear/' + this.year).then(res => {
             this.count = res.data.data
           })
 
@@ -341,11 +325,16 @@
 <style scoped>
 
   .el-card {
-    max-width: 80%;
+    max-width: 60%;
+  }
+
+  .image {
+    width: 100%;
+    display: block;
   }
 
   .el-timeline-item {
-    margin-left: 15%;
+    margin-left: 25%;
   }
 
   .mpage {

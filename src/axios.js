@@ -2,10 +2,10 @@ import axios from 'axios'
 import Element from 'element-ui'
 import store from './store'
 import router from './router'
+import Global from "@/Global";
 
 
-// axios.defaults.baseURL = "http://localhost:8081"
-axios.defaults.baseURL = "http://81.68.192.120:8081"
+axios.defaults.baseURL = Global.url
 
 const request = axios.create({
     timeout: 5000

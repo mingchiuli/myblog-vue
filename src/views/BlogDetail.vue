@@ -7,70 +7,21 @@
       <LoginStatus></LoginStatus>
     </div>
 
-    <el-card class="toc-fixed" v-if="catalog & isPC" :body-style="{ padding: '5px' }"	>
+    <Catalogue :props="defaultProps" ref="toc" v-if="isPC"></Catalogue>
 
-      <div class="box">
-        <div class="tocTitle">目录</div>
-        <hr style="max-width: 90%;border: 0; border-top: 1px solid;color: lightgray;"/>
+    <EditStatus :blog="blog"></EditStatus>
 
-        <el-tree
-            :data="toc"
-            :props="defaultProps"
-            highlight-current
-            accordion
-            :indent="10"
-            node-key="id"
-            @node-click="scrollToPosition"
-            ref="menuTree">
-        </el-tree>
 
-      </div>
-    </el-card>
-
-    <div>
-      <div class="status" v-if="hasLogin">
-        <el-link icon="el-icon-edit">
-          <router-link :to="{name: 'BlogEdit', params: {blogId: blog.id}}" style="font-size: medium; color: green">
-            <!--        编辑-->
-            <el-button type="text" style="font-size: medium; color: limegreen">编辑</el-button>
-
-          </router-link>
-        </el-link>
-        <el-divider class="el-div" direction="vertical"></el-divider>
-        <el-divider class="el-div" direction="vertical"></el-divider>
-        <el-link icon="el-icon-delete">
-          <el-button type="text" @click="deleteBlog" style="font-size: medium; color: indianred">删除</el-button>
-        </el-link>
-      </div>
-
-      <div>
-        <div class="content" v-loading="loading">
-<!--                使用mavon-editor预览功能-->
-          <mavon-editor v-html="blog.content" :subfield="false"
-                        :editable="false"
-                        default-open="preview"
-                        :navigation="true" :toolbars-flag="false" previewBackground="#ffffff" code-style="androidstudio" :scrollStyle="false" style="padding: 25px">
-          </mavon-editor>
-        </div>
-      </div>
-
+    <div class="content" v-loading="loading">
+      <!--                使用mavon-editor预览功能-->
+      <mavon-editor v-html="blog.content" :subfield="false"
+                    :editable="false"
+                    default-open="preview"
+                    :navigation="true" :toolbars-flag="false" previewBackground="#ffffff" code-style="androidstudio" :scrollStyle="false" style="padding: 25px">
+      </mavon-editor>
     </div>
 
-    <el-backtop>
-      <div
-          style="{
-        height: 100%;
-        width: 100%;
-        background-color: #f2f5f6;
-        box-shadow: 0 0 6px rgba(0,0,0, .12);
-        text-align: center;
-        line-height: 40px;
-        color: #1989fa;
-      }"
-      >
-        UP
-      </div>
-    </el-backtop>
+    <BackTop></BackTop>
 
     <Utterances style="width: inherit"></Utterances>
 
@@ -79,21 +30,21 @@
 
 <script>
 
+import EditStatus from "@/components/EditStatus";
 let clipboard
 
-import Footer from "@/components/Footer";
+import Catalogue from "@/components/Catalogue";
 import LoginStatus from "@/components/LoginStatus";
 import Sider from "@/components/Sider";
-import $ from "jquery";
 import Utterances from "@/components/Utterances";
 import { markdown } from "@/util/markdown";
-import Clipboard from "clipboard";
 import mavonEditor from "mavon-editor";
+import BackTop from "@/components/BackTop";
 
 
 export default {
   name: "BlogDetail.vue",
-  components: {Utterances, Comment, Sider, Footer, LoginStatus},
+  components: {BackTop, EditStatus, Catalogue, Utterances, Sider, LoginStatus},
   data() {
     return {
       blog: {
@@ -122,124 +73,8 @@ export default {
 
   methods: {
 
-    handleNodeClick(data) {
-      console.log(data);
-    },
-
-    tocAndDist(arr) {
-      arr.forEach(item => {
-
-        if ($(item).attr("id")) {
-
-          let id = item.id.substring(item.id.lastIndexOf("_") + 1)
-
-          let dist = $('#' + item.id).offset().top;
-
-          this.catalogue.push({id, dist})
-        }
-
-      })
-    },
-
-    tocAndCli() {
-
-      this.$nextTick(() => {
-        const aArr1 = $(
-            ".v-note-wrapper a"
-        ).toArray();
-
-        let aArr = []
-
-        aArr1.forEach(item => {
-          if (item.id) {
-           aArr.push(item)
-          }
-        })
-
-
-        //给数据赋值，保存元素的id和其距顶部的距离
-        this.tocAndDist(aArr)
-
-        let toc = [];
-        aArr.forEach((item, index) => {
-
-          let prop = $(item).parent().prop('nodeName');
-
-          if (prop === 'H2') {
-            let href = $(item).attr("id");
-            let name = $(item).parent().text();
-
-            let children = this.getChildren(aArr, item, index)
-            toc.push({
-              id: href.substring(href.lastIndexOf("_") + 1),
-              href: "#" + href,
-              name,
-              prop,
-              children
-            });
-            this.catalog = true
-          }
-        });
-
-        this.toc = toc
-      });
-
-      clipboard = new Clipboard(".copy-btn");
-
-      this.$nextTick(() => {
-        // 复制成功失败的提示
-        clipboard.on("success", () => {
-          this.$message.success("复制成功");
-        });
-        clipboard.on("error", () => {
-          this.$message.error("复制失败");
-        });
-      });
-    },
-
-    getChildren(aArr, item, index) {
-
-      let out = []
-
-      if (index === aArr.length - 1) {
-        return []
-      }
-
-      let nodeName = $(aArr[index]).parent().prop('nodeName')
-
-      let level = parseInt(nodeName.substring(1, 2).charAt(0))
-
-      if ($(aArr[index + 1]).parent().prop('nodeName') === nodeName) {
-        return []
-      }
-
-      for (let i = index + 1; i < aArr.length; i++) {
-
-        let name = $(aArr[i]).parent().prop('nodeName')
-
-        if (level + 1 === parseInt(name.substring(1, 2))) {
-
-          //构建孩子
-          let href = $(aArr[i]).attr("id");
-          let name = $(aArr[i]).parent().text();
-          let children = this.getChildren(aArr, aArr[i], i)
-
-          out.push({
-            //lastIndexOf是因为有些标签有多个_，取最后为id
-            id: href.substring(href.lastIndexOf("_") + 1),
-            href: "#" + href,
-            name,
-            children
-          })
-        } else if (level < parseInt(name.substring(1, 2)) - 1) {
-          continue
-        } else {
-          break
-        }
-
-      }
-
-      return out
+    showCatalog(val) {
+      this.catalog = val
     },
 
     isPCorMobile() {
@@ -250,39 +85,6 @@ export default {
     },
 
 
-    scrollToPosition(data) {
-
-      let id = data.href
-
-      const position = $(id).offset();
-      position.top = position.top - 40;
-
-      $("html,body").animate({ scrollTop: position.top }, 0);
-    },
-
-    deleteBlog() {
-      const ids = []
-      ids.push(this.blog.id)
-      this.$confirm('是否删除该日志?', '提示', {
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
-        type: 'warning'
-      }).then(() => {
-        this.$axios.post('/deleteBlogs', ids, {
-          headers: {
-            "Authorization": localStorage.getItem("myToken")
-          }
-        }).then(res => {
-          this.$router.push('/blogs/1')
-        })
-      }).catch(() => {
-        this.$message({
-          type: 'info',
-          message: '已取消删除'
-        });
-      });
-    },
-
     createdCommon(res) {
       const blog = res.data.data
       this.blog.id = blog.id
@@ -291,57 +93,15 @@ export default {
 
       this.blog.content = markdown(mavonEditor.mavonEditor, blog.content)
     },
-
-    roll() {
-      let scrolled = document.documentElement.scrollTop || document.body.scrollTop
-
-      let temp
-
-      this.catalogue.forEach(item => {
-        let dist = scrolled - item.dist
-        if (dist > -41) {
-          temp = item
-          return
-        }
-      })
-
-      try {
-        let nodes = this.$refs.menuTree.store._getAllNodes();
-
-        for (let i in nodes) {
-
-          if (nodes[i].data.id === temp.id) {
-            nodes[i].expanded = true
-
-            this.$refs.menuTree.setCurrentKey(nodes[i].data.id)
-
-            this.expand(nodes[i])
-          } else {
-            nodes[i].expanded = false
-          }
-        }
-      } catch (e) {
-
-      }
-    },
-
-    expand(node) {
-      if (node && node.parent) {
-        node.parent.expanded = true
-      }
-      //展开他的所有父节点
-      if (node.parent)
-      this.expand(node.parent)
-    }
   },
 
 
   mounted() {
     this.isPCorMobile()
-
-    window.addEventListener('scroll', this.roll)
   },
   created() {
+
+    const _this = this
 
     if (JSON.parse(localStorage.getItem("myUserInfo")) && JSON.parse(localStorage.getItem("myUserInfo")).role === 'admin') {
 
@@ -358,11 +118,16 @@ export default {
 
         this.loading = false
 
-        this.tocAndCli()
+        this.$nextTick(() => {
+          this.$refs.toc.tocAndCli()
+        })
+
+
       })
 
 
     } else if (this.$route.query.token) {
+
 
       this.loading = true
       const _this = this
@@ -375,7 +140,11 @@ export default {
 
         _this.loading = false
 
-        this.tocAndCli()
+
+        this.$nextTick(() => {
+          this.$refs.toc.tocAndCli()
+        })
+
 
       })
 
@@ -391,7 +160,11 @@ export default {
 
         _this.loading = false
 
-        this.tocAndCli()
+
+        this.$nextTick(() => {
+          this.$refs.toc.tocAndCli()
+        })
+
 
       })
     }
@@ -407,10 +180,6 @@ export default {
       }
     }
   },
-
-  destroyed() {
-    clipboard.destroy();
-  }
 }
 </script>
 
@@ -459,47 +228,6 @@ h1 {
 //使用v-html填充内容以后，这个样式就不用变更了
 div.v-note-wrapper .v-note-panel .v-note-navigation-wrapper.transition {
   /*display: none;*/
-}
-
-.toc-fixed {
-  position: fixed;
-  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
-  max-width: 13%;
-  width: 20%;
-  right: 1%;
-  top: 10px;
-  max-height: 100%;
-  .el-tree-node__content {
-    height: 26px !important;
-    font-size: xx-large;
-    overflow-x: auto;
-    overflow-y: auto;
-  }
-}
-
-
-
-.toc {
-  width: 100%;
-  overflow-y: auto;
-  word-break: break-all;
-  padding: 0.2rem 0 0.2rem 0.2rem;
-}
-
-.tocTitle {
-  margin-left: 5%;
-  font-size: 18px;
-  margin-bottom: 1%;
-  margin-top: 6%;
-}
-
-.toca {
-  display: inline-block;
-  color: #2196f3;
-  font-size: 16px;
-  margin-left: 5.5%;
-  cursor: pointer;
-  padding: 2% 0;
 }
 
 .utterances {
