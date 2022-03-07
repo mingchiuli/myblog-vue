@@ -6,13 +6,13 @@
         title="mingchiuli"
         :visible.sync="drawer"
         :direction="direction"
-        size="400px"
+        size="350px"
         :before-close="handleClose">
 
       <el-avatar :size="80" :src="avatar" style="margin-left: 40%"></el-avatar>
 
-      <div style="margin-left: 40%; font-family: 'Kaiti SC',serif">百川東到海</div>
-      <div style="margin-left: 40%; font-family: 'Kaiti SC',serif">何時復西歸</div>
+      <div style="margin-left: 39%; font-size: 18px; font-family: 'Kaiti SC',serif">百川東到海</div>
+      <div style="margin-left: 39%; font-size: 18px; font-family: 'Kaiti SC',serif">何時復西歸</div>
 
       <el-tree
           :data="data"
@@ -150,7 +150,7 @@ export default {
 }
 
 span.el-tree-node__label {
-  font-size: 16px;
+  font-size: 18px;
 }
 
 
