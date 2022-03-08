@@ -26,6 +26,11 @@ request.interceptors.response.use(response => {
       return response
     } else {
 
+        if (res.code === 401) {
+            store.commit("REMOVE_INFO")
+            router.push("/login")
+        }
+
       Element.Message.error(res.msg, {duration: 3 * 1000})
 
       return Promise.reject(res.msg)

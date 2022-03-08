@@ -158,39 +158,11 @@ export default {
     }
   },
 
-  created() {
-    this.initWebSocket();
-  },
-
-  watch: {
-    content0: {
-      handler: function () {
-        this.sync()
-      },
-      deep: false,
-      // immediate: false
-    },
-    content1: {
-      handler: function () {
-        this.sync()
-      },
-      deep: false,
-    },
-    content2: {
-      handler: function () {
-        this.sync()
-      },
-      deep: false,
-    },
-
-  },
-
   methods: {
 
     sync() {
       let num = this.user.number
       let target = 'content' + num
-
       try {
         stompClient.publish({
           destination: '/app/sync/' + this.user.id,
@@ -305,7 +277,6 @@ export default {
     },
 
     initWebSocket() {
-
       this.loading = true
       this.$axios.get('/blogWSCooperate/' + this.$route.params.blogId + '/' + this.$route.params.coNumber,{
         headers: {
@@ -487,6 +458,33 @@ export default {
         }
         stompClient.deactivate()
       }
+    },
+
+  },
+
+  created() {
+    this.initWebSocket();
+  },
+
+  watch: {
+    content0: {
+      handler: function () {
+        this.sync()
+      },
+      deep: false,
+      // immediate: false
+    },
+    content1: {
+      handler: function () {
+        this.sync()
+      },
+      deep: false,
+    },
+    content2: {
+      handler: function () {
+        this.sync()
+      },
+      deep: false,
     },
 
   },
