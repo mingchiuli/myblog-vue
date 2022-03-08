@@ -118,9 +118,7 @@ export default {
 
         this.loading = false
 
-        this.$nextTick(() => {
-          this.$refs.toc.tocAndCli()
-        })
+        this.$refs.toc.tocAndCli()
 
 
       })
@@ -141,9 +139,7 @@ export default {
         _this.loading = false
 
 
-        this.$nextTick(() => {
-          this.$refs.toc.tocAndCli()
-        })
+        this.$refs.toc.tocAndCli()
 
 
       })
@@ -161,9 +157,7 @@ export default {
         _this.loading = false
 
 
-        this.$nextTick(() => {
-          this.$refs.toc.tocAndCli()
-        })
+        this.$refs.toc.tocAndCli()
 
 
       })

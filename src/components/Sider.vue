@@ -129,7 +129,7 @@ export default {
 };
 </script>
 
-<style lang="less">
+<style>
 
 .el-drawer__header {
   font-size: 20px;
