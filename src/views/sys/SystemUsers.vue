@@ -283,13 +283,17 @@
 
     </el-dialog>
 
+    <Footer></Footer>
+
 
   </div>
 </template>
 
 <script>
+import Footer from "@/components/Footer";
 export default {
   name: "SystemUsers",
+  components: {Footer},
   data() {
     return {
       searchUsersRole: '',

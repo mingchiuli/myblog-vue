@@ -4,31 +4,23 @@
     <router-link style="font-size: medium;margin-left: 78%; margin-bottom: 5px" :to="{name: 'Blogs', params: {currentPage : 1}}">进入日志</router-link>
     <div class="mbody">
       <div class="mIntro">
-        爱是恒久忍耐 又有恩慈 爱是不嫉妒
+        Love is patient
         <br>
-        Love is patient; love is kind
+        Love is kind
         <br>
-        爱是不自夸 不张狂 不做害羞的事
+        Love is not envious or boastful or arrogant or rude
         <br>
-        love is not envious or boastful or arrogant or rude
+        It does not insist on its own way
         <br>
-        不求自己的益处 不轻易发怒
+        It is not irritable or resentful
         <br>
-        It does not insist on its own way; it is not irritable or resentful
-        <br>
-        不计算人的恶 不喜欢不义 只喜欢真理
-        <br>
-        it does not rejoice in wrongdoing, but rejoices in the truth
-        <br>
-        凡事包容 凡事相信 凡事盼望 凡事忍耐
+        It does not rejoice in wrongdoing, but rejoices in the truth
         <br>
         It bears all things, believes all things, hopes all things, endures all things
         <br>
-        爱是永不止息
-        <br>
         Love never ends
         <br>
-        <p style="text-align: right">新约<br>哥林多前书<br>第十三章<br>第四节～第八节</p>
+        <p style="text-align: right">The Teachings and Works of Jesus<br>1 Corinthians<br>Chapter 13</p>
       </div>
     </div>
     <div>
@@ -40,8 +32,9 @@
       <p style="text-align: center">
         <img style="width: 50%; height: 30%" src="../../public/746311-20191023220441012-897312309.jpg" class="mImg" alt="">
       </p>
-      <li style="text-align: center">博客园抠的《不知道从哪来的图片》</li>
+      <li style="text-align: center">来自网络</li>
     </div>
+    <Footer></Footer>
   </div>
 </template>
 

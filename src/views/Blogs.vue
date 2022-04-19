@@ -51,6 +51,7 @@
       </el-pagination>
 
     </div>
+    <Footer></Footer>
   </div>
 </template>
 

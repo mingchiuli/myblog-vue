@@ -164,13 +164,17 @@
       </div>
     </el-dialog>
 
+    <Footer></Footer>
+
   </div>
 </template>
 
 <script>
 
+import Footer from "@/components/Footer";
 export default {
   name: "SystemBlogs",
+  components: {Footer},
   data() {
     return {
       search: false,

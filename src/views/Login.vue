@@ -28,7 +28,7 @@
       </el-main>
     </el-container>
 
-
+    <Footer></Footer>
   </div>
 </template>
 

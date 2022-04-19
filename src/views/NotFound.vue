@@ -16,17 +16,18 @@
       </div>
 
       <Utterances></Utterances>
-
+      <Footer></Footer>
     </div>
 </template>
 
 <script>
 
 import Utterances from "@/components/Utterances";
+import Footer from "@/components/Footer";
 
 export default {
   name: "NotFound",
-  components: {Utterances},
+  components: {Footer, Utterances},
   data() {
     return {
       url: ''

@@ -25,6 +25,8 @@
 
     <Utterances style="width: inherit"></Utterances>
 
+    <Footer></Footer>
+
   </div>
 </template>
 
@@ -40,11 +42,12 @@ import Utterances from "@/components/Utterances";
 import { markdown } from "@/util/markdown";
 import mavonEditor from "mavon-editor";
 import BackTop from "@/components/BackTop";
+import Footer from "@/components/Footer";
 
 
 export default {
   name: "BlogDetail.vue",
-  components: {BackTop, EditStatus, Catalogue, Utterances, Sider, LoginStatus},
+  components: {Footer, BackTop, EditStatus, Catalogue, Utterances, Sider, LoginStatus},
   data() {
     return {
       blog: {

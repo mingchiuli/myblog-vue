@@ -155,15 +155,19 @@
 
 		</el-dialog>
 
+    <Footer></Footer>
+
 
 	</div>
 
 </template>
 
 <script>
-	export default {
+	import Footer from "@/components/Footer";
+  export default {
 		name: "SystemRoute",
-		data() {
+    components: {Footer},
+    data() {
 			return {
 				dialogVisible: false,
 				editForm: {

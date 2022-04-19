@@ -1,21 +1,26 @@
 <template>
-  <el-card class="box-card">
-    <div slot="header" class="clearfix">
-      <span style="font-size: large">Spring-logback后台日志</span>
-      <div style="float: right; padding: 0.5% 0;">
-        <el-button style="font-size: medium" id="tag-copy" :data-clipboard-text="msg" type="text" @click="copy($event,msg)">复制日志</el-button>
-        <el-divider direction="vertical"></el-divider>
-        <el-button style="font-size: medium" type="text" @click="show">开始监控</el-button>
+  <div>
+    <el-card class="box-card">
+      <div slot="header" class="clearfix">
+        <span style="font-size: large">Spring-logback后台日志</span>
+        <div style="float: right; padding: 0.5% 0;">
+          <el-button style="font-size: medium" id="tag-copy" :data-clipboard-text="msg" type="text" @click="copy($event,msg)">复制日志</el-button>
+          <el-divider direction="vertical"></el-divider>
+          <el-button style="font-size: medium" type="text" @click="show">开始监控</el-button>
+        </div>
       </div>
-    </div>
-    <div v-html="msg" class="text-item" v-loading="loading">
-      {{ msg }}
-    </div>
-  </el-card>
+      <div v-html="msg" class="text-item" v-loading="loading">
+        {{ msg }}
+      </div>
+    </el-card>
+    <Footer></Footer>
+  </div>
+
 </template>
 
 <script>
 
+import Footer from "@/components/Footer";
 let stompClient
 
 import Clipboard from 'clipboard';
@@ -25,6 +30,7 @@ import GLOBAL from '@/Global';
 
 export default {
   name: "SystemLogs",
+  components: {Footer},
   data() {
     return {
       msg: '',

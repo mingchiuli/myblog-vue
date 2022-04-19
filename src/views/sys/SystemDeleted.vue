@@ -91,12 +91,16 @@
         :total="total">
     </el-pagination>
 
+    <Footer></Footer>
+
   </div>
 </template>
 
 <script>
+import Footer from "@/components/Footer";
 export default {
   name: "SystemDeleted",
+  components: {Footer},
   data() {
     return {
       searchBlogsTitle: '',

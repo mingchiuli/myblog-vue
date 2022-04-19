@@ -256,7 +256,7 @@ export default {
   right: 1%;
   top: 10px;
   max-height: 100%;
-.el-tree-node__content {
+  .el-tree-node__content {
   height: 26px !important;
   font-size: xx-large;
   overflow-x: auto;

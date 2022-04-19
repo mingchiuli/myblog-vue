@@ -41,6 +41,7 @@
                     default-open="preview"
                     :navigation="true" :toolbars-flag="false" previewBackground="#ffffff" :scrollStyle="false" code-style="androidstudio">
       </mavon-editor>
+
     </el-form>
 
     <el-input
@@ -88,7 +89,11 @@
 
     <el-button style="float: right" v-if="user.role === 'admin'" type="primary" @click="submitForm('ruleForm')">立即创建</el-button>
 
+
+    <Footer></Footer>
   </div>
+
+
 </template>
 
 
@@ -97,10 +102,12 @@
 let stompClient
 
 import SockJS from 'sockjs-client';
+import Footer from "@/components/Footer";
 import { Client, Message } from '@stomp/stompjs';
 import GLOBAL from '@/Global'
 
 export default {
+  components: {Footer},
   name: "Cooperate",
   data() {
     return {

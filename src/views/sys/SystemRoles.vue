@@ -169,13 +169,17 @@
 
 		</el-dialog>
 
+    <Footer></Footer>
+
 	</div>
 </template>
 
 <script>
-	export default {
+	import Footer from "@/components/Footer";
+  export default {
 		name: "SystemRoles",
-		data() {
+    components: {Footer},
+    data() {
 			return {
 				searchForm: {},
 				delBtlStatus: true,

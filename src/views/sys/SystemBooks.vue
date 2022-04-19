@@ -5,8 +5,10 @@
 </template>
 
 <script>
+import Footer from "@/components/Footer";
 export default {
-  name: "SystemBooks"
+  name: "SystemBooks",
+  components: {Footer}
 }
 </script>
 
@@ -16,6 +18,6 @@ export default {
     /*width: 1500px;*/
     width: 100%;
 
-    height: 528px;
+    height: 580px;
   }
 </style>

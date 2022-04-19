@@ -13,12 +13,17 @@ export default {
 
 <style scoped>
 
+.footer {
+  margin-top: 7%;
+}
+
 hr {
   display: block;
   height: 1px;
   border: 0;
   border-top: 1px solid;
-  margin: 1% auto;
+  margin-top: 4%;
+  margin-bottom: 3%;
   padding: 0;
   max-width: 20%;
   color: lightgray;
@@ -26,9 +31,9 @@ hr {
 }
 
 .copyright {
+  height: 50px;
   text-align: center;
   font-size: 17px;
-  margin-top: 3%;
 }
 
 
