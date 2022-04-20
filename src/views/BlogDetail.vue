@@ -40,7 +40,6 @@ import LoginStatus from "@/components/LoginStatus";
 import Sider from "@/components/Sider";
 import Utterances from "@/components/Utterances";
 import { markdown } from "@/util/markdown";
-import mavonEditor from "mavon-editor";
 import BackTop from "@/components/BackTop";
 import Footer from "@/components/Footer";
 
@@ -94,7 +93,7 @@ export default {
       this.blog.title = blog.title
       document.title = blog.title
 
-      this.blog.content = markdown(mavonEditor.mavonEditor, blog.content)
+      this.blog.content = markdown(this.$mavonEditor.mavonEditor, blog.content)
     },
   },
 

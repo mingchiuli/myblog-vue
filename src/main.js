@@ -22,7 +22,7 @@ Vue.use(mavonEditor)
 
 Vue.config.productionTip = false
 Vue.prototype.$axios = axios
-
+Vue.prototype.$mavonEditor = mavonEditor
 
 //标题
 router.beforeEach((to, from, next) => {
