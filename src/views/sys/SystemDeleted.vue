@@ -55,7 +55,7 @@
 
       <el-table-column
           prop="created"
-          label="删除时间"
+          label="创建时间"
           width="150"
           align="center">
       </el-table-column>
