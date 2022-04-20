@@ -8,6 +8,7 @@
 		</el-form>
 
 		<el-table
+        v-loading="loading"
 				:data="tableData"
         row-key="menuId"
         style="width: 100%;margin-bottom: 20px;"
@@ -169,6 +170,7 @@
     components: {Footer},
     data() {
 			return {
+        loading: false,
 				dialogVisible: false,
 				editForm: {
 
@@ -201,6 +203,7 @@
 		},
 		methods: {
 			getMenuTree() {
+        this.loading = true
 				this.$axios.get("/sys/menu/list", {
           headers: {
             "Authorization": localStorage.getItem("myToken")
@@ -208,6 +211,7 @@
         }).then(res => {
 
 					this.tableData = res.data.data
+          this.loading = false
 
 				})
 			},

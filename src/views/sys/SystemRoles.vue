@@ -27,6 +27,7 @@
 		</el-form>
 
 		<el-table
+        v-loading="loading"
 				ref="multipleTable"
 				:data="tableData"
 				tooltip-effect="dark"
@@ -181,6 +182,7 @@
     components: {Footer},
     data() {
 			return {
+        loading: false,
 				searchForm: {},
 				delBtlStatus: true,
 
@@ -219,6 +221,7 @@
 			}
 		},
 		created() {
+      this.loading = true
 			this.getRoleList()
 
 			this.$axios.get('/sys/menu/list', {
@@ -227,6 +230,7 @@
         }
       }).then(res => {
 				this.permTreeData = res.data.data
+        this.loading = false
 			})
 		},
 		methods: {
@@ -259,6 +263,7 @@
 			},
 
 			getRoleList() {
+        this.loading = true
 				this.$axios.get("/sys/role/list", {
 					params: {
 						name: this.searchForm.name,
@@ -273,6 +278,7 @@
 					this.size = res.data.data.size
 					this.current = res.data.data.current
 					this.total = res.data.data.total
+          this.loading = false
 				})
 			},
 
