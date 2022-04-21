@@ -11,8 +11,8 @@
 
       <el-avatar :size="80" :src="avatar" style="margin-left: 40%"></el-avatar>
 
-      <div style="margin-left: 39%; font-size: 18px; font-family: 'Kaiti SC',serif">百川東到海</div>
-      <div style="margin-left: 39%; font-size: 18px; font-family: 'Kaiti SC',serif">何時復西歸</div>
+      <div style="margin-left: 38.4%; font-size: 18px; font-family: 'Kaiti SC',serif">百川東到海</div>
+      <div style="margin-left: 38.4%; font-size: 18px; font-family: 'Kaiti SC',serif">何時復西歸</div>
 
       <el-tree
           :data="data"
