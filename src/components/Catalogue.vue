@@ -34,7 +34,7 @@ export default {
 
       catalogue: [],
 
-      isCatalog: true
+      // isCatalog: true
 
     }
   },
@@ -71,44 +71,41 @@ export default {
             ".v-note-wrapper a"
         ).toArray();
 
-        if (aArr1.length === 0) {
-          this.isCatalog = false
-          return
+        //有目录且目录长度大于2再显示目录
+        if (aArr1.length !== 0 && aArr1.length !== 1) {
+          let aArr = []
+
+          aArr1.forEach(item => {
+            if (item.id) {
+              aArr.push(item)
+            }
+          })
+
+          //给数据赋值，保存元素的id和其距顶部的距离
+          this.tocAndDist(aArr)
+
+          let toc = [];
+          aArr.forEach((item, index) => {
+
+            let prop = $(item).parent().prop('nodeName');
+
+            if (prop === 'H2') {
+              let href = $(item).attr("id");
+              let name = $(item).parent().text();
+
+              let children = this.getChildren(aArr, item, index)
+              toc.push({
+                id: href.substring(href.lastIndexOf("_") + 1),
+                href: "#" + href,
+                name,
+                prop,
+                children
+              });
+            }
+          });
+          this.toc = toc
+          this.$emit("isCatalog", true)
         }
-
-        let aArr = []
-
-        aArr1.forEach(item => {
-          if (item.id) {
-            aArr.push(item)
-          }
-        })
-
-
-        //给数据赋值，保存元素的id和其距顶部的距离
-        this.tocAndDist(aArr)
-
-        let toc = [];
-        aArr.forEach((item, index) => {
-
-          let prop = $(item).parent().prop('nodeName');
-
-          if (prop === 'H2') {
-            let href = $(item).attr("id");
-            let name = $(item).parent().text();
-
-            let children = this.getChildren(aArr, item, index)
-            toc.push({
-              id: href.substring(href.lastIndexOf("_") + 1),
-              href: "#" + href,
-              name,
-              prop,
-              children
-            });
-          }
-        });
-        // this.$emit("isToc", true)
-        this.toc = toc
       });
 
       clipboard = new Clipboard(".copy-btn");

@@ -7,7 +7,7 @@
       <LoginStatus></LoginStatus>
     </div>
 
-    <Catalogue :props="defaultProps" ref="toc" v-if="isPC"></Catalogue>
+    <Catalogue :props="defaultProps" ref="toc" v-show="catalog" v-if="isPC" @isCatalog="showCatalog"></Catalogue>
 
     <EditStatus :blog="blog"></EditStatus>
 
@@ -75,8 +75,8 @@ export default {
 
   methods: {
 
-    showCatalog(val) {
-      this.catalog = val
+    showCatalog(val1) {
+      this.catalog = val1
     },
 
     isPCorMobile() {
@@ -97,13 +97,8 @@ export default {
     },
   },
 
-
-  mounted() {
-    this.isPCorMobile()
-  },
   created() {
-
-    const _this = this
+    this.isPCorMobile()
 
     if (JSON.parse(localStorage.getItem("myUserInfo")) && JSON.parse(localStorage.getItem("myUserInfo")).role === 'admin') {
 
@@ -117,48 +112,32 @@ export default {
       }).then(res => {
 
         this.createdCommon(res)
-
         this.loading = false
-
         this.$refs.toc.tocAndCli()
-
-
       })
-
 
     } else if (this.$route.query.token) {
 
-
       this.loading = true
-      const _this = this
       const blogId = this.$route.params.blogId
       const token = this.$route.query.token
 
       this.$axios.get('/blogToken/' + blogId + '/' + token).then(res => {
 
         this.createdCommon(res)
-
-        _this.loading = false
-
-
+        this.loading = false
         this.$refs.toc.tocAndCli()
-
-
       })
 
     } else {
 
       this.loading = true
-      const _this = this
       const blogId = this.$route.params.blogId
 
       this.$axios.get('/blog/' + blogId).then(res => {
 
         this.createdCommon(res)
-
-        _this.loading = false
-
-
+        this.loading = false
         this.$refs.toc.tocAndCli()
 
 
