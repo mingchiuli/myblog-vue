@@ -31,6 +31,7 @@
     <div class="block">
       <el-timeline>
         <el-timeline-item :timestamp="blog.created" placement="top" v-for="blog in blogs" color="#0bbd87">
+          <p v-if="blog.score !== undefined">{{"搜索匹配得分：" + blog.score}}</p>
           <el-card class="el-card" v-loading="loading">
             <img :src="blog.link ? blog.link : 'https://fuss10.elemecdn.com/3/28/bbf893f792f03a54408b3b7a7ebf0jpeg.jpeg'" class="image" alt="">
             <h4>
