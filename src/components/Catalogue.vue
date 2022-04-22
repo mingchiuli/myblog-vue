@@ -71,15 +71,17 @@ export default {
             ".v-note-wrapper a"
         ).toArray();
 
-        //有目录且目录长度大于2再显示目录
-        if (aArr1.length !== 0 && aArr1.length !== 1) {
-          let aArr = []
+        let aArr = []
 
-          aArr1.forEach(item => {
-            if (item.id) {
-              aArr.push(item)
-            }
-          })
+        aArr1.forEach(item => {
+          if (item.id) {
+            aArr.push(item)
+          }
+        })
+
+        //有目录且目录长度大于2再显示目录
+        if (aArr.length !== 0 && aArr.length !== 1) {
+
 
           //给数据赋值，保存元素的id和其距顶部的距离
           this.tocAndDist(aArr)
