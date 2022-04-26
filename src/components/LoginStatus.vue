@@ -9,6 +9,15 @@
       <el-divider direction="vertical"></el-divider>
       <span><el-link type="danger" @click="logout" style="font-size: large">退出</el-link></span>
     </div>
+    <div v-if="!hasLogin">
+      <span><el-link @click="init" type="primary" style="font-size: large">-+-+</el-link></span>
+      <el-divider direction="vertical"></el-divider>
+      <span><el-link type="success" @click="back" style="font-size: large">退回前页</el-link></span>
+      <el-divider direction="vertical"></el-divider>
+      <span><el-link type="danger" @click="webs" style="font-size: large">书签检索</el-link></span>
+      <el-divider direction="vertical"></el-divider>
+      <span><el-link type="warning" style="font-size: large">+-+-</el-link></span>
+    </div>
   </div>
 </template>
 
@@ -25,6 +34,14 @@ export default {
     }
   },
   methods: {
+
+    back() {
+      this.$router.back()
+    },
+
+    webs() {
+      this.$router.push('/sys/webs')
+    },
 
     init() {
       this.$router.push('/blogs/1')

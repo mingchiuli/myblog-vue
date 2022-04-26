@@ -7,6 +7,8 @@
           <el-button style="font-size: medium" id="tag-copy" :data-clipboard-text="msg" type="text" @click="copy($event,msg)">复制日志</el-button>
           <el-divider direction="vertical"></el-divider>
           <el-button style="font-size: medium" type="text" @click="show">开始监控</el-button>
+          <el-divider direction="vertical"></el-divider>
+          <el-button style="font-size: medium" type="text" @click="stop">停止监控</el-button>
         </div>
       </div>
       <div v-html="msg" class="text-item" v-loading="loading">
@@ -43,6 +45,17 @@ export default {
   },
 
   methods: {
+    stop() {
+      this.$axios.get('/stopMQ', {
+        headers: {
+          "Authorization": localStorage.getItem("myToken")
+        }
+      }).then(res => {
+        if (res.data.code === 200) {
+          this.$message.success("关闭消息队列成功")
+        }
+      })
+    },
 
     show() {
       this.$axios.get('/startMQ', {
