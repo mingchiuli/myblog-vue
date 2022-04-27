@@ -17,8 +17,18 @@ router.beforeEach((to, from, next) => {
       }
     }).then(res => {
 
+      let temp = []
+
+      res.data.data.forEach(item => {
+        //有孩子说明是后台路由
+        if (item.children.length !== 0) {
+          temp.push(item)
+        }
+      })
+
+      console.log(temp)
       // 拿到menuList
-      store.commit("setMenuList", res.data.data)
+      store.commit("setMenuList", temp)
 
       // 动态绑定路由
       let newRoutes = router.options.routes
@@ -39,11 +49,13 @@ router.beforeEach((to, from, next) => {
       store.commit("changeRouteStatus", hasRoute)
 
     })
-  } else if (from.name !== 'Blogs' && to.matched.some(record => record.meta.requireAuth) && !localStorage.getItem("myToken")) {
-
-    next({path: '/login'})
-
   }
+
+  // else if (from.name !== 'Blogs' && to.matched.some(record => record.meta.requireAuth) && !localStorage.getItem("myToken")) {
+  //
+  //   next({path: '/login'})
+  //
+  // }
 
   next()
 
@@ -79,8 +91,9 @@ const recursive = (data, newRoutes) => {
   }
 
   let route = menuToRoute(data)
-
-  if (route) {
+  if (route && ((route.name === 'BlogEdit') || (route.name === 'BlogAdd') || (route.name === 'Cooperate'))) {
+    newRoutes.push(route)
+  } else if (route) {
     newRoutes[0].children.push(route)
   }
 

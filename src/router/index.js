@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import BlogDetail from '../views/BlogDetail.vue'
 import Intro from '../views/Intro.vue'
-import Cooperate from "@/views/Cooperate";
 import VueRouter from 'vue-router';
 import SystemWebs from "@/views/sys/SystemWebs";
 
@@ -25,15 +24,6 @@ const routes = [
       },
     ]
   },
-  {
-    path: '/cooperate/:blogId/:coNumber',
-    name: Cooperate,
-    component: () => import('@/views/Cooperate'),
-    meta: {
-      title: '合作编辑',
-      requireAuth: true
-    }
-  },
 
   {
     path: '/other/:flag',
@@ -42,11 +32,6 @@ const routes = [
     meta: {
       title: '简历'
     }
-  },
-  {
-    path: '/footer',
-    name: 'Footer',
-    component: () => import('@/components/Footer'),
   },
 
   {
@@ -88,32 +73,11 @@ const routes = [
       title: '登录博客'
     }
   },
-  {
-    path: '/blog/add',
-    name: 'BlogAdd',
-    component: () => import('@/views/BlogEdit'),
-    meta: {
-      requireAuth: true,
-      title: '新建博客'
-    }
-  },
+
   {
     path: '/blog/:blogId',
     name: 'BlogDetail',
     component: BlogDetail,
-    meta: {
-      requireAuth: true,
-      title: '编辑博客'
-    }
-  },
-  {
-    path: '/blog/:blogId/edit',
-    name: 'BlogEdit',
-    component: () => import('@/views/BlogEdit'),
-    meta: {
-      requireAuth: true,
-      title: '编辑博客'
-    }
   },
 
   {
