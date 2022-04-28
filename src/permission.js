@@ -26,7 +26,6 @@ router.beforeEach((to, from, next) => {
         }
       })
 
-      console.log(temp)
       // 拿到menuList
       store.commit("setMenuList", temp)
 
