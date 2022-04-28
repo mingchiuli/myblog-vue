@@ -39,7 +39,7 @@
 				<template slot-scope="scope">
 					<el-tag size="small" v-if="scope.row.type === 0">目录</el-tag>
 					<el-tag size="small" v-else-if="scope.row.type === 1" type="success">菜单</el-tag>
-					<el-tag size="small" v-else-if="scope.row.type === 2" type="info">按钮</el-tag>
+					<el-tag size="small" v-else-if="scope.row.type === 2" type="info">路由</el-tag>
 				</template>
 
 			</el-table-column>
