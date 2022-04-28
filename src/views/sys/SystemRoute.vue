@@ -132,7 +132,7 @@
 					<el-radio-group v-model="editForm.type">
 						<el-radio :label=0>目录</el-radio>
 						<el-radio :label=1>菜单</el-radio>
-						<el-radio :label=2>按钮</el-radio>
+						<el-radio :label=2>路由</el-radio>
 					</el-radio-group>
 				</el-form-item>
 
