@@ -44,7 +44,7 @@ export default {
     },
 
     init() {
-      this.$router.push('/blogs/1')
+      this.$router.push('/public/blogs/1')
     },
 
     add() {

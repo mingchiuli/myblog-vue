@@ -9,10 +9,11 @@
         size="350px"
         :before-close="handleClose">
 
-      <el-avatar :size="80" :src="avatar" style="margin-left: 40%"></el-avatar>
-
-      <div style="margin-left: 38.4%; font-size: 18px; font-family: 'Kaiti SC',serif">百川東到海</div>
-      <div style="margin-left: 38.4%; font-size: 18px; font-family: 'Kaiti SC',serif">何時復西歸</div>
+      <div style="text-align: left">
+        <el-avatar :size="80" :src="avatar" style="margin-left: 40%"></el-avatar>
+        <div style="margin-left: 135px; font-size: 18px;">百川東到海</div>
+        <div style="margin-left: 135px; font-size: 18px;">何時復西歸</div>
+      </div>
 
       <el-tree
           :data="data"
@@ -82,15 +83,15 @@ export default {
     handleNodeClick(data) {
       switch (data.label) {
         case '2022':
-          this.$router.push("/blogs/2022/1")
+          this.$router.push("/public/blogs/2022/1")
           this.drawer = false
           break
         case '2021':
-          this.$router.push("/blogs/2021/1")
+          this.$router.push("/public/blogs/2021/1")
           this.drawer = false
           break
         case '日志':
-          this.$router.push("/blogs/1")
+          this.$router.push("/public/blogs/1")
           this.drawer = false
           break
         case '关于':

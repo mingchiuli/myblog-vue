@@ -1,8 +1,6 @@
 <template>
   <div>
     <div class="myItem">
-<!--      width: 0解决flex Sider被拉伸的问题-->
-      <Sider style="width: 0;margin-left: 10%;"></Sider>
 
       <el-autocomplete
           v-if="isPC"
@@ -11,22 +9,10 @@
           :fetch-suggestions="querySearchAsync"
           placeholder="请输入内容"
           @select="handleSelect"
-          clearable style="width: 15%;margin-top: 10px;margin-left: 65%"></el-autocomplete>
+          clearable style="width: 20%;margin-top: 10px;margin-left: 65%"></el-autocomplete>
 
       <el-button v-if="isPC" @click="searchKeyword" type="success" plain style="margin-top: 10px;font-size: smaller;" icon="el-icon-search"></el-button>
     </div>
-
-    <div class="m-content" v-if="year === 0">
-      <h1>日志</h1>
-      <hr>
-    </div>
-
-    <div class="m-content" v-else-if="year !== 0">
-      <h1>归档{{year}}({{count}})</h1>
-      <hr>
-    </div>
-
-    <LoginStatus></LoginStatus>
 
     <div class="block">
       <el-timeline>
@@ -38,6 +24,7 @@
               <el-link style="color: black" type="info" plain @click="blogStatus(blog.id)">{{blog.title}}</el-link>
             </h4>
             <p>{{blog.description}}</p>
+            <p v-if="blog.highlight !== undefined" v-html="blog.highlight"></p>
           </el-card>
         </el-timeline-item>
       </el-timeline>
@@ -45,14 +32,13 @@
       <el-pagination class="mpage"
                      background
                      layout="prev, pager, next"
-                     :current-page="currentPage"
+                     :current-page="parseInt(currentPage)"
                      :page-size="pageSize"
                      :total="total"
                      @current-change=pageSelect>
       </el-pagination>
 
     </div>
-    <Footer></Footer>
   </div>
 </template>
 
@@ -87,13 +73,15 @@
         for (let i = 0; i < this.blogs.length; i++) {
           this.blogs[i].created = this.blogs[i].created.substring(0, 10)
         }
+
         this.currentPage = res.data.data.current
+
         this.total = res.data.data.total
         this.pageSize = res.data.data.size
       },
 
       isPCorMobile() {
-        this.flag =  navigator.userAgent.match(/(phone|pod|iPhone|iPod|ios|Android|Moblie|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowerNG|WebOS|Symbian|Windows Phone)/i);
+        this.flag = navigator.userAgent.match(/(phone|pod|iPhone|iPod|ios|Android|Moblie|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowerNG|WebOS|Symbian|Windows Phone)/i);
         if (this.flag === null) {
           this.isPC = true;
         }
@@ -146,12 +134,8 @@
               cancelButtonText: '取消',
             }).then(({ value }) => {
               this.$axios.get('/blogToken/' + id + '/' + value).then(res => {
-                if (res.data.code === 200) {
-                  this.$router.push('/blog/' + id + '?token=' + value)
-                }
+                this.$router.push('/public/blog/' + id + '?token=' + value)
               })
-
-
 
             }).catch(() => {
               this.$message({
@@ -177,13 +161,14 @@
 
       pageByYear(currentPage) {
         this.loading = true
+
         this.$axios.get("/blogsByYear/" + this.year + "/" + currentPage).then(res => {
 
           this.blogsCommon(res)
 
           //更换页码后强制浏览器回到顶端
           $("html,body").animate({ scrollTop: 0}, 200);
-          this.$router.push("/blogs/" + this.year + "/" + currentPage)
+          this.$router.push("/public/blogs/" + this.year + "/" + currentPage)
           this.loading = false
         })
       },
@@ -199,7 +184,7 @@
 
           // document.body.scrollTop = document.documentElement.scrollTop = 0
           // vue不会重复执行created()之类的钩子函数，如果只是参数值变化，页面不会重复刷新，所以不影响效率，仅仅是地址栏改变
-          this.$router.push("/blogs/" + currentPage)
+          this.$router.push("/public/blogs/" + currentPage)
           this.loading = false
         })
       },
@@ -239,7 +224,7 @@
 
             this.searchSortedCommon(res)
 
-            this.$router.push("/blogs/" + this.year + '/' + currentPage)
+            this.$router.push("/public/blogs/" + this.year + '/' + currentPage)
             this.loading = false
           })
         } else {
@@ -247,7 +232,7 @@
           this.$axios.get('/search/' + currentPage + '?keyword=' + this.input).then(res => {
 
             this.searchSortedCommon(res)
-            this.$router.push("/blogs/" + currentPage)
+            this.$router.push("/public/blogs/" + currentPage)
             this.loading = false
           })
         }
@@ -256,17 +241,22 @@
 
       forCreated() {
 
+        this.$emit("title", '')
+
         if (this.$route.params.year) {
           this.year = this.$route.params.year
 
           this.$axios.get('/getCountByYear/' + this.year).then(res => {
             this.count = res.data.data
+            this.$emit("yearCount", this.year, this.count)
           })
 
           this.currentPage = this.$route.params.currentPage
+
           this.pageByYear(this.currentPage)
 
         } else {
+          this.$emit("yearCount", 0, 0)
           this.page(this.$route.params.currentPage)
         }
       }
@@ -302,21 +292,8 @@
 
         this.year = 0
 
-        if (this.$route.params.year) {
-          this.year = this.$route.params.year
+        this.forCreated()
 
-          this.$axios.get('/getCountByYear/' + this.year).then(res => {
-            this.count = res.data.data
-          })
-
-          this.currentPage = this.$route.params.currentPage
-          this.pageByYear(this.currentPage)
-
-        } else {
-
-          this.page(this.$route.params.currentPage)
-
-        }
       }
     }
 
@@ -357,8 +334,8 @@
 
 
   .m-content {
-    max-width: 100%;
-    margin-top: 0;
+    /*max-width: 100%;*/
+    /*margin-top: 0;*/
     text-align: center;
 
   }
@@ -382,8 +359,12 @@
 
   .myItem {
     /*位于一行*/
-    display: flex;
-    flex-direction: row;
+    /*display: flex;*/
+    /*flex-direction: row;*/
+    position: absolute;
+    width: 80%;
+    right: 0;
+    top: 0;
   }
 
 

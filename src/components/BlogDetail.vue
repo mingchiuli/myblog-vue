@@ -1,11 +1,11 @@
 <template>
   <div>
-    <div>
-      <Sider style="width: 0; margin-left: 10%;"></Sider>
-      <h1 style="text-align: center;font-family: 'Kaiti SC',serif"> {{ blog.title }}</h1>
-      <hr/>
-      <LoginStatus></LoginStatus>
-    </div>
+<!--    <div>-->
+<!--      <Sider style="width: 0; margin-left: 10%;"></Sider>-->
+<!--      <h1 style="text-align: center;font-family: 'Kaiti SC',serif"> {{ blog.title }}</h1>-->
+<!--      <hr/>-->
+<!--      <LoginStatus></LoginStatus>-->
+<!--    </div>-->
 
     <Catalogue :props="defaultProps" ref="toc" v-show="catalog" v-if="isPC" @isCatalog="showCatalog"></Catalogue>
 
@@ -24,8 +24,6 @@
     <BackTop></BackTop>
 
     <Utterances style="width: inherit"></Utterances>
-
-    <Footer></Footer>
 
   </div>
 </template>
@@ -92,6 +90,7 @@ export default {
       this.blog.id = blog.id
       this.blog.title = blog.title
       document.title = blog.title
+      this.$emit("title", blog.title)
 
       this.blog.content = markdown(this.$mavonEditor.mavonEditor, blog.content)
     },
@@ -99,6 +98,8 @@ export default {
 
   created() {
     this.isPCorMobile()
+
+    this.$emit("yearCount", 0, 0)
 
     if (JSON.parse(localStorage.getItem("myUserInfo")) && JSON.parse(localStorage.getItem("myUserInfo")).role === 'admin') {
 

@@ -27,6 +27,7 @@
           <div style="font-size: 14px">收藏时间：{{ web.created }}</div>
           <br v-if="web.score !== undefined"/>
           <div style="font-size: 14px" v-if="web.score !== undefined">{{"搜索匹配得分：" + web.score}}</div>
+          <p style="font-size: 14px" v-html="web.highlight" v-if="web.highlight !== undefined"></p>
         </el-card>
       </div>
     </div>

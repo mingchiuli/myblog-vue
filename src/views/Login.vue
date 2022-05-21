@@ -125,7 +125,7 @@
     },
     created() {
       if (localStorage.getItem('myToken')) {
-        this.$router.push('/blogs/1')
+        this.$router.push('/public/blogs/1')
         return
       }
       this.getCaptcha()

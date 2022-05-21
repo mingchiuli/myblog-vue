@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import BlogDetail from '../views/BlogDetail.vue'
+import BlogDetail from '../components/BlogDetail.vue'
 import Intro from '../views/Intro.vue'
 import VueRouter from 'vue-router';
 import SystemWebs from "@/views/sys/SystemWebs";
@@ -25,6 +25,37 @@ const routes = [
     ]
   },
 
+
+  {
+    path: '/public',
+    component: () => import('@/views/BlogParent'),
+    children: [
+      {
+        name: 'Blogs',
+        path: 'blogs/:currentPage',
+        component: () => import('@/components/Blogs'),
+        meta: {
+          title: '博客列表',
+        }
+      },
+      {
+        path: 'blogs/:year/:currentPage',
+        name: 'BlogsByYear',
+        component: () => import('@/components/Blogs'),
+        meta: {
+          title: '博客归档'
+        }
+      },
+      {
+        path: 'blog/:blogId',
+        name: 'BlogDetail',
+        component: () => import('@/components/BlogDetail'),
+      },
+    ]
+  },
+
+
+
   {
     path: '/other/:flag',
     name: 'Resume',
@@ -48,23 +79,23 @@ const routes = [
     name: 'Index',
     redirect: {name: "Intro"}
   },
-  {
-    path: '/blogs/:currentPage',
-    name: 'Blogs',
-    component: () => import('@/views/Blogs'),
-    meta: {
-      title: '博客列表'
-    }
-  },
+  // {
+  //   path: '/blogs/:currentPage',
+  //   name: 'Blogs',
+  //   component: () => import('@/components/Blogs'),
+  //   meta: {
+  //     title: '博客列表'
+  //   }
+  // },
 
-  {
-    path: '/blogs/:year/:currentPage',
-    name: 'BlogsByYear',
-    component: () => import('@/views/Blogs'),
-    meta: {
-      title: '博客归档'
-    }
-  },
+  // {
+  //   path: '/blogs/:year/:currentPage',
+  //   name: 'BlogsByYear',
+  //   component: () => import('@/components/Blogs'),
+  //   meta: {
+  //     title: '博客归档'
+  //   }
+  // },
   {
     path: '/login',
     name: 'Login',
@@ -74,17 +105,16 @@ const routes = [
     }
   },
 
-  {
-    path: '/blog/:blogId',
-    name: 'BlogDetail',
-    component: BlogDetail,
-  },
+  // {
+  //   path: '/blog/:blogId',
+  //   name: 'BlogDetail',
+  //   component: BlogDetail,
+  // },
 
   {
     path: "*", // 此处需特别注意置于最底部
     name: "notFound",
     component: () => import('@/views/NotFound'),
-
   }
 
 ]
