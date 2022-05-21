@@ -109,7 +109,7 @@
               _this.$store.commit("SET_TOKEN", jwt)
               _this.$store.commit("SET_LOGIN", true)
 
-              _this.$router.push('blogs/1')
+              _this.$router.push('/public/blogs/1')
 
             })
 
