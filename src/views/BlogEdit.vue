@@ -86,7 +86,7 @@
               _this.$alert('操作成功', '提示', {
                 confirmButtonText: '确定',
                 callback: action => {
-                  _this.$router.push('/blog/' + this.contentForm.id)
+                  _this.$router.push('/public/blog/' + this.contentForm.id)
                 }
               });
 
