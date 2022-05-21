@@ -230,7 +230,7 @@ export default {
     },
 
     find(id) {
-      this.$router.push('/blog/' + id)
+      this.$router.push('/public/blog/' + id)
     },
 
     getBlogToken() {
