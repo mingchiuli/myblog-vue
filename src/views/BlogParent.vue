@@ -21,14 +21,14 @@
     </div>
 
     <div class="m-content" v-else>
-      <h1>日志</h1>
+      <h1> {{ choose }} </h1>
       <hr>
     </div>
 
 
     <LoginStatus></LoginStatus>
 
-    <router-view @title="setTitle" @yearCount="setYearCount"/>
+    <router-view @title="setTitle" @yearCount="setYearCount" @choose="setChoose"/>
 
     <Footer></Footer>
 
@@ -49,7 +49,8 @@ export default {
     return {
       title: '',
       year: 0,
-      count: -1
+      count: -1,
+      choose: '日志'
     }
   },
 
@@ -63,6 +64,11 @@ export default {
       this.year = year
       this.count = count
     },
+
+    setChoose(choose) {
+      this.year = 0
+      this.choose = choose
+    }
   }
 }
 </script>

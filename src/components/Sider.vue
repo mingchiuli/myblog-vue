@@ -98,7 +98,7 @@ export default {
           this.$router.push("/")
           break
         case '简历':
-          this.$router.push("/other/1")
+          this.$router.push("/public/other/1")
           this.drawer = false
           break
         case 'mla':
@@ -106,7 +106,7 @@ export default {
           this.drawer = false
           break
         case '更新':
-          this.$router.push("/other/0")
+          this.$router.push("/public/other/0")
           this.drawer = false
           break
         case '版权':

@@ -1,9 +1,6 @@
 <template>
   <div>
     <div v-if="flag">
-      <Sider style="width: 0; margin-left: 10%;"></Sider>
-      <h1 style="text-align: center;">简历</h1>
-      <hr>
       <div class="mbody">
         <div class="mIntro">
           <h2 style="text-align: center; font-size: x-large; font-family: 'Kaiti SC',serif">MingChiu Li</h2>
@@ -18,9 +15,6 @@
     </div>
 
     <div v-else-if="!flag">
-      <Sider style="width: 0; margin-left: 10%;"></Sider>
-      <h1 style="text-align: center;">更新</h1>
-      <hr>
       <div class="mbody">
         <div class="mIntro">
           <p class="mTitle">2022.3.7</p>
@@ -60,7 +54,7 @@
 
     </div>
 
-    <Footer></Footer>
+<!--    <Footer></Footer>-->
 
   </div>
 </template>
@@ -73,21 +67,32 @@ export default {
   components: {Sider, Footer},
   data() {
     return {
-      flag: true
+      flag: -1
+    }
+  },
+
+  methods: {
+    forCreated() {
+
+      if (this.$route.params.flag === '0') {
+        this.flag = false
+        this.$emit("choose", "更新")
+      } else if (this.$route.params.flag === '1') {
+        this.flag = true
+        this.$emit("choose", "简历")
+      }
     }
   },
 
   created() {
-    if (this.$route.params.flag === '0') {
-      this.flag = false
-    }
+    this.forCreated()
   },
 
   watch: {
     $route(to,from){
       // created:{}里面的方法
 
-      this.flag = this.$route.params.flag !== '0';
+      this.forCreated()
     }
 
   }

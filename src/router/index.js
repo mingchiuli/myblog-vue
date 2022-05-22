@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import BlogDetail from '../components/BlogDetail.vue'
+import BlogDetail from '../views/BlogDetail.vue'
 import Intro from '../views/Intro.vue'
 import VueRouter from 'vue-router';
 import SystemWebs from "@/views/sys/SystemWebs";
@@ -33,7 +33,7 @@ const routes = [
       {
         name: 'Blogs',
         path: 'blogs/:currentPage',
-        component: () => import('@/components/Blogs'),
+        component: () => import('@/views/Blogs'),
         meta: {
           title: '博客列表',
         }
@@ -41,7 +41,7 @@ const routes = [
       {
         path: 'blogs/:year/:currentPage',
         name: 'BlogsByYear',
-        component: () => import('@/components/Blogs'),
+        component: () => import('@/views/Blogs'),
         meta: {
           title: '博客归档'
         }
@@ -49,21 +49,30 @@ const routes = [
       {
         path: 'blog/:blogId',
         name: 'BlogDetail',
-        component: () => import('@/components/BlogDetail'),
+        component: () => import('@/views/BlogDetail'),
+      },
+
+      {
+        path: 'other/:flag',
+        name: 'Resume',
+        component: () => import('@/views/Resume'),
+        meta: {
+          title: '简历'
+        }
       },
     ]
   },
 
 
 
-  {
-    path: '/other/:flag',
-    name: 'Resume',
-    component: () => import('@/views/Resume'),
-    meta: {
-      title: '简历'
-    }
-  },
+  // {
+  //   path: '/other/:flag',
+  //   name: 'Resume',
+  //   component: () => import('@/views/Resume'),
+  //   meta: {
+  //     title: '简历'
+  //   }
+  // },
 
   {
     path: '/intro',

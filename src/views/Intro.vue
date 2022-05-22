@@ -1,7 +1,10 @@
 <template>
   <div>
-    <Sider style="width: 0; margin-left: 10%;"></Sider>
-    <router-link style="font-size: medium;margin-left: 78%; margin-bottom: 5px" :to="{name: 'Blogs', params: {currentPage : 1}}">进入日志</router-link>
+<!--    <Sider style="width: 0; margin-left: 10%;"></Sider>-->
+    <div style="margin-top: 50px"></div>
+    <div style="margin-left: 78%">
+      <router-link style="font-size: large; margin-bottom: 5px;" :to="{name: 'Blogs', params: {currentPage : 1}}">进入日志</router-link>
+    </div>
     <div class="mbody">
       <div class="mIntro">
         Love is patient
@@ -34,6 +37,7 @@
       </p>
       <li style="text-align: center">来自网络</li>
     </div>
+    <Utterances></Utterances>
     <Footer></Footer>
   </div>
 </template>
@@ -41,9 +45,10 @@
 <script>
 import Footer from "@/components/Footer";
 import Sider from "@/components/Sider";
+import Utterances from "@/components/Utterances";
 export default {
   name: "Intro",
-  components: {Sider, Footer},
+  components: {Utterances, Sider, Footer},
 }
 </script>
 
