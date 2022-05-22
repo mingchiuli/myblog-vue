@@ -257,6 +257,7 @@
 
         } else {
           this.$emit("yearCount", 0, 0)
+          this.$emit("choose", "日志")
           this.page(this.$route.params.currentPage)
         }
       }
