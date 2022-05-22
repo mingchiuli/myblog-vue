@@ -50,7 +50,7 @@ export default {
       title: '',
       year: 0,
       count: -1,
-      choose: '加载中...'
+      choose: ''
     }
   },
 

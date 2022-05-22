@@ -99,7 +99,7 @@ export default {
   created() {
     this.isPCorMobile()
 
-    this.$emit("yearCount", 0, 0)
+    this.$emit("yearCount", 0, -1)
 
     if (JSON.parse(localStorage.getItem("myUserInfo")) && JSON.parse(localStorage.getItem("myUserInfo")).role === 'admin') {
 
@@ -144,10 +144,6 @@ export default {
 
       })
     }
-  },
-
-  beforeDestroy() {
-    this.$emit("title", "")
   },
 
   computed: {
