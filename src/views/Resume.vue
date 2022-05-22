@@ -91,10 +91,13 @@ export default {
   watch: {
     $route(to,from){
       // created:{}里面的方法
-
       this.forCreated()
     }
 
+  },
+
+  destroyed() {
+    this.$emit("choose", "加载中...")
   }
 }
 </script>
