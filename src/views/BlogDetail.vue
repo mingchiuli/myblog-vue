@@ -146,6 +146,10 @@ export default {
     }
   },
 
+  beforeDestroy() {
+    this.$emit("title", "")
+  },
+
   computed: {
     hasLogin: {
       get() {

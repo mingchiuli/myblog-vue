@@ -2,7 +2,7 @@
   <div>
     <div class="myItem">
       <!--      width: 0解决flex Sider被拉伸的问题-->
-      <Sider style="width: 0;margin-left: 10%;"></Sider>
+      <Sider style="width: 0;margin-left: 10%;" @choose="setChoose"></Sider>
 
     </div>
 

@@ -95,10 +95,6 @@ export default {
     }
 
   },
-
-  destroyed() {
-    this.$emit("choose", "加载中...")
-  }
 }
 </script>
 
