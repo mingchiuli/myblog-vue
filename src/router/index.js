@@ -63,17 +63,6 @@ const routes = [
     ]
   },
 
-
-
-  // {
-  //   path: '/other/:flag',
-  //   name: 'Resume',
-  //   component: () => import('@/views/Resume'),
-  //   meta: {
-  //     title: '简历'
-  //   }
-  // },
-
   {
     path: '/intro',
     name: 'Intro',
@@ -88,23 +77,6 @@ const routes = [
     name: 'Index',
     redirect: {name: "Intro"}
   },
-  // {
-  //   path: '/blogs/:currentPage',
-  //   name: 'Blogs',
-  //   component: () => import('@/components/Blogs'),
-  //   meta: {
-  //     title: '博客列表'
-  //   }
-  // },
-
-  // {
-  //   path: '/blogs/:year/:currentPage',
-  //   name: 'BlogsByYear',
-  //   component: () => import('@/components/Blogs'),
-  //   meta: {
-  //     title: '博客归档'
-  //   }
-  // },
   {
     path: '/login',
     name: 'Login',
@@ -114,11 +86,6 @@ const routes = [
     }
   },
 
-  // {
-  //   path: '/blog/:blogId',
-  //   name: 'BlogDetail',
-  //   component: BlogDetail,
-  // },
 
   {
     path: "*", // 此处需特别注意置于最底部

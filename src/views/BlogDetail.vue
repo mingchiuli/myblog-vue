@@ -1,11 +1,5 @@
 <template>
   <div>
-<!--    <div>-->
-<!--      <Sider style="width: 0; margin-left: 10%;"></Sider>-->
-<!--      <h1 style="text-align: center;font-family: 'Kaiti SC',serif"> {{ blog.title }}</h1>-->
-<!--      <hr/>-->
-<!--      <LoginStatus></LoginStatus>-->
-<!--    </div>-->
 
     <Catalogue :props="defaultProps" ref="toc" v-show="catalog" v-if="isPC" @isCatalog="showCatalog"></Catalogue>
 
@@ -23,7 +17,7 @@
 
     <BackTop></BackTop>
 
-    <Utterances style="width: inherit"></Utterances>
+    <Comment></Comment>
 
   </div>
 </template>
@@ -36,7 +30,7 @@ let clipboard
 import Catalogue from "@/components/Catalogue";
 import LoginStatus from "@/components/LoginStatus";
 import Sider from "@/components/Sider";
-import Utterances from "@/components/Utterances";
+import Comment from "@/components/Comment";
 import { markdown } from "@/util/markdown";
 import BackTop from "@/components/BackTop";
 import Footer from "@/components/Footer";
@@ -44,7 +38,7 @@ import Footer from "@/components/Footer";
 
 export default {
   name: "BlogDetail.vue",
-  components: {Footer, BackTop, EditStatus, Catalogue, Utterances, Sider, LoginStatus},
+  components: {Footer, BackTop, EditStatus, Catalogue, Comment, Sider, LoginStatus},
   data() {
     return {
       blog: {
@@ -206,7 +200,7 @@ div.v-note-wrapper .v-note-panel .v-note-navigation-wrapper.transition {
   /*display: none;*/
 }
 
-.utterances {
+.Comment {
   max-width: 70%;
 }
 

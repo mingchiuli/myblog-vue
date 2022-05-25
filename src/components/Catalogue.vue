@@ -173,11 +173,15 @@ export default {
             name,
             children
           })
-        } else if (level < parseInt(name.substring(1, 2)) - 1) {
-          continue
-        } else {
-          break
+        } else if (level + 1 > parseInt(name.substring(1, 2))) {
+          break;
         }
+      //如果是2，2，2，就不构建孩子
+      // else if (level < parseInt(name.substring(1, 2)) - 1) {
+      //     continue
+      //   } else {
+      //     break
+      //   }
 
       }
 

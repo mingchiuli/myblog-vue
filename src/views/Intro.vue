@@ -37,7 +37,8 @@
       </p>
       <li style="text-align: center">来自网络</li>
     </div>
-    <Utterances></Utterances>
+    <Comment></Comment>
+
     <Footer></Footer>
   </div>
 </template>
@@ -45,10 +46,10 @@
 <script>
 import Footer from "@/components/Footer";
 import Sider from "@/components/Sider";
-import Utterances from "@/components/Utterances";
+import Comment from "@/components/Comment";
 export default {
   name: "Intro",
-  components: {Utterances, Sider, Footer},
+  components: {Comment, Sider, Footer},
 }
 </script>
 
@@ -78,16 +79,11 @@ export default {
   margin-bottom: 3.5%;
 }
 
-
-
-
-
 h2 {
   font-size: xx-large;
   margin-top: 2%;
   margin-bottom: 5%;
 }
-
 
 hr {
   display: block;
@@ -99,9 +95,6 @@ hr {
   max-width: 30%;
   color: lightgray;
 }
-
-
-
 
 a {
   text-decoration: none;
