@@ -28,12 +28,12 @@
     </div>
     <div>
       <p style="text-align: center">
-        <img src="../../public/background.png" class="mImg" alt="">
+        <img src="http://81.68.192.120:8081/upload/img/20220524133334/5001c038-cf9f-4905-aab2-7c861f985a75_background.f5f43e2e.jpg" class="mImg" alt="">
       </p>
       <li style="text-align: center">Secret Garden《Winter Poem》</li>
 
       <p style="text-align: center">
-        <img style="width: 50%; height: 30%" src="../../public/746311-20191023220441012-897312309.jpg" class="mImg" alt="">
+        <img style="width: 50%; height: 30%" src="http://81.68.192.120:8081/upload/img/20220524133334/fbcf961a-c722-41e1-af49-74d977bde5b2_746311-20191023220441012-897312309.110bbcc6.jpg" class="mImg" alt="">
       </p>
       <li style="text-align: center">来自网络</li>
     </div>

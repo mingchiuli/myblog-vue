@@ -62,12 +62,6 @@ export default {
       }, {
         label: '更新'
       }, {
-        label: '代码'
-      }
-        , {
-          label: 'mla'
-        }
-        , {
           label: '版权'
         }],
       defaultProps: {
@@ -101,10 +95,6 @@ export default {
           this.$router.push("/public/other/1")
           this.drawer = false
           break
-        case 'mla':
-          window.open().location.href = '/mla.html';
-          this.drawer = false
-          break
         case '更新':
           this.$router.push("/public/other/0")
           this.drawer = false
@@ -113,9 +103,6 @@ export default {
           window.open().location.href = 'https://creativecommons.org/licenses/by-nc-sa/4.0/';
           this.drawer = false
           break
-        case '代码':
-          window.open().location.href = '/_book/index.html';
-          this.drawer = false
       }
     }
   },
