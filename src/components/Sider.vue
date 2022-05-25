@@ -32,14 +32,12 @@
 
 <script>
 
-import avatar from '../../public/WechatIMG7.jpeg'
-
 export default {
   name: "Sider",
   data() {
     return {
 
-      avatar: avatar,
+      avatar: 'http://81.68.192.120:8081/upload/img/20220524133334/bf48de8a-8a85-438f-8d0f-fbc5636da16d_WechatIMG7.jpeg',
 
       input: '',
       drawer: false,
