@@ -43,7 +43,7 @@ export default {
 
       const disqus = new DisqusJS({
         shortname: '81-68-192-120',
-        siteName: '81.68.192.120',
+        siteName: 'mingchiuli',
         identifier: document.location.origin + document.location.pathname + document.location.search,
         url: document.location.origin + document.location.pathname + document.location.search,
         title: document.title,

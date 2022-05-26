@@ -14,7 +14,7 @@ export default {
 <style scoped>
 
 .footer {
-  margin-top: 7%;
+  margin-top: 4%;
 }
 
 hr {
@@ -44,9 +44,5 @@ a {
   font-family: "Brush Script MT",serif;
   font-size: 20px;
 }
-
-
-
-
 
 </style>

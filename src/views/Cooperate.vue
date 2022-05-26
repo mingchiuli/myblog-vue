@@ -221,7 +221,7 @@ export default {
               confirmButtonText: '确定',
               callback: () => {
                 this.disconnectWebSocket()
-                this.$router.push("/blogs/1")
+                this.$router.push("/public/blogs/1")
               }
             });
           })
