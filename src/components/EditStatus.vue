@@ -42,7 +42,7 @@ export default {
             "Authorization": localStorage.getItem("myToken")
           }
         }).then(res => {
-          this.$router.push('/blogs/1')
+          this.$router.push('/public/blogs/1')
         })
       }).catch(() => {
         this.$message({

@@ -312,7 +312,7 @@ export default {
 
 
     addNewBlog() {
-      this.$router.push('/blog/add')
+      this.$router.push({name: 'BlogAdd'})
     },
 
     editHandle (id) {
