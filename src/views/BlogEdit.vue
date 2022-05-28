@@ -198,6 +198,7 @@ import Footer from "@/components/Footer";
         this.contentForm.description = blog.description
         this.contentForm.content = blog.content
         this.contentForm.link = blog.link
+        this.fileList.push({name: '封面', url: blog.link})
         this.created = blog.created
       }
     },
