@@ -14,14 +14,29 @@
           <el-input type="textarea" v-model="contentForm.description"></el-input>
         </el-form-item>
 
-        <el-image :src="contentForm.link" style="width: 30%">
+
+
+
+        <el-upload
+            action="#"
+            style="width: 30%; margin-left: 35%"
+            class="upload-demo"
+            :on-remove="removeCover"
+            :file-list="fileList"
+            :http-request="uploadCover"
+            list-type="text">
+          <el-button size="small" type="primary">点击上传封面</el-button>
+        </el-upload>
+        <br/>
+
+        <el-image :src="fileList.length === 0 ? '' : fileList[0].url" style="width: 30%">
         </el-image>
         <div>封面预览</div>
         <br/>
 
-        <el-form-item label="封面" prop="link" v-loading="loading">
-          <el-input v-model="contentForm.link"></el-input>
-        </el-form-item>
+<!--        <el-form-item label="封面" prop="link" v-loading="loading">-->
+<!--          <el-input v-model="contentForm.link"></el-input>-->
+<!--        </el-form-item>-->
 
         <el-form-item label="内容" prop="content" v-loading="loading">
           <mavon-editor v-model="contentForm.content" :ishljs = "true" ref="md" code-style="androidstudio" @imgAdd="imgAdd" @imgDel="imgDel"></mavon-editor>
@@ -40,7 +55,8 @@
 </template>
 
 <script>
-  import Footer from "@/components/Footer";
+import Global from '@/Global';
+import Footer from "@/components/Footer";
   export default {
     name: "BlogEdit.vue",
     components: {Footer},
@@ -55,6 +71,7 @@
         },
         created: '',
         loading: false,
+        uploadUrl : Global.url + '/upload',
 
 
         rules: {
@@ -70,9 +87,47 @@
           ]
         },
 
+        fileList: []
+
+
       };
     },
     methods: {
+      removeCover(file) {
+        const formdata = new FormData()
+        formdata.append('url', file.url)
+        this.$axios({
+          url: '/delfile',
+          method: 'delete',
+          data: formdata,
+          headers: { 'Content-Type': 'multipart/form-data',"Authorization": localStorage.getItem("myToken")},
+        }).then(res => {
+          this.fileList = []
+          this.contentForm.link = ''
+        })
+            .catch(res => {
+              console.log(res)
+            })
+      },
+
+      uploadCover(image) {
+        // 第一步.将图片上传到服务器.
+        const formdata = new FormData();
+        formdata.append('image', image.file);
+        formdata.append('created', this.created)
+        this.$axios({
+          url: '/upload',
+          method: 'post',
+          data: formdata,
+          headers: { 'Content-Type': 'multipart/form-data',"Authorization": localStorage.getItem("myToken")},
+        }).then((url) => {
+          // 第二步.将返回的url替换
+          this.fileList.push({name: '封面', url: url.data.data})
+          this.contentForm.link = url.data.data
+        })
+      },
+
+
       submitForm(formName) {
         this.$refs[formName].validate((valid) => {
           if (valid) {
@@ -149,7 +204,6 @@
     created() {
       this.loading = true
       const blogId = this.$route.params.blogId
-      console.log(blogId)
       const _this = this
       if(blogId && localStorage.getItem("myUserInfo") && JSON.parse(localStorage.getItem("myUserInfo")).role === 'admin') {
         this.$axios.get('/blogAuthorized/' + blogId, {
