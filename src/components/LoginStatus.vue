@@ -1,17 +1,17 @@
 <template>
   <div class="maction">
     <div v-if="hasLogin">
-      <span><el-link @click="init" type="primary" style="font-size: large">主页</el-link></span>
+      <span><el-link @click="init" type="primary" style="font-size: large">Homepage</el-link></span>
       <el-divider direction="vertical"></el-divider>
-      <span><el-link type="success" @click="add" style="font-size: large">发表博客</el-link></span>
+      <span><el-link type="success" @click="add" style="font-size: large">Blog post</el-link></span>
       <el-divider direction="vertical"></el-divider>
-      <span><el-link type="warning" @click="backStage" style="font-size: large">进入后台</el-link></span>
+      <span><el-link type="warning" @click="backStage" style="font-size: large">step into backstage</el-link></span>
       <el-divider direction="vertical"></el-divider>
-      <span><el-link type="danger" @click="logout" style="font-size: large">退出</el-link></span>
+      <span><el-link type="danger" @click="logout" style="font-size: large">logout</el-link></span>
     </div>
     <div v-if="!hasLogin">
       <el-divider direction="vertical"></el-divider>
-      <span><el-link type="success" @click="back" style="font-size: large">退回前页</el-link></span>
+      <span><el-link type="success" @click="back" style="font-size: large">back</el-link></span>
       <el-divider direction="vertical"></el-divider>
     </div>
   </div>

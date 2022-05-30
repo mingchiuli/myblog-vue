@@ -1,16 +1,16 @@
 <template>
   <div>
-    <h2>发表日志</h2>
+    <h2>Publish Blog</h2>
 
     <div class="m-content">
 
       <el-form :model="contentForm" :rules="rules" ref="contentForm" label-width="100px" class="demo-contentForm">
-        <el-form-item label="标题" prop="title">
+        <el-form-item label="title" prop="title">
           <el-input v-model="contentForm.title"></el-input>
         </el-form-item>
 
 <!--        el-form-item的prop="description"疑似没用-->
-        <el-form-item label="摘要" prop="description">
+        <el-form-item label="description" prop="description">
           <el-input type="textarea" v-model="contentForm.description"></el-input>
         </el-form-item>
 
@@ -25,13 +25,13 @@
             :file-list="fileList"
             :http-request="uploadCover"
             list-type="text">
-          <el-button size="small" type="primary">点击上传封面</el-button>
+          <el-button size="small" type="primary">Click to upload the cover</el-button>
         </el-upload>
         <br/>
 
         <el-image :src="fileList.length === 0 ? '' : fileList[0].url" style="width: 30%">
         </el-image>
-        <div>封面预览</div>
+        <div>Cover Preview</div>
         <br/>
 
 <!--        <el-form-item label="封面" prop="link" v-loading="loading">-->
@@ -43,8 +43,8 @@
         </el-form-item>
 
         <el-form-item>
-          <el-button type="primary" @click="submitForm('contentForm')">立即创建</el-button>
-          <el-button @click="resetForm('contentForm')">重置</el-button>
+          <el-button type="primary" @click="submitForm('contentForm')">Submit</el-button>
+          <el-button @click="resetForm('contentForm')">Reset</el-button>
         </el-form-item>
       </el-form>
 
@@ -76,14 +76,14 @@ import Footer from "@/components/Footer";
 
         rules: {
           title: [
-            {required: true, message: '请输入标题', trigger: 'blur'},
-            {min: 3, max: 25, message: '长度在 3 到 25 个字符', trigger: 'blur'}
+            {required: true, message: 'Please enter the title', trigger: 'blur'},
+            {min: 3, max: 25, message: '3 to 25 characters in length', trigger: 'blur'}
           ],
           description: [
-            {required: true, message: '请输入摘要', trigger: 'blur'}
+            {required: true, message: 'Please enter the description', trigger: 'blur'}
           ],
           content: [
-            {required: true, message: '请输入内容', trigger: 'blur'}
+            {required: true, message: 'Please enter the content', trigger: 'blur'}
           ]
         },
 
@@ -122,7 +122,7 @@ import Footer from "@/components/Footer";
           headers: { 'Content-Type': 'multipart/form-data',"Authorization": localStorage.getItem("myToken")},
         }).then((url) => {
           // 第二步.将返回的url替换
-          this.fileList.push({name: '封面', url: url.data.data})
+          this.fileList.push({name: 'Cover', url: url.data.data})
           this.contentForm.link = url.data.data
         })
       },
@@ -138,8 +138,8 @@ import Footer from "@/components/Footer";
               }
             }).then(res => {
               console.log(res)
-              _this.$alert('操作成功', '提示', {
-                confirmButtonText: '确定',
+              _this.$alert('Operation Successful!', 'Prompt', {
+                confirmButtonText: 'Confirm',
                 callback: action => {
                   _this.$router.push('/public/blog/' + this.contentForm.id)
                 }
@@ -198,7 +198,7 @@ import Footer from "@/components/Footer";
         this.contentForm.description = blog.description
         this.contentForm.content = blog.content
         this.contentForm.link = blog.link
-        this.fileList.push({name: '封面', url: blog.link})
+        this.fileList.push({name: 'Cover', url: blog.link})
         this.created = blog.created
       }
     },

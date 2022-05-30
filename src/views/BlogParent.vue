@@ -10,7 +10,7 @@
 
 
     <div class="m-content" v-if="year !== 0">
-      <h1>归档{{year}}({{count}})</h1>
+      <h1>Archive{{year}}({{count}})</h1>
       <hr>
     </div>
 

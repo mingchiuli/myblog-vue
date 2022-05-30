@@ -4,7 +4,7 @@
     <div>
       <el-col style="margin-bottom: 5%; margin-top: 5%; text-align: center">
         <el-card style="width: 100%; height: 150px; color: #333;">
-          <div style="padding-bottom: 1%; border-bottom: 1px solid #ccc">在线用户<span style="font-size: 12px">(点击聊天气泡开始通讯)</span></div>
+          <div style="padding-bottom: 1%; border-bottom: 1px solid #ccc">Online users<span style="font-size: 12px">Click the bubble to contact</span></div>
           <div style="padding: 10px 0;float: left" v-for="user in users" v-if="user.username !== username" :key="user.username">
             <div> {{user.username}} </div>
             <div>
@@ -21,15 +21,15 @@
       <el-input
           style="width: 50%"
           v-if="user.number === 0"
-          placeholder="请输入内容"
+          placeholder="Please enter the content"
           v-model="text"
           clearable>
       </el-input>
       <el-button v-if="user.number === 0" type="primary" icon="el-icon-edit" @click="send"></el-button>
     </div>
 
-    <el-input v-if="user.role === 'admin'" v-model="ruleForm.title" placeholder="标题"></el-input>
-    <el-input v-if="user.role === 'admin'" type="textarea" v-model="ruleForm.description" placeholder="摘要"></el-input>
+    <el-input v-if="user.role === 'admin'" v-model="ruleForm.title" placeholder="title"></el-input>
+    <el-input v-if="user.role === 'admin'" type="textarea" v-model="ruleForm.description" placeholder="description"></el-input>
 
 
     <el-form v-loading="loading" :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm1">
@@ -47,7 +47,7 @@
     <el-input
         style="width: 50%"
         v-if="user.number === 1"
-        placeholder="请输入内容"
+        placeholder="Please enter the content"
         v-model="text"
         clearable>
     </el-input>
@@ -69,7 +69,7 @@
     <el-input
         style="width: 50%"
         v-if="user.number === 2"
-        placeholder="请输入内容"
+        placeholder="Please enter the content"
         v-model="text"
         clearable>
     </el-input>
@@ -87,7 +87,7 @@
 
     </el-form>
 
-    <el-button style="float: right" v-if="user.role === 'admin'" type="primary" @click="submitForm('ruleForm')">立即创建</el-button>
+    <el-button style="float: right" v-if="user.role === 'admin'" type="primary" @click="submitForm('ruleForm')">Submit</el-button>
 
 
     <Footer></Footer>
@@ -140,14 +140,14 @@ export default {
 
       rules: {
         title: [
-          {required: true, message: '请输入标题', trigger: 'blur'},
-          {min: 3, max: 25, message: '长度在 3 到 25 个字符', trigger: 'blur'}
+          {required: true, message: 'Please enter the title', trigger: 'blur'},
+          {min: 3, max: 25, message: '3 to 25 characters in length', trigger: 'blur'}
         ],
         description: [
-          {required: true, message: '请输入摘要', trigger: 'blur'}
+          {required: true, message: 'Please enter the description', trigger: 'blur'}
         ],
         content: [
-          {required: true, message: '请输入内容', trigger: 'blur'}
+          {required: true, message: 'Please enter the content', trigger: 'blur'}
         ]
       },
     }
@@ -217,8 +217,8 @@ export default {
               destination: '/app/taskOver/' + this.user.id,
             })
 
-            this.$alert('操作成功', '提示', {
-              confirmButtonText: '确定',
+            this.$alert('Operation successful!', 'Prompt', {
+              confirmButtonText: 'Confirm',
               callback: () => {
                 this.disconnectWebSocket()
                 this.$router.push("/public/blogs/1")
@@ -235,11 +235,11 @@ export default {
 
     send() {
       if (!this.chatUser) {
-        this.$message({type: 'warning', message: "请选择聊天对象"})
+        this.$message({type: 'warning', message: "Please choose the user"})
         return;
       }
       if (!this.text) {
-        this.$message({type: 'warning', message: "请输入内容"})
+        this.$message({type: 'warning', message: "Please enter the content"})
         return;
       }
 
@@ -325,7 +325,7 @@ export default {
       this.webSocketTimer = setInterval(() => {
         if (!stompClient.connected) {
 
-          this.$message.error("websocket重连中 ...")
+          this.$message.error("websocket reconnection ...")
 
           this.connectWebSocket();
         }
@@ -427,7 +427,7 @@ export default {
 
           this.$message({
             showClose: true,
-            message: obj.from + '对你说: ' + obj.message,
+            message: obj.from + 'say to you: ' + obj.message,
             type: 'success',
             duration: 20 * 1000,
             onClose:() => {

@@ -1,10 +1,10 @@
 <template>
 	<div>
 		<el-form :inline="true" @submit.native.prevent>
-			<el-form-item label="搜索查询">
+			<el-form-item label="Search">
 				<el-input
 						v-model="searchForm.name"
-						placeholder="名称"
+						placeholder="Name"
 						clearable
             @keyup.enter.native="getRoleList">
 
@@ -12,16 +12,16 @@
 			</el-form-item>
 
 			<el-form-item>
-				<el-button @click="getRoleList">搜索</el-button>
+				<el-button @click="getRoleList">Search</el-button>
 			</el-form-item>
 
 			<el-form-item>
-				<el-button type="primary" @click="dialogVisible = true">新增</el-button>
+				<el-button type="primary" @click="dialogVisible = true">Add</el-button>
 			</el-form-item>
 
 			<el-form-item>
-				<el-popconfirm title="这是确定批量删除吗？" @confirm="delHandle(null)">
-					<el-button type="danger" slot="reference" :disabled="delBtlStatus">批量删除</el-button>
+				<el-popconfirm title="Are you sure to delete in batch?" @confirm="delHandle(null)">
+					<el-button type="danger" slot="reference" :disabled="delBtlStatus">Delete Batch</el-button>
 				</el-popconfirm>
 			</el-form-item>
 		</el-form>
@@ -44,49 +44,49 @@
 
 			<el-table-column
 					prop="name"
-					label="名称"
+					label="Name"
 					width="120"
           align="center">
 			</el-table-column>
 			<el-table-column
 					prop="code"
-					label="唯一编码"
+					label="Unique Code"
 					show-overflow-tooltip
           align="center">
 			</el-table-column>
 			<el-table-column
 					prop="remark"
-					label="描述"
+					label="Remark"
 					show-overflow-tooltip
           align="center">
 			</el-table-column>
 
 			<el-table-column
 					prop="status"
-					label="状态"
+					label="Status"
           align="center">
 				<template slot-scope="scope">
-					<el-tag size="small" v-if="scope.row.status === 0" type="success">正常</el-tag>
-					<el-tag size="small" v-else-if="scope.row.status === 1" type="danger">禁用</el-tag>
+					<el-tag size="small" v-if="scope.row.status === 0" type="success">Normal</el-tag>
+					<el-tag size="small" v-else-if="scope.row.status === 1" type="danger">Disable</el-tag>
 				</template>
 
 			</el-table-column>
 			<el-table-column
 					prop="icon"
-					label="操作"
+					label="Operation"
           align="center"
           fixed="right">
 
 				<template slot-scope="scope">
-					<el-button type="text" @click="permHandle(scope.row.id)" style="color: orange">分配权限</el-button>
+					<el-button type="text" @click="permHandle(scope.row.id)" style="color: orange">Assign permissions</el-button>
 					<el-divider direction="vertical"></el-divider>
 
-					<el-button type="text" @click="editHandle(scope.row.id)">编辑</el-button>
+					<el-button type="text" @click="editHandle(scope.row.id)">Edit</el-button>
 					<el-divider direction="vertical"></el-divider>
 
 					<template>
-						<el-popconfirm title="这是一段内容确定删除吗？" @confirm="delHandle(scope.row.id)">
-							<el-button type="text" slot="reference" style="color: indianred">删除</el-button>
+						<el-popconfirm title="Are you sure to delete？" @confirm="delHandle(scope.row.id)">
+							<el-button type="text" slot="reference" style="color: indianred">Delete</el-button>
 						</el-popconfirm>
 					</template>
 
@@ -116,36 +116,36 @@
 
 			<el-form :model="editForm" :rules="editFormRules" ref="editForm" label-width="100px" class="demo-editForm">
 
-				<el-form-item label="角色名称" prop="name" label-width="100px">
+				<el-form-item label="Role Name" prop="name" label-width="100px">
 					<el-input v-model="editForm.name" autocomplete="off"></el-input>
 				</el-form-item>
 
-				<el-form-item label="唯一编码" prop="code" label-width="100px">
+				<el-form-item label="Unique Code" prop="code" label-width="100px">
 					<el-input v-model="editForm.code" autocomplete="off"></el-input>
 				</el-form-item>
 
-				<el-form-item label="描述" prop="remark" label-width="100px">
+				<el-form-item label="Remark" prop="remark" label-width="100px">
 					<el-input v-model="editForm.remark" autocomplete="off"></el-input>
 				</el-form-item>
 
 
-				<el-form-item label="状态" prop="status" label-width="100px">
+				<el-form-item label="Status" prop="status" label-width="100px">
 					<el-radio-group v-model="editForm.status">
-						<el-radio :label=1>禁用</el-radio>
-						<el-radio :label=0>正常</el-radio>
+						<el-radio :label=1>Disable</el-radio>
+						<el-radio :label=0>Normal</el-radio>
 					</el-radio-group>
 				</el-form-item>
 
 				<el-form-item>
-					<el-button type="primary" @click="submitForm('editForm')">立即创建</el-button>
-					<el-button @click="resetForm('editForm')">重置</el-button>
+					<el-button type="primary" @click="submitForm('editForm')">Submit</el-button>
+					<el-button @click="resetForm('editForm')">Reset</el-button>
 				</el-form-item>
 			</el-form>
 
 		</el-dialog>
 
 		<el-dialog
-				title="分配权限"
+				title="Assign permissions"
 				:visible.sync="permDialogVisible"
 				width="600px">
 
@@ -164,8 +164,8 @@
 			</el-form>
 
 			<span slot="footer" class="dialog-footer">
-			    <el-button @click="permDialogVisible = false">取消</el-button>
-			    <el-button type="primary" @click="submitPermFormHandle('permForm')">确定</el-button>
+			    <el-button @click="permDialogVisible = false">Cancel</el-button>
+			    <el-button type="primary" @click="submitPermFormHandle('permForm')">Submit</el-button>
 			</span>
 
 		</el-dialog>
@@ -199,13 +199,13 @@
 
 				editFormRules: {
 					name: [
-						{required: true, message: '请输入角色名称', trigger: 'blur'}
+						{required: true, message: 'Please enter the role name', trigger: 'blur'}
 					],
 					code: [
-						{required: true, message: '请输入唯一编码', trigger: 'blur'}
+						{required: true, message: 'Please enter the unique code', trigger: 'blur'}
 					],
 					status: [
-						{required: true, message: '请选择状态', trigger: 'blur'}
+						{required: true, message: 'Please select status', trigger: 'blur'}
 					]
 				},
 
@@ -292,7 +292,7 @@
             }).then(res => {
 								this.$message({
 									showClose: true,
-									message: '恭喜你，操作成功',
+									message: 'Operation successful!',
 									type: 'success',
 									onClose:() => {
 										this.getRoleList()
@@ -342,7 +342,7 @@
         }).then(res => {
 					this.$message({
 						showClose: true,
-						message: '操作成功',
+						message: 'Operation successful!',
 						type: 'success',
 						onClose:() => {
 
@@ -386,7 +386,7 @@
         }).then(res => {
 					this.$message({
 						showClose: true,
-						message: '恭喜你，操作成功',
+						message: 'Operation successful!',
 						type: 'success',
 						onClose:() => {
 							this.getRoleList()

@@ -43,11 +43,11 @@ export default {
       drawer: false,
       direction: 'ltr',
       data: [{
-        label: '关于',
+        label: 'About',
       }, {
-        label: '日志',
+        label: 'Blogs',
       },{
-        label: '归档',
+        label: 'Archive',
         children: [{
           label: '2022'
         }
@@ -56,11 +56,11 @@ export default {
           }
         ]
       }, {
-        label: '简历'
+        label: 'Resume'
       }, {
-        label: '更新'
+        label: 'Update logs'
       }, {
-          label: '版权'
+          label: 'Copyright'
         }],
       defaultProps: {
         children: 'children',
@@ -82,22 +82,22 @@ export default {
           this.$router.push("/public/blogs/2021/1")
           this.drawer = false
           break
-        case '日志':
+        case 'BLogs':
           this.$router.push("/public/blogs/1")
           this.drawer = false
           break
-        case '关于':
+        case 'About':
           this.$router.push("/")
           break
-        case '简历':
+        case 'Resume':
           this.$router.push("/public/other/1")
           this.drawer = false
           break
-        case '更新':
+        case 'Update logs':
           this.$router.push("/public/other/0")
           this.drawer = false
           break
-        case '版权':
+        case 'Copyright':
           window.open().location.href = 'https://creativecommons.org/licenses/by-nc-sa/4.0/';
           this.drawer = false
           break

@@ -3,7 +3,7 @@
 <!--    <Sider style="width: 0; margin-left: 10%;"></Sider>-->
     <div style="margin-top: 50px"></div>
     <div style="margin-left: 78%">
-      <router-link style="font-size: large; margin-bottom: 5px;" :to="{name: 'Blogs', params: {currentPage : 1}}">进入日志</router-link>
+      <router-link style="font-size: large; margin-bottom: 5px;" :to="{name: 'Blogs', params: {currentPage : 1}}">Step into</router-link>
     </div>
     <div class="mbody">
       <div class="mIntro">

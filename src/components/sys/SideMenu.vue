@@ -39,9 +39,9 @@
           <el-submenu index="2">
             <template slot="title">
               <i class="el-icon-magic-stick"></i>
-              <span>工具管理</span>
+              <span>Tool management</span>
             </template>
-            <el-menu-item index="SystemWebs" @click="selectMenu({name: 'SystemWebs', title: '收藏检索'})"><i class="el-icon-link"></i>收藏检索</el-menu-item>
+            <el-menu-item index="SystemWebs" @click="selectMenu({name: 'SystemWebs', title: 'Web page collection'})"><i class="el-icon-link"></i>Web page collection</el-menu-item>
           </el-submenu>
         </el-menu>
 

@@ -3,7 +3,7 @@
 
 		<el-form :inline="true">
 			<el-form-item>
-				<el-button type="primary" @click="dialogVisible = true">新增</el-button>
+				<el-button type="primary" @click="dialogVisible = true">Add</el-button>
 			</el-form-item>
 		</el-form>
 
@@ -20,7 +20,7 @@
 
 			<el-table-column
 					prop="title"
-					label="名称"
+					label="Title"
 					sortable
 					width="180"
           align="center">
@@ -28,60 +28,60 @@
 
 			<el-table-column
 					prop="icon"
-					label="图标"
+					label="Icon"
           align="center">
 			</el-table-column>
 
 			<el-table-column
 					prop="type"
-					label="类型"
+					label="Type"
           align="center">
 				<template slot-scope="scope">
-					<el-tag size="small" v-if="scope.row.type === 0">目录</el-tag>
-					<el-tag size="small" v-else-if="scope.row.type === 1" type="success">菜单</el-tag>
-					<el-tag size="small" v-else-if="scope.row.type === 2" type="info">路由</el-tag>
+					<el-tag size="small" v-if="scope.row.type === 0">Catalogue</el-tag>
+					<el-tag size="small" v-else-if="scope.row.type === 1" type="success">Item</el-tag>
+					<el-tag size="small" v-else-if="scope.row.type === 2" type="info">Route</el-tag>
 				</template>
 
 			</el-table-column>
 
 			<el-table-column
 					prop="url"
-					label="菜单URL"
+					label="Item URL"
           align="center">
 			</el-table-column>
 			<el-table-column
 					prop="component"
-					label="菜单组件"
+					label="Component"
           align="center">
 			</el-table-column>
 			<el-table-column
 					prop="orderNum"
-					label="排序号"
+					label="Order Number"
           align="center">
 			</el-table-column>
 			<el-table-column
 					prop="status"
-					label="状态"
+					label="Status"
           align="center">
 				<template slot-scope="scope">
-					<el-tag size="small" v-if="scope.row.status === 0" type="success">正常</el-tag>
-					<el-tag size="small" v-else-if="scope.row.status === 1" type="danger">禁用</el-tag>
+					<el-tag size="small" v-if="scope.row.status === 0" type="success">Normal</el-tag>
+					<el-tag size="small" v-else-if="scope.row.status === 1" type="danger">Disable</el-tag>
 				</template>
 
 			</el-table-column>
 			<el-table-column
 					prop="icon"
-					label="操作"
+					label="Operation"
           align="center"
           fixed="right">
 
 				<template slot-scope="scope">
-					<el-button type="text" @click="editHandle(scope.row.menuId)">编辑</el-button>
+					<el-button type="text" @click="editHandle(scope.row.menuId)">Edit</el-button>
 					<el-divider direction="vertical"></el-divider>
 
 					<template>
-						<el-popconfirm title="这是一段内容确定删除吗？" @confirm="delHandle(scope.row.menuId)">
-							<el-button type="text" slot="reference" style="color: indianred">删除</el-button>
+						<el-popconfirm title="Are you sure to delete？" @confirm="delHandle(scope.row.menuId)">
+							<el-button type="text" slot="reference" style="color: indianred">Delete</el-button>
 						</el-popconfirm>
 					</template>
 
@@ -93,15 +93,15 @@
 
 		<!--新增对话框-->
 		<el-dialog
-				title="提示"
+				title="Prompt"
 				:visible.sync="dialogVisible"
 				width="600px"
 				:before-close="handleClose">
 
 			<el-form :model="editForm" :rules="editFormRules" ref="editForm" label-width="100px" class="demo-editForm">
 
-				<el-form-item label="上级菜单" prop="parentId">
-					<el-select v-model="editForm.parentId" placeholder="请选择上级菜单">
+				<el-form-item label="Parent menu" prop="parentId">
+					<el-select v-model="editForm.parentId" placeholder="Please select the parent menu">
 						<template v-for="item in tableData">
 							<el-option :label="item.title" :value="item.menuId"></el-option>
 							<template v-for="child in item.children">
@@ -113,44 +113,44 @@
 					</el-select>
 				</el-form-item>
 
-				<el-form-item label="菜单名称" prop="title" label-width="100px">
+				<el-form-item label="Title" prop="title" label-width="100px">
 					<el-input v-model="editForm.title" autocomplete="off"></el-input>
 				</el-form-item>
 
-				<el-form-item label="图标" prop="icon" label-width="100px">
+				<el-form-item label="Icon" prop="icon" label-width="100px">
 					<el-input v-model="editForm.icon" autocomplete="off"></el-input>
 				</el-form-item>
-				<el-form-item label="菜单URL" prop="url" label-width="100px">
+				<el-form-item label="Url" prop="url" label-width="100px">
 					<el-input v-model="editForm.url" autocomplete="off"></el-input>
 				</el-form-item>
 
-				<el-form-item label="菜单组件" prop="component" label-width="100px">
+				<el-form-item label="Component" prop="component" label-width="100px">
 					<el-input v-model="editForm.component" autocomplete="off"></el-input>
 				</el-form-item>
 
-				<el-form-item label="类型" prop="type" label-width="100px">
+				<el-form-item label="Type" prop="type" label-width="100px">
 					<el-radio-group v-model="editForm.type">
-						<el-radio :label=0>目录</el-radio>
-						<el-radio :label=1>菜单</el-radio>
-						<el-radio :label=2>路由</el-radio>
+						<el-radio :label=0>Catalogue</el-radio>
+						<el-radio :label=1>Menu</el-radio>
+						<el-radio :label=2>Route</el-radio>
 					</el-radio-group>
 				</el-form-item>
 
-				<el-form-item label="状态" prop="status" label-width="100px">
+				<el-form-item label="Status" prop="status" label-width="100px">
 					<el-radio-group v-model="editForm.status">
-						<el-radio :label=0>正常</el-radio>
-						<el-radio :label=1>禁用</el-radio>
+						<el-radio :label=0>Normal</el-radio>
+						<el-radio :label=1>Disable</el-radio>
 					</el-radio-group>
 				</el-form-item>
 
-				<el-form-item label="排序号" prop="orderNum" label-width="100px">
-					<el-input-number v-model="editForm.orderNum" :min="1" label="排序号">1</el-input-number>
+				<el-form-item label="Order Number" prop="orderNum" label-width="100px">
+					<el-input-number v-model="editForm.orderNum" :min="1" label="Order Number">1</el-input-number>
 				</el-form-item>
 
 
 				<el-form-item>
-					<el-button type="primary" @click="submitForm('editForm')">立即创建</el-button>
-					<el-button @click="resetForm('editForm')">重置</el-button>
+					<el-button type="primary" @click="submitForm('editForm')">Submit</el-button>
+					<el-button @click="resetForm('editForm')">Reset</el-button>
 				</el-form-item>
 			</el-form>
 
@@ -177,22 +177,22 @@
 				},
 				editFormRules: {
 					parentId: [
-						{required: true, message: '请选择上级菜单', trigger: 'blur'}
+						{required: true, message: 'Please select the parent menu', trigger: 'blur'}
 					],
 					name: [
-						{required: true, message: '请输入名称', trigger: 'blur'}
+						{required: true, message: 'Please enter name', trigger: 'blur'}
 					],
 					perms: [
-						{required: true, message: '请输入权限编码', trigger: 'blur'}
+						{required: true, message: 'Please enter perms', trigger: 'blur'}
 					],
 					type: [
-						{required: true, message: '请选择状态', trigger: 'blur'}
+						{required: true, message: 'Please select type', trigger: 'blur'}
 					],
 					orderNum: [
-						{required: true, message: '请填入排序号', trigger: 'blur'}
+						{required: true, message: 'Please select order number', trigger: 'blur'}
 					],
 					status: [
-						{required: true, message: '请选择状态', trigger: 'blur'}
+						{required: true, message: 'Please select status', trigger: 'blur'}
 					]
 				},
 				tableData: []
@@ -227,7 +227,7 @@
 
 								this.$message({
 									showClose: true,
-									message: '恭喜你，操作成功',
+									message: 'Operation successful!',
 									type: 'success',
 									onClose:() => {
 										this.getMenuTree()
@@ -269,7 +269,7 @@
         }).then(res => {
 					this.$message({
 						showClose: true,
-						message: '恭喜你，操作成功',
+						message: 'Operation successful!',
 						type: 'success',
 						onClose:() => {
 							this.getMenuTree()

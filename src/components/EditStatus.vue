@@ -3,14 +3,14 @@
     <el-link icon="el-icon-edit">
       <router-link :to="{name: 'BlogEdit', params: {blogId: blog.id}}" style="font-size: medium; color: green">
         <!--        编辑-->
-        <el-button type="text" style="font-size: medium; color: limegreen">编辑</el-button>
+        <el-button type="text" style="font-size: medium; color: limegreen">Edit</el-button>
 
       </router-link>
     </el-link>
     <el-divider class="el-div" direction="vertical"></el-divider>
     <el-divider class="el-div" direction="vertical"></el-divider>
     <el-link icon="el-icon-delete">
-      <el-button type="text" @click="deleteBlog" style="font-size: medium; color: indianred">删除</el-button>
+      <el-button type="text" @click="deleteBlog" style="font-size: medium; color: indianred">Delete</el-button>
     </el-link>
   </div>
 </template>
@@ -32,9 +32,9 @@ export default {
     deleteBlog() {
       const ids = []
       ids.push(this.blog.id)
-      this.$confirm('是否删除该日志?', '提示', {
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
+      this.$confirm('Delete the blog?', 'Prompt', {
+        confirmButtonText: 'Confirm',
+        cancelButtonText: 'Cancel',
         type: 'warning'
       }).then(() => {
         this.$axios.post('/deleteBlogs', ids, {
@@ -47,7 +47,7 @@ export default {
       }).catch(() => {
         this.$message({
           type: 'info',
-          message: '已取消删除'
+          message: 'Deletion cancelled'
         });
       });
     },

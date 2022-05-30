@@ -1,6 +1,6 @@
 <template>
   <div>
-    <strong>博客后台</strong>
+    <strong>Blog Backstage</strong>
 
     <div class="header-avatar">
 
@@ -12,13 +12,13 @@
 						</span>
         <el-dropdown-menu slot="dropdown">
           <!--          <el-dropdown-item>回到首页</el-dropdown-item>-->
-          <el-dropdown-item @click.native="back">回到首页</el-dropdown-item>
+          <el-dropdown-item @click.native="back">Back to the index page</el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown>
 
 <!--      <el-link href="/blogs/1">回到首页</el-link>不执行destoryed-->
-      <el-link href="https://www.douban.com/people/164125579" target="_blank">豆瓣</el-link>
-      <el-link href="https://space.bilibili.com/64519456" target="_blank">b站</el-link>
+      <el-link href="https://www.douban.com/people/164125579" target="_blank">douban</el-link>
+      <el-link href="https://space.bilibili.com/64519456" target="_blank">bilibili</el-link>
     </div>
 
   </div>
@@ -31,7 +31,7 @@ export default {
   data() {
     return {
       avatar: 'https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png',
-      username: '游客'
+      username: 'Anonymous'
     }
   },
   methods: {

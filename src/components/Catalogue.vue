@@ -2,7 +2,7 @@
   <el-card class="toc-fixed" :body-style="{ padding: '5px' }"	>
 
     <div class="box">
-      <div class="tocTitle">目录</div>
+      <div class="tocTitle">Catalogue</div>
       <hr style="max-width: 90%;border: 0; border-top: 1px solid;color: lightgray;"/>
 
       <el-tree

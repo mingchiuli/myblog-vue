@@ -1,11 +1,11 @@
 <template>
   <div>
     <el-form :inline="true" @submit.native.prevent>
-      <el-form-item label="搜索查询">
-        <el-input v-model="searchBlogsTitle" placeholder="标题关键字" clearable @keyup.enter.native="getBlogList"></el-input>
+      <el-form-item label="Search">
+        <el-input v-model="searchBlogsTitle" placeholder="Title Keyword" clearable @keyup.enter.native="getBlogList"></el-input>
       </el-form-item>
       <el-form-item>
-        <el-button type="primary" @click="getBlogList">搜索</el-button>
+        <el-button type="primary" @click="getBlogList">Search</el-button>
       </el-form-item>
     </el-form>
 
@@ -25,19 +25,19 @@
       </el-table-column>
       <el-table-column
           prop="username"
-          label="作者"
+          label="author"
           width="90"
           align="center">
       </el-table-column>
       <el-table-column
           prop="title"
           width="120"
-          label="标题"
+          label="Title"
           align="center">
       </el-table-column>
       <el-table-column
           prop="description"
-          label="描述"
+          label="Description"
           width="180"
           align="center">
       </el-table-column>
@@ -45,23 +45,23 @@
       <el-table-column
           prop="status"
           width="70"
-          label="状态"
+          label="Status"
           align="center">
         <template slot-scope="scope">
-          <el-tag size="small" v-if="scope.row.status === 0" type="success">正常</el-tag>
-          <el-tag size="small" v-else-if="scope.row.status === 1" type="danger">隐藏</el-tag>
+          <el-tag size="small" v-if="scope.row.status === 0" type="success">Normal</el-tag>
+          <el-tag size="small" v-else-if="scope.row.status === 1" type="danger">Hidden</el-tag>
         </template>
       </el-table-column>
 
       <el-table-column
           prop="created"
-          label="创建时间"
+          label="Created"
           width="150"
           align="center">
       </el-table-column>
       <el-table-column
           prop="content"
-          label="内容"
+          label="Content"
           width="405"
           align="center">
       </el-table-column>
@@ -69,12 +69,12 @@
       <el-table-column
           prop="icon"
           width="100"
-          label="操作"
+          label="Operation"
           align="center"
           fixed="right">
 
         <template slot-scope="scope">
-          <el-button type="text" @click="editHandle(scope.row.id)">恢复</el-button>
+          <el-button type="text" @click="editHandle(scope.row.id)">Resume</el-button>
         </template>
       </el-table-column>
 
@@ -129,7 +129,7 @@ export default {
       }).then(res => {
         this.$message({
           showClose: true,
-          message: '操作成功',
+          message: 'Operation successful!',
           type: 'success',
           onClose:() => {
             this.getBlogList()
@@ -201,7 +201,7 @@ export default {
       }).then(res => {
         this.$message({
           showClose: true,
-          message: '操作成功',
+          message: 'Operation successful!',
           type: 'success',
           onClose:() => {
             this.getBlogList()

@@ -7,7 +7,7 @@
           v-model="input"
           @keyup.enter.native="searchKeyword"
           :fetch-suggestions="querySearchAsync"
-          placeholder="请输入内容"
+          placeholder="Please input the keyword"
           @select="handleSelect"
           clearable style="width: 20%;margin-top: 10px;margin-left: 65%"></el-autocomplete>
 
@@ -17,7 +17,7 @@
     <div class="block">
       <el-timeline>
         <el-timeline-item :timestamp="blog.created" placement="top" v-for="blog in blogs" color="#0bbd87">
-          <p v-if="blog.score !== undefined">{{"搜索匹配得分：" + blog.score}}</p>
+          <p v-if="blog.score !== undefined">{{"Search Scores：" + blog.score}}</p>
           <el-card class="el-card" v-loading="loading">
             <img :src="blog.link ? blog.link : 'https://fuss10.elemecdn.com/3/28/bbf893f792f03a54408b3b7a7ebf0jpeg.jpeg'" class="image" alt="">
             <h4>
@@ -129,9 +129,9 @@
           const status = res.data.data
           if ((status === 1 && !localStorage.getItem("myToken")) || (status === 1 && JSON.parse(localStorage.getItem("myUserInfo")).role !== 'admin')) {
 
-            this.$prompt('请输入阅读密钥', '提示', {
-              confirmButtonText: '确定',
-              cancelButtonText: '取消',
+            this.$prompt('Please input the password', 'Prompt', {
+              confirmButtonText: 'Confirm',
+              cancelButtonText: 'Cancel',
             }).then(({ value }) => {
               this.$axios.get('/blogToken/' + id + '/' + value).then(res => {
                 this.$router.push('/public/blog/' + id + '?token=' + value)
@@ -140,7 +140,7 @@
             }).catch(() => {
               this.$message({
                 type: 'info',
-                message: '联系博主获取密钥'
+                message: 'Contact with me to get the password'
               });
             });
 
@@ -206,7 +206,7 @@
         if (res.data.data.total === 0) {
           this.input = ''
           this.searchKeyword()
-          this.$message.error("没有相关记录")
+          this.$message.error("No records")
           this.loading = false
           return
         }
@@ -257,7 +257,7 @@
 
         } else {
           this.$emit("yearCount", 0, -1)
-          this.$emit("choose", "日志")
+          this.$emit("choose", "Blog Records")
           this.page(this.$route.params.currentPage)
         }
       }

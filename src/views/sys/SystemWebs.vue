@@ -1,13 +1,13 @@
 <template>
   <div>
     <el-form :inline="true" @submit.native.prevent>
-      <el-form-item label="搜索查询">
-        <el-input v-model="webHits" placeholder="关键词" clearable @keyup.enter.native="searchWeb"></el-input>
+      <el-form-item label="Search">
+        <el-input v-model="webHits" placeholder="Keyword" clearable @keyup.enter.native="searchWeb"></el-input>
       </el-form-item>
       <el-form-item>
-        <el-button type="primary" @click="searchWeb">搜索</el-button>
-        <el-button type="primary" @click="dialogVisible = true">添加</el-button>
-        <a style="margin-left: 10px; font-size: medium" :href="'javascript:(function(){var site=%27http://81.68.192.120/sys/webs?title=%27+encodeURIComponent(document.title)+%27&url=%27+encodeURIComponent(document.URL)+%27&token=%27+%27' + token  + '%27;var win=window.open(site,%27_blank%27);win.focus();})()'">收藏我吧！(拖拽到收藏栏)</a>
+        <el-button type="primary" @click="searchWeb">Search</el-button>
+        <el-button type="primary" @click="dialogVisible = true">Add</el-button>
+        <a style="margin-left: 10px; font-size: medium" :href="'javascript:(function(){var site=%27http://81.68.192.120/sys/webs?title=%27+encodeURIComponent(document.title)+%27&url=%27+encodeURIComponent(document.URL)+%27&token=%27+%27' + token  + '%27;var win=window.open(site,%27_blank%27);win.focus();})()'">Collect me ！(Drag to browser favorites bar)</a>
       </el-form-item>
     </el-form>
 
@@ -16,17 +16,17 @@
         <el-card class="box-card" style="height: 100%" v-loading="loading">
           <div slot="header" class="clearfix">
             <el-link @click="go(web.link)">{{ web.title }}</el-link>
-            <el-button style="float: right; padding: 3px 0" type="text" @click="editWeb(web.id)">编辑</el-button>
-            <el-popconfirm title="确定删除吗？" @confirm="delWeb(web.id)">
-              <el-button style="float: right;padding: 3px 0" type="text" slot="reference">删除</el-button>
+            <el-button style="float: right; padding: 3px 0" type="text" @click="editWeb(web.id)">Edit</el-button>
+            <el-popconfirm title="Are you sure to delete？" @confirm="delWeb(web.id)">
+              <el-button style="float: right;padding: 3px 0" type="text" slot="reference">Delete</el-button>
             </el-popconfirm>
           </div>
           <div class="text item">
             {{ web.description }}
           </div>
-          <div style="font-size: 14px">收藏时间：{{ web.created }}</div>
+          <div style="font-size: 14px">Time stamp：{{ web.created }}</div>
           <br v-if="web.score !== undefined"/>
-          <div style="font-size: 14px" v-if="web.score !== undefined">{{"搜索匹配得分：" + web.score}}</div>
+          <div style="font-size: 14px" v-if="web.score !== undefined">{{"Search Scores：" + web.score}}</div>
           <p style="font-size: 14px" v-html="web.highlight" v-if="web.highlight !== undefined"></p>
         </el-card>
       </div>
@@ -34,74 +34,74 @@
 
 
     <el-dialog
-        title="收藏状态"
+        title="Status"
         :visible.sync="infoVisible"
         width="600px"
         :before-close="infoHandleClose">
 
       <el-form :model="infoForm" :rules="infoFormRules" ref="infoForm" label-width="100px" class="demo-editForm">
 
-        <el-form-item label="收藏标题" prop="title" label-width="100px">
+        <el-form-item label="Title" prop="title" label-width="100px">
           <el-input v-model="infoForm.title" autocomplete="off"></el-input>
         </el-form-item>
 
 
-        <el-form-item label="收藏摘要" prop="description" label-width="100px">
+        <el-form-item label="Description" prop="description" label-width="100px">
           <el-input v-model="infoForm.description" autocomplete="off"></el-input>
         </el-form-item>
 
-        <el-form-item label="收藏链接" prop="description" label-width="100px">
+        <el-form-item label="Link" prop="description" label-width="100px">
           <el-input v-model="infoForm.link" autocomplete="off" placeholder="https/http开头"></el-input>
         </el-form-item>
 
 
-        <el-form-item label="状态" prop="status" label-width="100px">
+        <el-form-item label="Status" prop="status" label-width="100px">
           <el-radio-group v-model="infoForm.status">
-            <el-radio :label=1>隐藏</el-radio>
-            <el-radio :label=0>公开</el-radio>
+            <el-radio :label=1>Private</el-radio>
+            <el-radio :label=0>Public</el-radio>
           </el-radio-group>
         </el-form-item>
 
         <el-form-item>
-          <el-button type="primary" @click="submitInfoForm('infoForm')">创建</el-button>
-          <el-button @click="resetForm('infoForm')">重置</el-button>
+          <el-button type="primary" @click="submitInfoForm('infoForm')">Submit</el-button>
+          <el-button @click="resetForm('infoForm')">Reset</el-button>
         </el-form-item>
       </el-form>
 
     </el-dialog>
 
     <el-dialog
-        title="添加收藏"
+        title="Add"
         :visible.sync="dialogVisible"
         width="600px"
         :before-close="handleClose">
 
       <el-form :model="editForm" :rules="editFormRules" ref="editForm" label-width="100px" class="demo-editForm">
 
-        <el-form-item label="收藏标题" prop="title" label-width="100px">
+        <el-form-item label="Title" prop="title" label-width="100px">
           <el-input v-model="editForm.title" autocomplete="off"></el-input>
         </el-form-item>
 
 
-        <el-form-item label="收藏摘要" prop="description" label-width="100px">
+        <el-form-item label="Description" prop="description" label-width="100px">
           <el-input v-model="editForm.description" autocomplete="off"></el-input>
         </el-form-item>
 
-        <el-form-item label="收藏链接" prop="description" label-width="100px">
+        <el-form-item label="Link" prop="description" label-width="100px">
           <el-input v-model="editForm.link" autocomplete="off" placeholder="https/http开头"></el-input>
         </el-form-item>
 
 
-        <el-form-item label="状态" prop="status" label-width="100px">
+        <el-form-item label="Status" prop="status" label-width="100px">
           <el-radio-group v-model="editForm.status">
-            <el-radio :label=1>隐藏</el-radio>
-            <el-radio :label=0>公开</el-radio>
+            <el-radio :label=1>Private</el-radio>
+            <el-radio :label=0>Public</el-radio>
           </el-radio-group>
         </el-form-item>
 
         <el-form-item>
-          <el-button type="primary" @click="submitForm('editForm')">创建</el-button>
-          <el-button @click="resetForm('editForm')">重置</el-button>
+          <el-button type="primary" @click="submitForm('editForm')">Submit</el-button>
+          <el-button @click="resetForm('editForm')">Reset</el-button>
         </el-form-item>
       </el-form>
     </el-dialog>
@@ -150,31 +150,31 @@ export default {
 
       infoFormRules: {
         title: [
-          {required: true, message: '请输入标题', trigger: 'blur'}
+          {required: true, message: 'Please enter the title', trigger: 'blur'}
         ],
         description: [
-          {required: true, message: '请输入描述', trigger: 'blur'}
+          {required: true, message: 'Please enter the description', trigger: 'blur'}
         ],
         link: [
-          {required: true, message: '请输入链接', trigger: 'blur'}
+          {required: true, message: 'Please enter the link', trigger: 'blur'}
         ],
         status: [
-          {required: true, message: '请选择状态', trigger: 'blur'}
+          {required: true, message: 'Please enter the status', trigger: 'blur'}
         ],
       },
 
       editFormRules: {
         title: [
-          {required: true, message: '请输入标题', trigger: 'blur'}
+          {required: true, message: 'Please enter the title', trigger: 'blur'}
         ],
         description: [
-          {required: true, message: '请输入描述', trigger: 'blur'}
+          {required: true, message: 'Please enter the description', trigger: 'blur'}
         ],
         link: [
-          {required: true, message: '请输入链接', trigger: 'blur'}
+          {required: true, message: 'Please enter the link', trigger: 'blur'}
         ],
         status: [
-          {required: true, message: '请选择状态', trigger: 'blur'}
+          {required: true, message: 'Please enter the status', trigger: 'blur'}
         ],
       },
     }
@@ -208,7 +208,7 @@ export default {
       if (res.data.data.total === 0) {
         this.webHits = ''
         this.searchWeb()
-        this.$message.error("没有相关记录")
+        this.$message.error("No Records")
         this.loading = false
         return
       }
@@ -257,7 +257,7 @@ export default {
       }).then(res => {
         this.$message({
           showClose: true,
-          message: '操作成功',
+          message: 'Operation Successful!',
           type: 'success',
           duration: 3 * 1000,
           onClose:() => {
@@ -295,7 +295,7 @@ export default {
           }).then(res => {
             this.$message({
               showClose: true,
-              message: '操作成功',
+              message: 'Operation Successful!',
               type: 'success',
               duration: 3 * 1000,
               onClose:() => {
@@ -322,7 +322,7 @@ export default {
           }).then(res => {
             this.$message({
               showClose: true,
-              message: '操作成功',
+              message: 'Operation Successful!',
               type: 'success',
               duration: 3 * 1000,
               onClose:() => {
@@ -407,7 +407,7 @@ export default {
       }).then(res => {
         this.$message({
           showClose: true,
-          message: '操作成功',
+          message: 'Operation Successful!',
           type: 'success',
           onClose:() => {
             this.getBlogList(1)

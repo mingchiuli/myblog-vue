@@ -1,8 +1,8 @@
 <template>
   <div style="text-align: center">
-    <p style="font-weight: bolder">访客访问记录</p>
+    <p style="font-weight: bolder">Visitor access records</p>
     <Map></Map>
-    <p style="font-weight: bolder">点击图片查看详情</p>
+    <p style="font-weight: bolder">Click on the picture to view the details</p>
     <Footer></Footer>
   </div>
 </template>

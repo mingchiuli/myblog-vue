@@ -1,16 +1,16 @@
 <template>
   <div>
     <el-form :inline="true" @submit.native.prevent>
-      <el-form-item label="搜索查询">
-        <el-input v-model="searchUsersRole" placeholder="角色" clearable @keyup.enter.native="getUserList"></el-input>
+      <el-form-item label="Search Query">
+        <el-input v-model="searchUsersRole" placeholder="role" clearable @keyup.enter.native="getUserList"></el-input>
       </el-form-item>
       <el-form-item>
-        <el-button type="primary" @click="getUserList">搜索</el-button>
-        <el-button type="primary" @click="dialogVisible = true">新增</el-button>
+        <el-button type="primary" @click="getUserList">Search</el-button>
+        <el-button type="primary" @click="dialogVisible = true">Add</el-button>
       </el-form-item>
       <el-form-item>
-        <el-popconfirm title="这是确定批量删除吗？" @confirm="delHandle(null)">
-          <el-button type="danger" slot="reference" :disabled="delBtlStatus">批量删除</el-button>
+        <el-popconfirm title="Are you sure to delete in batch？" @confirm="delHandle(null)">
+          <el-button type="danger" slot="reference" :disabled="delBtlStatus">Delete Batch</el-button>
         </el-popconfirm>
       </el-form-item>
     </el-form>
@@ -39,12 +39,12 @@
       </el-table-column>
       <el-table-column
           prop="username"
-          label="用户名"
+          label="Username"
           width="90"
           align="center">
       </el-table-column>
       <el-table-column
-          label="头像"
+          label="Avatar"
           width="50"
           align="center">
         <template slot-scope="scope">
@@ -53,49 +53,49 @@
       </el-table-column>
       <el-table-column
           prop="email"
-          label="邮箱"
+          label="Email"
           width="180"
           align="center">
       </el-table-column>
       <el-table-column
           prop="monitor"
           width="70"
-          label="监控"
+          label="Monitor"
           align="center">
         <template slot-scope="scope">
-          <el-tag size="small" v-if="scope.row.monitor === 1" type="success">在线</el-tag>
-          <el-tag size="small" v-else-if="scope.row.monitor === 0" type="danger">离线</el-tag>
+          <el-tag size="small" v-if="scope.row.monitor === 1" type="success">online</el-tag>
+          <el-tag size="small" v-else-if="scope.row.monitor === 0" type="danger">outline</el-tag>
         </template>
       </el-table-column>
 
       <el-table-column
           prop="status"
           width="70"
-          label="状态"
+          label="Status"
           align="center">
         <template slot-scope="scope">
-          <el-tag size="small" v-if="scope.row.status === 0" type="success">正常</el-tag>
-          <el-tag size="small" v-else-if="scope.row.status === 1" type="danger">锁定</el-tag>
+          <el-tag size="small" v-if="scope.row.status === 0" type="success">Normal</el-tag>
+          <el-tag size="small" v-else-if="scope.row.status === 1" type="danger">Locked</el-tag>
         </template>
       </el-table-column>
 
       <el-table-column
           prop="created"
-          label="创建时间"
+          label="Timestamp"
           width="150"
           align="center">
       </el-table-column>
 
       <el-table-column
           prop="lastLogin"
-          label="上次登录"
+          label="Last Login"
           width="150"
           align="center">
       </el-table-column>
 
       <el-table-column
           prop="role"
-          label="角色"
+          label="Role"
           width="80"
           align="center">
         <template slot-scope="scope">
@@ -106,25 +106,25 @@
       <el-table-column
           prop="icon"
           width="225"
-          label="操作"
+          label="Operation"
           align="center"
           fixed="right">
 
         <template slot-scope="scope">
-          <el-button v-if="scope.row.monitor === 1 && scope.row.id !== 1" type="text" @click="roleKick(scope.row.id)">踢掉</el-button>
+          <el-button v-if="scope.row.monitor === 1 && scope.row.id !== 1" type="text" @click="roleKick(scope.row.id)">Kick</el-button>
           <el-divider v-if="scope.row.monitor === 1 && scope.row.id !== 1" direction="vertical"></el-divider>
-          <el-button type="text" @click="infoHandle(scope.row.id)">信息</el-button>
+          <el-button type="text" @click="infoHandle(scope.row.id)">Information</el-button>
           <el-divider direction="vertical"></el-divider>
 
 
           <template>
-            <el-popconfirm title="这是一段内容确定删除吗？" @confirm="delHandle(scope.row.id)">
-              <el-button type="text" slot="reference" style="color: indianred;">删除</el-button>
+            <el-popconfirm title="Are you sure to delete?" @confirm="delHandle(scope.row.id)">
+              <el-button type="text" slot="reference" style="color: indianred;">Delete</el-button>
             </el-popconfirm>
           </template>
 
           <el-divider direction="vertical"></el-divider>
-          <el-button type="text" @click="passwordHandle(scope.row.id)">密码</el-button>
+          <el-button type="text" @click="passwordHandle(scope.row.id)">Password</el-button>
 
         </template>
       </el-table-column>
@@ -143,29 +143,29 @@
     </el-pagination>
 
     <el-dialog
-        title="添加账号"
+        title="Add Profile"
         :visible.sync="dialogVisible"
         width="600px"
         :before-close="handleClose">
 
       <el-form :model="editForm" :rules="editFormRules" ref="editForm" label-width="100px" class="demo-editForm">
 
-        <el-form-item label="用户名" prop="username" label-width="100px">
+        <el-form-item label="Username" prop="username" label-width="100px">
           <el-input v-model="editForm.username" autocomplete="off"></el-input>
         </el-form-item>
 
-        <el-form-item label="密码" prop="password" label-width="100px">
+        <el-form-item label="password" prop="password" label-width="100px">
           <el-input v-model="editForm.password" type="password" autocomplete="off"></el-input>
         </el-form-item>
 
-        <el-form-item label="确认密码" prop="password" label-width="100px">
+        <el-form-item label="Confirm password" prop="password" label-width="100px">
           <el-input v-model="passwordConfirm" type="password" autocomplete="off"></el-input>
         </el-form-item>
 
-        <el-form-item label="角色" prop="role" label-width="100px">
+        <el-form-item label="Role" prop="role" label-width="100px">
 <!--          <el-input v-model="editForm.role" autocomplete="off"></el-input>-->
 
-          <el-select v-model="editForm.role" placeholder="请选择">
+          <el-select v-model="editForm.role" placeholder="Please select">
             <el-option
                 v-for="item in roleList"
                 :key="item.code"
@@ -176,25 +176,25 @@
 
         </el-form-item>
 
-        <el-form-item label="头像" prop="avatar" label-width="100px">
-          <el-input v-model="editForm.avatar" placeholder="输入网址链接" autocomplete="off"></el-input>
+        <el-form-item label="Avatar" prop="avatar" label-width="100px">
+          <el-input v-model="editForm.avatar" placeholder="Enter the link" autocomplete="off"></el-input>
         </el-form-item>
 
-        <el-form-item label="邮箱" prop="email" label-width="100px">
+        <el-form-item label="Email" prop="email" label-width="100px">
           <el-input v-model="editForm.email" autocomplete="off"></el-input>
         </el-form-item>
 
 
-        <el-form-item label="状态" prop="status" label-width="100px">
+        <el-form-item label="Status" prop="status" label-width="100px">
           <el-radio-group v-model="editForm.status">
-            <el-radio :label=1>禁用</el-radio>
-            <el-radio :label=0>正常</el-radio>
+            <el-radio :label=1>Disable</el-radio>
+            <el-radio :label=0>Normal</el-radio>
           </el-radio-group>
         </el-form-item>
 
         <el-form-item>
-          <el-button type="primary" @click="submitForm('editForm')">创建</el-button>
-          <el-button @click="resetForm('editForm')">重置</el-button>
+          <el-button type="primary" @click="submitForm('editForm')">Submit</el-button>
+          <el-button @click="resetForm('editForm')">Reset</el-button>
         </el-form-item>
       </el-form>
 
@@ -203,7 +203,7 @@
 
 
     <el-dialog
-        title="账号状态"
+        title="Profile Status"
         :visible.sync="infoVisible"
         width="600px"
         :before-close="infoHandleClose">
@@ -214,13 +214,13 @@
           <el-input v-model="infoForm.id" autocomplete="off"></el-input>
         </el-form-item>
 
-        <el-form-item label="用户名" prop="username" label-width="100px">
+        <el-form-item label="Username" prop="username" label-width="100px">
           <el-input :disabled="true" v-model="infoForm.username" autocomplete="off"></el-input>
         </el-form-item>
 
-        <el-form-item label="角色" prop="role" label-width="100px">
+        <el-form-item label="Role" prop="role" label-width="100px">
 
-          <el-select v-model="infoForm.role" placeholder="请选择">
+          <el-select v-model="infoForm.role" placeholder="Please select">
             <el-option
                 v-for="item in roleList"
                 :key="item.code"
@@ -232,52 +232,52 @@
 <!--          <el-input v-model="infoForm.role" autocomplete="off"></el-input>-->
         </el-form-item>
 
-        <el-form-item label="头像" prop="avatar" label-width="100px">
-          <el-input v-model="infoForm.avatar" placeholder="输入网址链接" autocomplete="off"></el-input>
+        <el-form-item label="Avatar" prop="avatar" label-width="100px">
+          <el-input v-model="infoForm.avatar" placeholder="Enter the link" autocomplete="off"></el-input>
         </el-form-item>
 
-        <el-form-item label="邮箱" prop="email" label-width="100px">
+        <el-form-item label="Email" prop="email" label-width="100px">
           <el-input v-model="infoForm.email" autocomplete="off"></el-input>
         </el-form-item>
 
-        <el-form-item label="状态" prop="status" label-width="100px">
+        <el-form-item label="Status" prop="status" label-width="100px">
           <el-radio-group v-model="infoForm.status">
-            <el-radio :label=1>锁定</el-radio>
-            <el-radio :label=0>正常</el-radio>
+            <el-radio :label=1>Locked</el-radio>
+            <el-radio :label=0>Normal</el-radio>
           </el-radio-group>
         </el-form-item>
 
         <el-form-item>
-          <el-button type="primary" @click="submitInfoForm('infoForm')">创建</el-button>
-          <el-button @click="resetForm('infoForm')">重置</el-button>
+          <el-button type="primary" @click="submitInfoForm('infoForm')">Submit</el-button>
+          <el-button @click="resetForm('infoForm')">Reset</el-button>
         </el-form-item>
       </el-form>
 
     </el-dialog>
 
     <el-dialog
-        title="修改密码"
+        title="Modify Password"
         :visible.sync="passwordVisible"
         width="600px"
         :before-close="passwordHandleClose">
 
       <el-form :model="passwordForm" :rules="passwordFormRules" ref="passwordForm" label-width="100px" class="demo-editForm">
 
-        <el-form-item label="用户名" prop="username" label-width="100px">
+        <el-form-item label="Username" prop="username" label-width="100px">
           <el-input :disabled="true" v-model="passwordForm.username" autocomplete="off"></el-input>
         </el-form-item>
 
-        <el-form-item label="密码" prop="password" label-width="100px">
+        <el-form-item label="Password" prop="password" label-width="100px">
           <el-input v-model="passwordForm.password" type="password" autocomplete="off"></el-input>
         </el-form-item>
 
-        <el-form-item label="确认密码" prop="password" label-width="100px">
+        <el-form-item label="Confirm password" prop="password" label-width="100px">
           <el-input v-model="passwordConfirm" type="password" autocomplete="off"></el-input>
         </el-form-item>
 
         <el-form-item>
-          <el-button type="primary" @click="submitPasswordForm('passwordForm')">创建</el-button>
-          <el-button @click="resetForm('passwordForm')">重置</el-button>
+          <el-button type="primary" @click="submitPasswordForm('passwordForm')">Submit</el-button>
+          <el-button @click="resetForm('passwordForm')">Reset</el-button>
         </el-form-item>
       </el-form>
 
@@ -322,39 +322,39 @@ export default {
 
       editFormRules: {
         username: [
-          {required: true, message: '请输入唯一用户名', trigger: 'blur'}
+          {required: true, message: 'Please enter the unique username', trigger: 'blur'}
         ],
         password: [
-          {required: true, message: '请输入密码', trigger: 'blur'}
+          {required: true, message: 'Please enter password', trigger: 'blur'}
         ],
         status: [
-          {required: true, message: '请选择状态', trigger: 'blur'}
+          {required: true, message: 'Please select status', trigger: 'blur'}
         ],
         role: [
-          {required: true, message: '请输入角色', trigger: 'blur'}
+          {required: true, message: 'Please enter role', trigger: 'blur'}
         ],
         email: [
-          {required: true, message: '请输入邮箱', trigger: 'blur'}
+          {required: true, message: 'Please enter email', trigger: 'blur'}
         ],
       },
 
       infoFormRules: {
         password: [
-          {required: true, message: '请输入密码', trigger: 'blur'}
+          {required: true, message: 'Please enter password', trigger: 'blur'}
         ],
         status: [
-          {required: true, message: '请选择状态', trigger: 'blur'}
+          {required: true, message: 'Please select status', trigger: 'blur'}
         ],
         role: [
-          {required: true, message: '请输入角色', trigger: 'blur'}
+          {required: true, message: 'Please enter role', trigger: 'blur'}
         ],
         email: [
-          {required: true, message: '请输入邮箱', trigger: 'blur'}
+          {required: true, message: 'Please enter email', trigger: 'blur'}
         ],
       },
       passwordFormRules: {
         password: [
-          {required: true, message: '请输入密码', trigger: 'blur'}
+          {required: true, message: 'Please enter password', trigger: 'blur'}
         ],
       },
     }
@@ -388,7 +388,7 @@ export default {
           if (this.passwordConfirm !== this.editForm.password) {
             this.$message({
               showClose: false,
-              message: '密码输入不同',
+              message: 'Password input is different',
               type: 'warning'
             })
             return false
@@ -400,7 +400,7 @@ export default {
           }).then(res => {
                 this.$message({
                   showClose: true,
-                  message: '操作成功',
+                  message: 'Operation successful',
                   type: 'success',
                   onClose:() => {
                     this.getUserList()
@@ -423,7 +423,7 @@ export default {
           if (this.passwordConfirm !== this.passwordForm.password) {
             this.$message({
               showClose: false,
-              message: '密码输入不同',
+              message: 'Password input is different',
               type: 'warning'
             })
             return false
@@ -435,7 +435,7 @@ export default {
           }).then(res => {
             this.$message({
               showClose: true,
-              message: '操作成功',
+              message: 'Operation successful',
               type: 'success',
               onClose:() => {
                 this.getUserList()
@@ -463,7 +463,7 @@ export default {
           }).then(res => {
             this.$message({
               showClose: true,
-              message: '操作成功',
+              message: 'Operation successful',
               type: 'success',
               onClose:() => {
                 this.getUserList()
@@ -509,7 +509,7 @@ export default {
       }).then(res => {
         this.$message({
           showClose: true,
-          message: '操作成功',
+          message: 'Operation successful',
           type: 'success',
           onClose:() => {
             this.getUserList()
@@ -594,7 +594,7 @@ export default {
       }).then(res => {
         this.$message({
           showClose: true,
-          message: '删除成功',
+          message: 'Operation successful',
           type: 'success',
           onClose:() => {
 

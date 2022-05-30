@@ -2,13 +2,13 @@
   <div>
     <el-card class="box-card">
       <div slot="header" class="clearfix">
-        <span style="font-size: large">Spring-logback后台日志</span>
+        <span style="font-size: large">Spring-logback backstage logs</span>
         <div style="float: right; padding: 0.5% 0;">
-          <el-button style="font-size: medium" id="tag-copy" :data-clipboard-text="msg" type="text" @click="copy($event,msg)">复制日志</el-button>
+          <el-button style="font-size: medium" id="tag-copy" :data-clipboard-text="msg" type="text" @click="copy($event,msg)">Copy logs</el-button>
           <el-divider direction="vertical"></el-divider>
-          <el-button style="font-size: medium" type="text" @click="show">开始监控</el-button>
+          <el-button style="font-size: medium" type="text" @click="show">Start monitor</el-button>
           <el-divider direction="vertical"></el-divider>
-          <el-button style="font-size: medium" type="text" @click="stop">停止监控</el-button>
+          <el-button style="font-size: medium" type="text" @click="stop">Stop monitor</el-button>
         </div>
       </div>
       <div v-html="msg" class="text-item" v-loading="loading">
@@ -52,7 +52,7 @@ export default {
         }
       }).then(res => {
         if (res.data.code === 200) {
-          this.$message.success("关闭消息队列成功")
+          this.$message.success("Operation successful!")
         }
       })
     },
@@ -69,13 +69,13 @@ export default {
     copy() {
       const clipboard = new Clipboard("#tag-copy")
       clipboard.on('success', e => {
-        this.$message({ type: 'success', message: '复制成功' })
+        this.$message({ type: 'success', message: 'Operation successful!' })
         // 释放内存
         clipboard.destroy()
       })
       clipboard.on('error', e => {
         // 不支持复制
-        this.$message({ type: 'warning', message: '该浏览器不支持自动复制' })
+        this.$message({ type: 'warning', message: 'Operation fail!' })
         // 释放内存
         clipboard.destroy()
       })
@@ -87,7 +87,7 @@ export default {
 
       this.webSocketTimer = setInterval(() => {
         if (!stompClient.connected) {
-          console.log("websocket重连中 ...");
+          console.log("websocket reconnection ...");
           this.connectWebSocket();
         }
       }, 10000);

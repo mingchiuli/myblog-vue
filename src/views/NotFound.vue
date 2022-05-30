@@ -2,7 +2,7 @@
     <div>
 
       <div>
-        <h1 style="text-align: center;">路由错误</h1>
+        <h1 style="text-align: center;">Route error!</h1>
         <hr>
         <div class="mbody">
           <div class="mIntro">

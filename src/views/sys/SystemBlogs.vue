@@ -1,20 +1,20 @@
 <template>
   <div>
     <el-form :inline="true" @submit.native.prevent>
-      <el-form-item label="搜索查询">
-        <el-input v-model="searchBlogs" placeholder="关键词" clearable @keyup.enter.native="getBlogList"></el-input>
+      <el-form-item label="Search Query">
+        <el-input v-model="searchBlogs" placeholder="Keyword" clearable @keyup.enter.native="getBlogList"></el-input>
       </el-form-item>
       <el-form-item>
-        <el-button type="primary" @click="getBlogList">搜索</el-button>
-        <el-button type="primary" @click="addNewBlog">新增</el-button>
+        <el-button type="primary" @click="getBlogList">Search</el-button>
+        <el-button type="primary" @click="addNewBlog">Add</el-button>
       </el-form-item>
       <el-form-item>
-        <el-popconfirm title="这是确定批量删除吗？" @confirm="delHandle(null)">
-          <el-button type="danger" slot="reference" :disabled="delBtlStatus">批量删除</el-button>
+        <el-popconfirm title="Are you sure to delete in batch?" @confirm="delHandle(null)">
+          <el-button type="danger" slot="reference" :disabled="delBtlStatus">Delete Batch</el-button>
         </el-popconfirm>
       </el-form-item>
       <el-form-item>
-        <el-button type="primary" @click="getBlogToken">阅读密钥</el-button>
+        <el-button type="primary" @click="getBlogToken">Read key</el-button>
       </el-form-item>
     </el-form>
 
@@ -43,19 +43,19 @@
       </el-table-column>
       <el-table-column
           prop="username"
-          label="作者"
+          label="Author"
           width="90"
           align="center">
       </el-table-column>
       <el-table-column
           prop="title"
           width="80"
-          label="标题"
+          label="Title"
           align="center">
       </el-table-column>
       <el-table-column
           prop="description"
-          label="描述"
+          label="Description"
           width="110"
           align="center">
       </el-table-column>
@@ -63,37 +63,37 @@
       <el-table-column
           prop="status"
           width="65"
-          label="状态"
+          label="Status"
           align="center">
         <template slot-scope="scope">
-          <el-tag size="small" v-if="scope.row.status === 0" type="success">正常</el-tag>
-          <el-tag size="small" v-else-if="scope.row.status === 1" type="danger">隐藏</el-tag>
+          <el-tag size="small" v-if="scope.row.status === 0" type="success">Normal</el-tag>
+          <el-tag size="small" v-else-if="scope.row.status === 1" type="danger">Hidden</el-tag>
         </template>
       </el-table-column>
 
       <el-table-column
           prop="created"
-          label="创建时间"
+          label="Created"
           width="140"
           align="center">
       </el-table-column>
       <el-table-column
           prop="content"
-          label="内容"
+          label="Content"
           width="190"
           align="center">
       </el-table-column>
 
       <el-table-column
           prop="readRecent"
-          label="近期"
+          label="Read Recent"
           width="50"
           align="center">
       </el-table-column>
 
       <el-table-column
           prop="readSum"
-          label="总阅读"
+          label="Read Sum"
           width="80"
           align="center">
       </el-table-column>
@@ -103,32 +103,32 @@
       <el-table-column
           prop="icon"
           width="260"
-          label="操作"
+          label="Operation"
           align="center"
           fixed="right">
 
         <template slot-scope="scope">
-          <el-button type="text" @click="find(scope.row.id)">查看</el-button>
+          <el-button type="text" @click="find(scope.row.id)">Check</el-button>
           <el-divider direction="vertical"></el-divider>
 
-          <el-button type="text" @click="editHandle(scope.row.id)" style="color: orange">编辑</el-button>
+          <el-button type="text" @click="editHandle(scope.row.id)" style="color: orange">Edit</el-button>
           <el-divider direction="vertical"></el-divider>
 
 
-          <el-button type="text" @click="cooperate(scope.row.id)" style="color: lightseagreen">协同</el-button>
+          <el-button type="text" @click="cooperate(scope.row.id)" style="color: lightseagreen">Cooperate</el-button>
 
           <el-divider direction="vertical"></el-divider>
 
           <template>
-            <el-popconfirm title="确定删除此博客吗？" @confirm="delHandle(scope.row.id)">
-              <el-button type="text" slot="reference" style="color: indianred">删除</el-button>
+            <el-popconfirm title="Are you sure to delete this blog？" @confirm="delHandle(scope.row.id)">
+              <el-button type="text" slot="reference" style="color: indianred">Delete</el-button>
             </el-popconfirm>
           </template>
 
           <el-divider direction="vertical"></el-divider>
 
-          <el-button v-if="scope.row.status === 1" type="text" @click="statusHandle(scope.row.id, scope.row.status)" style="color: limegreen">公开</el-button>
-          <el-button v-else-if="scope.row.status === 0" type="text" @click="statusHandle(scope.row.id, scope.row,status)" style="color: grey">隐藏</el-button>
+          <el-button v-if="scope.row.status === 1" type="text" @click="statusHandle(scope.row.id, scope.row.status)" style="color: limegreen">Public</el-button>
+          <el-button v-else-if="scope.row.status === 0" type="text" @click="statusHandle(scope.row.id, scope.row,status)" style="color: grey">Private</el-button>
 
 
         </template>
@@ -149,7 +149,7 @@
 
 
     <el-dialog
-        title="请选择位次: 编号越小，编辑区域越靠前"
+        title="Please select the position"
         :visible.sync="coVisible"
         width="400px"
         :before-close="coHandleClose">
@@ -160,7 +160,7 @@
         <el-radio-button label="2" :disabled="coDisabled.index2" @click.native="elTarget"></el-radio-button>
       </el-radio-group>
       <div style="text-align: right">
-        <el-button type="primary" :disabled="elGetTarget" @click="coConfirm">进入</el-button>
+        <el-button type="primary" :disabled="elGetTarget" @click="coConfirm">Get into</el-button>
       </div>
     </el-dialog>
 
@@ -240,8 +240,8 @@ export default {
           "Authorization": localStorage.getItem("myToken")
         }
       }).then(res => {
-        this.$alert(res.data.data, '阅读密钥', {
-          confirmButtonText: '重置阅读密钥',
+        this.$alert(res.data.data, 'Read key', {
+          confirmButtonText: 'Reset read key',
           callback: action => {
             if (action === 'confirm') {
 
@@ -252,7 +252,7 @@ export default {
               }).then(res => {
                 this.$message({
                   type: 'info',
-                  message: `阅读密钥已设置`
+                  message: `Read key set`
                 });
               })
 
@@ -301,7 +301,7 @@ export default {
       }).then(res => {
         this.$message({
           showClose: true,
-          message: '操作成功',
+          message: 'Operation successful!',
           type: 'success',
           onClose:() => {
             this.getAllBlogs()
@@ -338,7 +338,7 @@ export default {
         if (res.data.data.records.total === 0) {
           this.searchBlogs = ''
           this.getAllBlogs()
-          this.$message.error("没有相关记录")
+          this.$message.error("No records")
           this.loading = false
           return
         }
@@ -398,7 +398,7 @@ export default {
       }).then(res => {
         this.$message({
           showClose: true,
-          message: '恭喜你，操作成功',
+          message: 'Operation successful!',
           type: 'success',
           onClose:() => {
 
