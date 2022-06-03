@@ -12,7 +12,7 @@
 						</span>
         <el-dropdown-menu slot="dropdown">
           <!--          <el-dropdown-item>回到首页</el-dropdown-item>-->
-          <el-dropdown-item @click.native="back">Back to the index page</el-dropdown-item>
+          <el-dropdown-item @click.native="back">Back</el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown>
 

@@ -62,7 +62,7 @@
 
       <el-table-column
           prop="status"
-          width="65"
+          width="80"
           label="Status"
           align="center">
         <template slot-scope="scope">
@@ -80,21 +80,21 @@
       <el-table-column
           prop="content"
           label="Content"
-          width="190"
+          width="175"
           align="center">
       </el-table-column>
 
       <el-table-column
           prop="readRecent"
-          label="Read Recent"
-          width="50"
+          label="Read"
+          width="60"
           align="center">
       </el-table-column>
 
       <el-table-column
           prop="readSum"
-          label="Read Sum"
-          width="80"
+          label="Read"
+          width="70"
           align="center">
       </el-table-column>
 
@@ -115,13 +115,13 @@
           <el-divider direction="vertical"></el-divider>
 
 
-          <el-button type="text" @click="cooperate(scope.row.id)" style="color: lightseagreen">Cooperate</el-button>
+          <el-button type="text" @click="cooperate(scope.row.id)" style="color: lightseagreen">Co</el-button>
 
           <el-divider direction="vertical"></el-divider>
 
           <template>
             <el-popconfirm title="Are you sure to delete this blog？" @confirm="delHandle(scope.row.id)">
-              <el-button type="text" slot="reference" style="color: indianred">Delete</el-button>
+              <el-button type="text" slot="reference" style="color: indianred">Del</el-button>
             </el-popconfirm>
           </template>
 

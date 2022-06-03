@@ -78,7 +78,7 @@
           fixed="right">
 
 				<template slot-scope="scope">
-					<el-button type="text" @click="permHandle(scope.row.id)" style="color: orange">Assign permissions</el-button>
+					<el-button type="text" @click="permHandle(scope.row.id)" style="color: orange">Permissions</el-button>
 					<el-divider direction="vertical"></el-divider>
 
 					<el-button type="text" @click="editHandle(scope.row.id)">Edit</el-button>

@@ -121,7 +121,7 @@
       },
 
       handleSelect(item) {
-        this.$router.push('/blog/' + item.id)
+        this.$router.push('/public/blog/' + item.id)
       },
 
       blogStatus(id) {

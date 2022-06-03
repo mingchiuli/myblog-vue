@@ -76,10 +76,10 @@ export default {
 
       if (this.$route.params.flag === '0') {
         this.flag = false
-        this.$emit("choose", "更新")
+        this.$emit("choose", "Update logs")
       } else if (this.$route.params.flag === '1') {
         this.flag = true
-        this.$emit("choose", "简历")
+        this.$emit("choose", "Resume")
       }
     }
   },

@@ -82,7 +82,7 @@ export default {
           this.$router.push("/public/blogs/2021/1")
           this.drawer = false
           break
-        case 'BLogs':
+        case 'Blogs':
           this.$router.push("/public/blogs/1")
           this.drawer = false
           break

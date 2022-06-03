@@ -3,11 +3,11 @@
     <div v-if="hasLogin">
       <span><el-link @click="init" type="primary" style="font-size: large">Homepage</el-link></span>
       <el-divider direction="vertical"></el-divider>
-      <span><el-link type="success" @click="add" style="font-size: large">Blog post</el-link></span>
+      <span><el-link type="success" @click="add" style="font-size: large">Post</el-link></span>
       <el-divider direction="vertical"></el-divider>
-      <span><el-link type="warning" @click="backStage" style="font-size: large">step into backstage</el-link></span>
+      <span><el-link type="warning" @click="backStage" style="font-size: large">Backstage</el-link></span>
       <el-divider direction="vertical"></el-divider>
-      <span><el-link type="danger" @click="logout" style="font-size: large">logout</el-link></span>
+      <span><el-link type="danger" @click="logout" style="font-size: large">Logout</el-link></span>
     </div>
     <div v-if="!hasLogin">
       <el-divider direction="vertical"></el-divider>

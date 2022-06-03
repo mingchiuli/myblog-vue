@@ -77,7 +77,7 @@ import Footer from "@/components/Footer";
         rules: {
           title: [
             {required: true, message: 'Please enter the title', trigger: 'blur'},
-            {min: 3, max: 25, message: '3 to 25 characters in length', trigger: 'blur'}
+            {min: 3, max: 50, message: '3 to 50 characters in length', trigger: 'blur'}
           ],
           description: [
             {required: true, message: 'Please enter the description', trigger: 'blur'}
@@ -122,6 +122,7 @@ import Footer from "@/components/Footer";
           headers: { 'Content-Type': 'multipart/form-data',"Authorization": localStorage.getItem("myToken")},
         }).then((url) => {
           // 第二步.将返回的url替换
+          console.log(url)
           this.fileList.push({name: 'Cover', url: url.data.data})
           this.contentForm.link = url.data.data
         })
@@ -198,7 +199,9 @@ import Footer from "@/components/Footer";
         this.contentForm.description = blog.description
         this.contentForm.content = blog.content
         this.contentForm.link = blog.link
-        this.fileList.push({name: 'Cover', url: blog.link})
+        if (blog.link !== '') {
+          this.fileList.push({name: 'Cover', url: blog.link})
+        }
         this.created = blog.created
       }
     },
@@ -206,6 +209,7 @@ import Footer from "@/components/Footer";
       this.loading = true
       const blogId = this.$route.params.blogId
       const _this = this
+      //是本人操作
       if(blogId && localStorage.getItem("myUserInfo") && JSON.parse(localStorage.getItem("myUserInfo")).role === 'admin') {
         this.$axios.get('/blogAuthorized/' + blogId, {
           headers: {
@@ -217,6 +221,7 @@ import Footer from "@/components/Footer";
 
           _this.loading = false
         })
+        //是其他小伙伴操作
       } else if (blogId && localStorage.getItem("myUserInfo")) {
         this.$axios.get('/blog/' + blogId).then(res => {
 
@@ -225,13 +230,16 @@ import Footer from "@/components/Footer";
           _this.loading = false
         })
       } else {
+        //是添加操作
         this.$axios.get('/addNewBlog', {
           headers: {
             "Authorization": localStorage.getItem("myToken")
           }
         }).then(res => {
+          //拿到新文章的id
           const id = res.data.data
 
+          //是本人操作
           if (JSON.parse(localStorage.getItem("myUserInfo")).role === 'admin') {
 
             _this.$axios.get('/blogAuthorized/' + id, {
@@ -245,6 +253,7 @@ import Footer from "@/components/Footer";
             })
 
           } else {
+            //是小伙伴操作
             this.$axios.get('/blog/' + id).then(res => {
 
               this.assignData(res)

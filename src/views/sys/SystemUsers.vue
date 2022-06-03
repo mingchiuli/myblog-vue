@@ -44,7 +44,7 @@
           align="center">
       </el-table-column>
       <el-table-column
-          label="Avatar"
+          label="Ava"
           width="50"
           align="center">
         <template slot-scope="scope">
@@ -59,18 +59,18 @@
       </el-table-column>
       <el-table-column
           prop="monitor"
-          width="70"
+          width="75"
           label="Monitor"
           align="center">
         <template slot-scope="scope">
-          <el-tag size="small" v-if="scope.row.monitor === 1" type="success">online</el-tag>
-          <el-tag size="small" v-else-if="scope.row.monitor === 0" type="danger">outline</el-tag>
+          <el-tag size="small" v-if="scope.row.monitor === 1" type="success">Online</el-tag>
+          <el-tag size="small" v-else-if="scope.row.monitor === 0" type="danger">Outline</el-tag>
         </template>
       </el-table-column>
 
       <el-table-column
           prop="status"
-          width="70"
+          width="80"
           label="Status"
           align="center">
         <template slot-scope="scope">
@@ -82,21 +82,21 @@
       <el-table-column
           prop="created"
           label="Timestamp"
-          width="150"
+          width="145"
           align="center">
       </el-table-column>
 
       <el-table-column
           prop="lastLogin"
           label="Last Login"
-          width="150"
+          width="145"
           align="center">
       </el-table-column>
 
       <el-table-column
           prop="role"
           label="Role"
-          width="80"
+          width="75"
           align="center">
         <template slot-scope="scope">
           <el-tag size="small" type="primary">{{ scope.row.role }}</el-tag>
@@ -113,18 +113,18 @@
         <template slot-scope="scope">
           <el-button v-if="scope.row.monitor === 1 && scope.row.id !== 1" type="text" @click="roleKick(scope.row.id)">Kick</el-button>
           <el-divider v-if="scope.row.monitor === 1 && scope.row.id !== 1" direction="vertical"></el-divider>
-          <el-button type="text" @click="infoHandle(scope.row.id)">Information</el-button>
+          <el-button type="text" @click="infoHandle(scope.row.id)">Info</el-button>
           <el-divider direction="vertical"></el-divider>
 
 
           <template>
             <el-popconfirm title="Are you sure to delete?" @confirm="delHandle(scope.row.id)">
-              <el-button type="text" slot="reference" style="color: indianred;">Delete</el-button>
+              <el-button type="text" slot="reference" style="color: indianred;">Del</el-button>
             </el-popconfirm>
           </template>
 
           <el-divider direction="vertical"></el-divider>
-          <el-button type="text" @click="passwordHandle(scope.row.id)">Password</el-button>
+          <el-button type="text" @click="passwordHandle(scope.row.id)">Token</el-button>
 
         </template>
       </el-table-column>
@@ -154,11 +154,11 @@
           <el-input v-model="editForm.username" autocomplete="off"></el-input>
         </el-form-item>
 
-        <el-form-item label="password" prop="password" label-width="100px">
+        <el-form-item label="Password" prop="password" label-width="100px">
           <el-input v-model="editForm.password" type="password" autocomplete="off"></el-input>
         </el-form-item>
 
-        <el-form-item label="Confirm password" prop="password" label-width="100px">
+        <el-form-item label="Confirm" prop="password" label-width="100px">
           <el-input v-model="passwordConfirm" type="password" autocomplete="off"></el-input>
         </el-form-item>
 
@@ -271,7 +271,7 @@
           <el-input v-model="passwordForm.password" type="password" autocomplete="off"></el-input>
         </el-form-item>
 
-        <el-form-item label="Confirm password" prop="password" label-width="100px">
+        <el-form-item label="Confirm" prop="password" label-width="100px">
           <el-input v-model="passwordConfirm" type="password" autocomplete="off"></el-input>
         </el-form-item>
 

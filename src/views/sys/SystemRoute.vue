@@ -38,7 +38,7 @@
           align="center">
 				<template slot-scope="scope">
 					<el-tag size="small" v-if="scope.row.type === 0">Catalogue</el-tag>
-					<el-tag size="small" v-else-if="scope.row.type === 1" type="success">Item</el-tag>
+					<el-tag size="small" v-else-if="scope.row.type === 1" type="success">Menu</el-tag>
 					<el-tag size="small" v-else-if="scope.row.type === 2" type="info">Route</el-tag>
 				</template>
 
