@@ -44,7 +44,7 @@
 
       <el-table-column
           prop="status"
-          width="70"
+          width="80"
           label="Status"
           align="center">
         <template slot-scope="scope">
@@ -56,7 +56,7 @@
       <el-table-column
           prop="created"
           label="Created"
-          width="150"
+          width="140"
           align="center">
       </el-table-column>
       <el-table-column
