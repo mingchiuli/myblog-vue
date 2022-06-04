@@ -132,17 +132,16 @@ import Footer from "@/components/Footer";
       submitForm(formName) {
         this.$refs[formName].validate((valid) => {
           if (valid) {
-            const _this = this
             this.$axios.post('/blog/edit', this.contentForm, {
               headers: {
                 "Authorization": localStorage.getItem("myToken")
               }
             }).then(res => {
               console.log(res)
-              _this.$alert('Operation Successful!', 'Prompt', {
+              this.$alert('Operation Successful!', 'Prompt', {
                 confirmButtonText: 'Confirm',
                 callback: action => {
-                  _this.$router.push('/public/blog/' + this.contentForm.id)
+                  this.$router.push('/public/blog/' + this.contentForm.id)
                 }
               });
 
@@ -208,7 +207,6 @@ import Footer from "@/components/Footer";
     created() {
       this.loading = true
       const blogId = this.$route.params.blogId
-      const _this = this
       //是本人操作
       if(blogId && localStorage.getItem("myUserInfo") && JSON.parse(localStorage.getItem("myUserInfo")).role === 'admin') {
         this.$axios.get('/blogAuthorized/' + blogId, {
@@ -219,7 +217,7 @@ import Footer from "@/components/Footer";
 
           this.assignData(res)
 
-          _this.loading = false
+          this.loading = false
         })
         //是其他小伙伴操作
       } else if (blogId && localStorage.getItem("myUserInfo")) {
@@ -227,7 +225,7 @@ import Footer from "@/components/Footer";
 
           this.assignData(res)
 
-          _this.loading = false
+          this.loading = false
         })
       } else {
         //是添加操作
@@ -242,14 +240,14 @@ import Footer from "@/components/Footer";
           //是本人操作
           if (JSON.parse(localStorage.getItem("myUserInfo")).role === 'admin') {
 
-            _this.$axios.get('/blogAuthorized/' + id, {
+            this.$axios.get('/blogAuthorized/' + id, {
               headers: {
                 "Authorization": localStorage.getItem("myToken")
               }
             }).then(res => {
 
               this.assignData(res)
-              _this.loading = false
+              this.loading = false
             })
 
           } else {
@@ -257,7 +255,7 @@ import Footer from "@/components/Footer";
             this.$axios.get('/blog/' + id).then(res => {
 
               this.assignData(res)
-              _this.loading = false
+              this.loading = false
             })
           }
         })

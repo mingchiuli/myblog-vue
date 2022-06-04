@@ -213,13 +213,12 @@ export default {
             }
           }).then(res => {
             console.log(res)
-            stompClient.publish({
-              destination: '/app/taskOver/' + this.user.id,
-            })
-
             this.$alert('Operation successful!', 'Prompt', {
               confirmButtonText: 'Confirm',
-              callback: () => {
+              callback: action => {
+                stompClient.publish({
+                  destination: '/app/taskOver/' + this.user.id,
+                })
                 this.disconnectWebSocket()
                 this.$router.push("/public/blogs/1")
               }
@@ -427,7 +426,7 @@ export default {
 
           this.$message({
             showClose: true,
-            message: obj.from + 'say to you: ' + obj.message,
+            message: obj.from + ' say to you: ' + obj.message,
             type: 'success',
             duration: 20 * 1000,
             onClose:() => {
