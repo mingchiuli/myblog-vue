@@ -3,7 +3,7 @@
     <el-button @click="drawer = true" type="success" plain style="margin-left: 10%;margin-top: 10px;font-size: smaller; " icon="el-icon-s-operation"></el-button>
 
     <el-drawer
-        title="mingchiuli"
+        title="Bonjour, étranger."
         :visible.sync="drawer"
         :direction="direction"
         size="350px"
@@ -56,10 +56,9 @@ export default {
           }
         ]
       }, {
-        label: 'Resume'
-      }, {
-        label: 'Update logs'
-      }, {
+        label: 'my little airport'
+      }
+        ,{
           label: 'Copyright'
         }],
       defaultProps: {
@@ -89,12 +88,8 @@ export default {
         case 'About':
           this.$router.push("/")
           break
-        case 'Resume':
-          this.$router.push("/public/other/1")
-          this.drawer = false
-          break
-        case 'Update logs':
-          this.$router.push("/public/other/0")
+        case 'my little airport':
+          window.open().location.href = '/mla.html';
           this.drawer = false
           break
         case 'Copyright':

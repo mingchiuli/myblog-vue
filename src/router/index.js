@@ -51,15 +51,6 @@ const routes = [
         name: 'BlogDetail',
         component: () => import('@/views/BlogDetail'),
       },
-
-      {
-        path: 'other/:flag',
-        name: 'Resume',
-        component: () => import('@/views/Resume'),
-        meta: {
-          title: '简历'
-        }
-      },
     ]
   },
 
