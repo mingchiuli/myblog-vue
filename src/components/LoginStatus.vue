@@ -9,11 +9,6 @@
       <el-divider direction="vertical"></el-divider>
       <span><el-link type="danger" @click="logout" style="font-size: large">Logout</el-link></span>
     </div>
-    <div v-if="!hasLogin">
-      <el-divider direction="vertical"></el-divider>
-      <span><el-link type="success" @click="back" style="font-size: large">back</el-link></span>
-      <el-divider direction="vertical"></el-divider>
-    </div>
   </div>
 </template>
 

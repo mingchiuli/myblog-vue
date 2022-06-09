@@ -48,12 +48,10 @@ export default {
         label: 'Blogs',
       },{
         label: 'Archive',
-        children: [{
-          label: '2022'
-        }
-        ,{
-            label: '2021'
-          }
+        children: [
+        // ,{
+        //     label: '2021'
+        //   }
         ]
       }, {
         label: 'my little airport'
@@ -72,15 +70,10 @@ export default {
       done()
     },
     handleNodeClick(data) {
+      if (data.children && data.children.length !== 0) {
+        return
+      }
       switch (data.label) {
-        case '2022':
-          this.$router.push("/public/blogs/2022/1")
-          this.drawer = false
-          break
-        case '2021':
-          this.$router.push("/public/blogs/2021/1")
-          this.drawer = false
-          break
         case 'Blogs':
           this.$router.push("/public/blogs/1")
           this.drawer = false
@@ -96,17 +89,28 @@ export default {
           window.open().location.href = 'https://creativecommons.org/licenses/by-nc-sa/4.0/';
           this.drawer = false
           break
+        default :
+          this.$router.push("/public/blogs/" + data.label + "/1")
+          this.drawer = false
       }
     }
   },
+  created() {
+    this.$axios.get('/searchYears').then(res => {
+      let years = res.data.data
+      years.forEach(year => {
+        this.data[2].children.push({"label": year})
+      })
+    })
+  },
 
   //同一个组件，路由改变时如果内容不变，如此解决
-  watch: {
-    $route(to,from){
-      // created:{}里面的方法
-    }
-
-  }
+  // watch: {
+  //   $route(to,from){
+  //     // created:{}里面的方法
+  //   }
+  //
+  // }
 };
 </script>
 
