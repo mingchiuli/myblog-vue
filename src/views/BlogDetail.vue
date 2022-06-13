@@ -3,7 +3,7 @@
 
     <Catalogue :props="defaultProps" ref="toc" v-show="catalog" v-if="isPC" @isCatalog="showCatalog"></Catalogue>
 
-    <EditStatus :blog="blog"></EditStatus>
+    <EditStatus v-if="hasLogin" :blog="blog"></EditStatus>
 
 
     <div class="content" v-loading="loading">
@@ -60,6 +60,17 @@ export default {
       defaultProps: {
         children: "children",
         label: "name"
+      }
+    }
+  },
+
+  computed: {
+    hasLogin: {
+      get() {
+        return this.$store.state.hasLogin
+      },
+      set(val) {
+        this.$store.state.hasLogin = val
       }
     }
   },
@@ -137,17 +148,6 @@ export default {
 
 
       })
-    }
-  },
-
-  computed: {
-    hasLogin: {
-      get() {
-        return this.$store.state.hasLogin
-      },
-      set(val) {
-        this.$store.state.hasLogin = val
-      }
     }
   },
 }

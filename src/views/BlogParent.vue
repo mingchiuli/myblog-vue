@@ -26,7 +26,7 @@
     </div>
 
 
-    <LoginStatus></LoginStatus>
+    <LoginStatus v-if="hasLogin"></LoginStatus>
 
     <router-view @title="setTitle" @yearCount="setYearCount" @choose="setChoose"/>
 
@@ -69,7 +69,24 @@ export default {
       this.year = 0
       this.choose = choose
     }
-  }
+  },
+
+  created() {
+    if (localStorage.getItem("myToken")) {
+      this.$store.state.hasLogin = true
+    }
+  },
+
+  computed: {
+    hasLogin: {
+      get() {
+        return this.$store.state.hasLogin
+      },
+      set(val) {
+        this.$store.state.hasLogin = val
+      }
+    }
+  },
 }
 </script>
 
