@@ -49,13 +49,12 @@ export default {
 
 
     logout() {
-      const _this = this
-      _this.$axios.get("/logout", {
+      this.$axios.post("/logout", null,{
         headers: {
           "Authorization": localStorage.getItem("myToken")
         }
       }).then(res => {
-        _this.$store.commit("REMOVE_INFO")
+        this.$store.commit("REMOVE_INFO")
       })
     }
   },

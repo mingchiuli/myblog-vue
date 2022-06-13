@@ -4,7 +4,7 @@
     <div>
       <el-col style="margin-bottom: 5%; margin-top: 5%; text-align: center">
         <el-card style="width: 100%; height: 150px; color: #333;">
-          <div style="padding-bottom: 1%; border-bottom: 1px solid #ccc">Online users<span style="font-size: 12px">Click the bubble to contact</span></div>
+          <div style="padding-bottom: 1%; border-bottom: 1px solid #ccc">Online users <span style="font-size: 12px">Click the bubble to contact</span></div>
           <div style="padding: 10px 0;float: left" v-for="user in users" v-if="user.username !== username" :key="user.username">
             <div> {{user.username}} </div>
             <div>
@@ -28,8 +28,8 @@
       <el-button v-if="user.number === 0" type="primary" icon="el-icon-edit" @click="send"></el-button>
     </div>
 
-    <el-input v-if="user.role === 'admin'" v-model="ruleForm.title" placeholder="title"></el-input>
-    <el-input v-if="user.role === 'admin'" type="textarea" v-model="ruleForm.description" placeholder="description"></el-input>
+    <el-input v-if="user.role === 'ROLE_admin'" v-model="ruleForm.title" placeholder="title"></el-input>
+    <el-input v-if="user.role === 'ROLE_admin'" type="textarea" v-model="ruleForm.description" placeholder="description"></el-input>
 
 
     <el-form v-loading="loading" :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm1">
@@ -87,7 +87,7 @@
 
     </el-form>
 
-    <el-button style="float: right" v-if="user.role === 'admin'" type="primary" @click="submitForm('ruleForm')">Submit</el-button>
+    <el-button style="float: right" v-if="user.role === 'ROLE_admin'" type="primary" @click="submitForm('ruleForm')">Submit</el-button>
 
 
     <Footer></Footer>
@@ -212,7 +212,7 @@ export default {
               "Authorization": localStorage.getItem("myToken")
             }
           }).then(res => {
-            console.log(res)
+
             this.$alert('Operation successful!', 'Prompt', {
               confirmButtonText: 'Confirm',
               callback: action => {
@@ -290,8 +290,10 @@ export default {
         }
       }).then(res => {
 
+
         const blog = res.data.data.blog
         const users = res.data.data.users
+
 
         let username = JSON.parse(localStorage.getItem("myUserInfo")).username;
         this.username = username
@@ -299,6 +301,7 @@ export default {
         for (let i = 0; i < users.length; i++) {
           let user = users[i]
           this['user' + user.number] = true
+
 
           this.blogId = this.$route.params.blogId
 

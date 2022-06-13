@@ -34,6 +34,7 @@
 
 <script>
   import Footer from "@/components/Footer";
+  import qs from 'qs'
   export default {
     name: "Login",
     components: {Footer},
@@ -44,7 +45,7 @@
           username: '',
           password: '',
           code: '',
-          token: '',
+          key: '',
         },
 
 
@@ -87,7 +88,7 @@
       getCaptcha() {
         this.$axios.get('/captcha').then(res => {
 
-          this.ruleForm.token = res.data.data.token
+          this.ruleForm.key = res.data.data.token
           this.captchaImg = res.data.data.captchaImg
           this.ruleForm.code = ''
         })
@@ -97,19 +98,13 @@
       submitForm(formName) {
         this.$refs[formName].validate((valid) => {
           if (valid) {
-            const _this = this
-            this.$axios.post('/login', this.ruleForm).then(res => {
-
-              // console.log(res.data)
-              const jwt = res.headers['authorization']
-              const userInfo = res.data.data
+            this.$axios.post('/login?' + qs.stringify(this.ruleForm)).then(res => {
 
               // 把数据共享出去
-              _this.$store.commit("SET_USERINFO", userInfo)
-              _this.$store.commit("SET_TOKEN", jwt)
-              _this.$store.commit("SET_LOGIN", true)
-
-              _this.$router.push('/public/blogs/1')
+              this.$store.commit("SET_TOKEN", res.data.data.token)
+              this.$store.commit("SET_USERINFO", res.data.data)
+              this.$store.commit("SET_LOGIN", true)
+              this.$router.push('/public/blogs/1')
 
             })
 
