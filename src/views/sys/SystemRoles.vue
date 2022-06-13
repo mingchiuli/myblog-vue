@@ -315,7 +315,6 @@
             "Authorization": localStorage.getItem("myToken")
           }
         }).then(res => {
-          console.log(res.data.data)
 
 					this.editForm = res.data.data
 
@@ -367,7 +366,6 @@
           }
         }).then(res => {
 
-          console.log(res.data.data.menuIds)
 					this.$refs.permTree.setCheckedKeys(res.data.data.menuIds)
 					this.permForm = res.data.data
 
@@ -376,8 +374,6 @@
 
 			submitPermFormHandle(formName) {
 				let menuIds = this.$refs.permTree.getCheckedKeys()
-
-				console.log(menuIds)
 
 				this.$axios.post('/sys/role/perm/' + this.permForm.id, menuIds, {
           headers: {

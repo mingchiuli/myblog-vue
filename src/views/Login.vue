@@ -102,7 +102,7 @@
 
               // 把数据共享出去
               this.$store.commit("SET_TOKEN", res.data.data.token)
-              this.$store.commit("SET_USERINFO", res.data.data)
+              this.$store.commit("SET_USERINFO", res.data.data.user)
               this.$store.commit("SET_LOGIN", true)
               this.$router.push('/public/blogs/1')
 

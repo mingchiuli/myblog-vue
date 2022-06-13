@@ -19,19 +19,23 @@ request.interceptors.request.use(config => {
 
 request.interceptors.response.use(response => {
 
-    let res = response.data;
+        let res = response.data;
 
     //controller里直接return Result.fail的话在这里
     if (res.code === 200) {
       return response
     } else {
 
+
         if (res.code === 401) {
             store.commit("REMOVE_INFO")
             router.push("/login")
         }
 
-      Element.Message.error(res.msg, {duration: 3 * 1000})
+        console.log(res)
+
+
+        Element.Message.error(res.msg, {duration: 3 * 1000})
 
       return Promise.reject(res.msg)
     }
@@ -54,10 +58,13 @@ request.interceptors.response.use(response => {
       //经过全局异常处理的话，result会抛到这里面
       if (error.response.data) {
 
-          if (error.response.data.code === 401) {
+          if (error.response.status === 401 || error.response.data.code === 401) {
               store.commit("REMOVE_INFO")
               router.push("/login")
           }
+
+
+          console.log()
 
           Element.Message.error(error.response.data.msg, {duration: 3 * 1000})
           return Promise.reject(error)

@@ -378,7 +378,6 @@ export default {
         }
       }).then(res => {
         this.roleList = res.data.data.records
-        console.log(res)
       })
     },
 
