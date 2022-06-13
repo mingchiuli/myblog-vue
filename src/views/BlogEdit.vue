@@ -208,7 +208,7 @@ import Footer from "@/components/Footer";
       this.loading = true
       const blogId = this.$route.params.blogId
       //是本人操作
-      if(blogId && localStorage.getItem("myUserInfo") && JSON.parse(localStorage.getItem("myUserInfo")).role === 'admin') {
+      if(blogId && localStorage.getItem("myUserInfo") && JSON.parse(localStorage.getItem("myUserInfo")).role === 'ROLE_admin') {
         this.$axios.get('/blogAuthorized/' + blogId, {
           headers: {
             "Authorization": localStorage.getItem("myToken")
@@ -238,7 +238,7 @@ import Footer from "@/components/Footer";
           const id = res.data.data
 
           //是本人操作
-          if (JSON.parse(localStorage.getItem("myUserInfo")).role === 'admin') {
+          if (JSON.parse(localStorage.getItem("myUserInfo")).role === 'ROLE_admin') {
 
             this.$axios.get('/blogAuthorized/' + id, {
               headers: {
