@@ -155,6 +155,7 @@ export default {
         return []
       }
 
+      //for循环作用，为index构建孩子节点，再遇到与index相等或更大的层级直接break
       for (let i = index + 1; i < aArr.length; i++) {
 
         let name = $(aArr[i]).parent().prop('nodeName')
@@ -173,7 +174,7 @@ export default {
             name,
             children
           })
-        } else if (level + 1 > parseInt(name.substring(1, 2))) {
+        } else if (level >= parseInt(name.substring(1, 2))) {
           break;
         }
       //如果是2，2，2，就不构建孩子

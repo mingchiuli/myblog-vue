@@ -283,7 +283,7 @@
 
     </el-dialog>
 
-    <Footer></Footer>
+    <Footer style="margin-top: 5%"></Footer>
 
 
   </div>

@@ -115,7 +115,7 @@
                    @current-change=pageSelect>
     </el-pagination>
 
-    <Footer></Footer>
+    <Footer style="margin-top: 5%"></Footer>
 
   </div>
 </template>
