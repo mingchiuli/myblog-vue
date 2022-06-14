@@ -26,7 +26,7 @@
     </div>
 
 
-    <LoginStatus v-if="hasLogin"></LoginStatus>
+    <LoginStatus></LoginStatus>
 
     <router-view @title="setTitle" @yearCount="setYearCount" @choose="setChoose"/>
 
@@ -126,6 +126,8 @@ h1 {
   display: flex;
   flex-direction: row;
 }
+
+
 
 
 </style>

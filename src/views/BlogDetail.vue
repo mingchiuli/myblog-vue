@@ -3,8 +3,8 @@
 
     <Catalogue :props="defaultProps" ref="toc" v-show="catalog" v-if="isPC" @isCatalog="showCatalog"></Catalogue>
 
-    <EditStatus v-if="hasLogin" :blog="blog"></EditStatus>
 
+    <EditStatus v-if="hasLogin" :blog="blog"></EditStatus>
 
     <div class="content" v-loading="loading">
       <!--                使用mavon-editor预览功能-->

@@ -9,6 +9,17 @@
       <el-divider direction="vertical"></el-divider>
       <span><el-link type="danger" @click="logout" style="font-size: large">Logout</el-link></span>
     </div>
+
+<!--    <div v-else-if="!hasLogin">-->
+
+<!--    </div>-->
+<!--    <div v-else-if="!hasLogin">-->
+
+<!--    </div>-->
+
+<!--    <div v-else-if="!hasLogin">-->
+<!--      <span><el-link @click="init" type="primary" style="font-size: large">Homepage</el-link></span>-->
+<!--    </div>-->
   </div>
 </template>
 
@@ -85,7 +96,7 @@ export default {
 <style scoped>
 .maction {
   margin-top: 40px;
-  margin-bottom: 25px;
+  margin-bottom: 60px;
   text-align: center;
 }
 
