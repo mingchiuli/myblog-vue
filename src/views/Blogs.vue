@@ -127,7 +127,7 @@
       blogStatus(id) {
         this.$axios.get('/blogStatus/' + id).then(res => {
           const status = res.data.data
-          if ((status === 1 && !localStorage.getItem("myToken")) || (status === 1 && JSON.parse(localStorage.getItem("myUserInfo")).role !== 'ROLE_admin')) {
+          if ((status === 1 && !localStorage.getItem("myToken")) || (status === 1 && JSON.parse(localStorage.getItem("myUserInfo")).role !== 'admin')) {
 
             this.$prompt('Please input the password', 'Prompt', {
               confirmButtonText: 'Confirm',

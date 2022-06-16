@@ -106,7 +106,7 @@ export default {
 
     this.$emit("yearCount", 0, -1)
 
-    if (JSON.parse(localStorage.getItem("myUserInfo")) && JSON.parse(localStorage.getItem("myUserInfo")).role === 'ROLE_admin') {
+    if (JSON.parse(localStorage.getItem("myUserInfo")) && JSON.parse(localStorage.getItem("myUserInfo")).role === 'admin') {
 
       this.$store.state.hasLogin = true
       this.loading = true

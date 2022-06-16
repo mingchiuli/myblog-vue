@@ -28,8 +28,8 @@
       <el-button v-if="user.number === 0" type="primary" icon="el-icon-edit" @click="send"></el-button>
     </div>
 
-    <el-input v-if="user.role === 'ROLE_admin'" v-model="ruleForm.title" placeholder="title"></el-input>
-    <el-input v-if="user.role === 'ROLE_admin'" type="textarea" v-model="ruleForm.description" placeholder="description"></el-input>
+    <el-input v-if="user.role === 'admin'" v-model="ruleForm.title" placeholder="title"></el-input>
+    <el-input v-if="user.role === 'admin'" type="textarea" v-model="ruleForm.description" placeholder="description"></el-input>
 
 
     <el-form v-loading="loading" :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm1">
@@ -87,7 +87,7 @@
 
     </el-form>
 
-    <el-button style="float: right" v-if="user.role === 'ROLE_admin'" type="primary" @click="submitForm('ruleForm')">Submit</el-button>
+    <el-button style="float: right" v-if="user.role === 'admin'" type="primary" @click="submitForm('ruleForm')">Submit</el-button>
 
 
     <Footer></Footer>

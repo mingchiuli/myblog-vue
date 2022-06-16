@@ -10,16 +10,10 @@
       <span><el-link type="danger" @click="logout" style="font-size: large">Logout</el-link></span>
     </div>
 
-<!--    <div v-else-if="!hasLogin">-->
-
-<!--    </div>-->
-<!--    <div v-else-if="!hasLogin">-->
-
+<!--    <div v-if="!hasLogin">-->
+<!--      <span><el-link @click="login" type="primary" style="font-size: large">Login</el-link></span>-->
 <!--    </div>-->
 
-<!--    <div v-else-if="!hasLogin">-->
-<!--      <span><el-link @click="init" type="primary" style="font-size: large">Homepage</el-link></span>-->
-<!--    </div>-->
   </div>
 </template>
 
@@ -36,6 +30,10 @@ export default {
     }
   },
   methods: {
+
+    // login() {
+    //   this.$router.push('/login')
+    // },
 
     back() {
       this.$router.back()

@@ -2,7 +2,10 @@
   <el-card class="toc-fixed" :body-style="{ padding: '5px' }"	>
 
     <div class="box">
-      <div class="tocTitle">Catalogue</div>
+      <div class="catalogueTitle">
+        <div class="tocTitle">Catalogue</div>
+        <el-button id="flushButton" style="margin-left: 20%; margin-top: 6%;" @click="tocAndCli">Flush</el-button>
+      </div>
       <hr style="max-width: 90%;border: 0; border-top: 1px solid;color: lightgray;"/>
 
       <el-tree
@@ -52,6 +55,9 @@ export default {
   },
 
   methods: {
+
+
+
     scrollToPosition(data) {
 
       let id = data.href
@@ -267,5 +273,24 @@ export default {
   overflow-y: auto;
 }
 }
+
+.catalogueTitle {
+  display: flex;
+  flex-direction: row;
+}
+
+
+#flushButton {
+  //color: #FFF;
+  //background-color: #1E90FF;
+  //border-color: #1E90FF;
+  height: 20px;
+  width: 40px;
+  line-height: 18px;
+  padding: 0 0;
+  //font-weight: 200;
+  //padding: 0 20px;
+}
+
 
 </style>
