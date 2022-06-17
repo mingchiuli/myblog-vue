@@ -184,14 +184,7 @@ export default {
           break;
         }
       //如果是2，2，2，就不构建孩子
-      // else if (level < parseInt(name.substring(1, 2)) - 1) {
-      //     continue
-      //   } else {
-      //     break
-      //   }
-
       }
-
       return out
     },
 
@@ -205,15 +198,15 @@ export default {
         let dist = scrolled - item.dist
         if (dist > -41) {
           temp = item
-          return
         }
       })
 
+
       try {
+
         let nodes = this.$refs.menuTree.store._getAllNodes();
 
         for (let i in nodes) {
-
           if (nodes[i].data.id === temp.id) {
             nodes[i].expanded = true
 
