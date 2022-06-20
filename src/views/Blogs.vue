@@ -6,10 +6,16 @@
           v-if="isPC"
           v-model="input"
           @keyup.enter.native="searchKeyword"
+          :trigger-on-focus="false"
           :fetch-suggestions="querySearchAsync"
           placeholder="Please input the keyword"
           @select="handleSelect"
-          clearable style="width: 20%;margin-top: 10px;margin-left: 65%"></el-autocomplete>
+          :popper-append-to-body="false"
+          clearable style="width: 20%;margin-top: 10px;margin-left: 65%">
+        <template slot-scope="{ item }">
+          <div class="autocomplete-choose-name" v-html="item.value"></div>
+        </template>
+      </el-autocomplete>
 
       <el-button v-if="isPC" @click="searchKeyword" type="success" plain style="margin-top: 10px;font-size: smaller;" icon="el-icon-search"></el-button>
     </div>
@@ -68,6 +74,11 @@
     },
     methods: {
 
+      changeStyle(status, className) {
+        let dom = document.querySelectorAll(className);
+        dom[0].style.display = status;
+      },
+
       blogsCommon(res) {
         this.blogs = res.data.data.records
         for (let i = 0; i < this.blogs.length; i++) {
@@ -98,11 +109,11 @@
 
       querySearchAsync(input, cb) {
         if (this.year !== 0) {
-          this.$axios.get('/searchByYear/' + 1 + '/' + this.year + '?keyword=' + input).then(res => {
+          this.$axios.get('/searchByYear/0/' + 1 + '/' + this.year + '?keyword=' + input).then(res => {
             this.querySearchAsyncCommon(res, cb)
           })
         } else {
-          this.$axios.get('/search/' + 1 + '?keyword=' + input).then(res => {
+          this.$axios.get('/search/0/' + 1 + '?keyword=' + input).then(res => {
             this.querySearchAsyncCommon(res, cb)
           })
         }
@@ -113,7 +124,7 @@
         let results = []
 
         array.forEach((item) => {
-          let temp = {"value": item.title, "id": item.id}
+          let temp = {"value": item.highlight, "id": item.id}
           results.push(temp)
         })
 
@@ -150,6 +161,7 @@
       },
 
       searchKeyword() {
+        this.changeStyle("none", ".el-autocomplete-suggestion");
         if (this.input === '') {
           this.forCreated()
         } else {
@@ -219,7 +231,7 @@
         this.loading = true
         if (this.year !== 0) {
           //按年份搜索
-          this.$axios.get('/searchByYear/' + currentPage + '/' + this.year + '?keyword=' + this.input).then(res => {
+          this.$axios.get('/searchByYear/1/' + currentPage + '/' + this.year + '?keyword=' + this.input).then(res => {
 
             this.searchSortedCommon(res)
 
@@ -228,7 +240,7 @@
           })
         } else {
           //不按年份搜索
-          this.$axios.get('/search/' + currentPage + '?keyword=' + this.input).then(res => {
+          this.$axios.get('/search/1/' + currentPage + '?keyword=' + this.input).then(res => {
 
             this.searchSortedCommon(res)
             this.$router.push("/public/blogs/" + currentPage)
@@ -365,6 +377,11 @@
     width: 80%;
     right: 0;
     top: 0;
+    /*overflow-x: auto;*/
+  }
+
+  /deep/ .el-autocomplete-suggestion{
+    width: auto!important;
   }
 
 
