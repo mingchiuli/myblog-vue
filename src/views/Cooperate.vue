@@ -448,8 +448,8 @@ export default {
       };
 
       stompClient.onStompError = function (frame) {
-        console.log('Broker reported error: ' + frame.headers['message']);
-        console.log('Additional details: ' + frame.body);
+        this.$message.error('Broker reported error: ' + frame.headers['message'])
+        this.$message.error('Additional details: ' + frame.body)
       };
       stompClient.activate();
     },

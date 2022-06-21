@@ -8,7 +8,7 @@
           @keyup.enter.native="searchKeyword"
           :trigger-on-focus="false"
           :fetch-suggestions="querySearchAsync"
-          placeholder="Please input the keyword"
+          placeholder="Keyword"
           @select="handleSelect"
           :popper-append-to-body="false"
           clearable style="width: 20%;margin-top: 10px;margin-left: 65%">
@@ -21,11 +21,37 @@
     </div>
 
     <div class="block">
+
+      <el-timeline>
+        <el-timeline-item v-if="loading" v-for="i in 5" :timestamp="'1900-01-01'" placement="top" color="#0bbd87">
+          <el-card class="el-card">
+            <el-skeleton :loading="loading" animated :count="1">
+              <template slot="template">
+                <el-skeleton-item
+                    variant="image"
+                    style="width: 100%;height: 202px"
+                />
+                <div style="padding: 14px;">
+                  <el-skeleton-item variant="h3" style="width: 50%;" />
+                  <div
+                      style="display: flex; align-items: center; margin-top: 16px; height: 16px;"
+                  >
+                    <el-skeleton-item variant="text" style="margin-right: 16px;" />
+                    <el-skeleton-item variant="text" style="width: 30%;" />
+                  </div>
+                </div>
+              </template>
+            </el-skeleton>
+          </el-card>
+        </el-timeline-item>
+      </el-timeline>
+
+
       <el-timeline>
         <el-timeline-item :timestamp="blog.created" placement="top" v-for="blog in blogs" color="#0bbd87">
           <p v-if="blog.score !== undefined">{{"Search Scores：" + blog.score}}</p>
-          <el-card class="el-card" v-loading="loading">
-            <img :src="blog.link ? blog.link : 'https://fuss10.elemecdn.com/3/28/bbf893f792f03a54408b3b7a7ebf0jpeg.jpeg'" class="image" alt="">
+          <el-card class="el-card">
+            <img :src="blog.link ? blog.link : 'http://81.68.192.120:8081/upload/img/20211118224937/bc649fde-42e5-4977-bfe6-bcaa6c2f606d_Screenshot2022-05-29at2.40.37AM.png'" class="image" alt="">
             <h4>
               <el-link style="color: black" type="info" plain @click="blogStatus(blog.id)">{{blog.title}}</el-link>
             </h4>

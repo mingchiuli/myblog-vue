@@ -87,7 +87,7 @@ export default {
 
       this.webSocketTimer = setInterval(() => {
         if (!stompClient.connected) {
-          console.log("websocket reconnection ...");
+          this.$message.error("websocket reconnection ...")
           this.connectWebSocket();
         }
       }, 10000);
