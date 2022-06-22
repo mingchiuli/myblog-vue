@@ -2,13 +2,13 @@
   <div>
     <el-card class="box-card">
       <div slot="header" class="clearfix">
-        <span style="font-size: large">Spring-logback backstage logs</span>
-        <div style="float: right; padding: 0.5% 0;">
-          <el-button style="font-size: medium" id="tag-copy" :data-clipboard-text="msg" type="text" @click="copy($event,msg)">Copy logs</el-button>
+        <span id="SLTitle">Spring-logback backstage logs</span>
+        <div id="SLContent">
+          <el-button class="SLButton" id="tag-copy" :data-clipboard-text="msg" type="text" @click="copy($event,msg)">Copy logs</el-button>
           <el-divider direction="vertical"></el-divider>
-          <el-button style="font-size: medium" type="text" @click="show">Start monitor</el-button>
+          <el-button class="SLButton" type="text" @click="show">Start monitor</el-button>
           <el-divider direction="vertical"></el-divider>
-          <el-button style="font-size: medium" type="text" @click="stop">Stop monitor</el-button>
+          <el-button class="SLButton" type="text" @click="stop">Stop monitor</el-button>
         </div>
       </div>
       <div v-html="msg" class="text-item" v-loading="loading">
@@ -163,5 +163,17 @@ export default {
 </script>
 
 <style scoped>
+#SLTitle {
+  font-size: large;
+}
+
+#SLContent {
+  float: right;
+  padding: 0.5% 0;
+}
+
+.SLButton {
+  font-size: medium;
+}
 
 </style>

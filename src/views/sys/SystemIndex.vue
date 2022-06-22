@@ -1,8 +1,8 @@
 <template>
-  <div style="text-align: center">
-    <p style="font-weight: bolder">Visitor access records</p>
+  <div id="SI">
+    <p>Visitor access records</p>
     <Map></Map>
-    <p style="font-weight: bolder">Click on the picture to view the details</p>
+    <p>Click on the picture to view the details</p>
     <Footer></Footer>
   </div>
 </template>
@@ -17,5 +17,11 @@ export default {
 </script>
 
 <style scoped>
+p {
+  font-weight: bolder;
+}
 
+#SI {
+  text-align: center;
+}
 </style>

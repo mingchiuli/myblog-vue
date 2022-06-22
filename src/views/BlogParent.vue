@@ -1,13 +1,7 @@
 <template>
   <div>
-    <div class="myItem">
       <!--      width: 0解决flex Sider被拉伸的问题-->
-      <Sider style="width: 0;margin-left: 10%;" @choose="setChoose"></Sider>
-
-    </div>
-
-
-
+    <Sider id="BPSider" @choose="setChoose"></Sider>
 
     <div class="m-content" v-if="year !== 0">
       <h1>Archive{{year}}({{count}})</h1>
@@ -120,14 +114,10 @@ h1 {
   margin-bottom: 3%;
 }
 
-
-.myItem {
-  /*位于一行*/
-  display: flex;
-  flex-direction: row;
+#BPSider {
+  width: 0;
+  margin-left: 10%;
 }
-
-
 
 
 </style>

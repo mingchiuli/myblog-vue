@@ -1,17 +1,17 @@
 <template>
-  <div class="maction">
+  <div class="LS">
     <div v-if="hasLogin">
-      <span><el-link @click="init" type="primary" style="font-size: large">Homepage</el-link></span>
+      <span><el-link class="LSLink" @click="init" type="primary">Homepage</el-link></span>
       <el-divider direction="vertical"></el-divider>
-      <span><el-link type="success" @click="add" style="font-size: large">Post</el-link></span>
+      <span><el-link class="LSLink" type="success" @click="add">Post</el-link></span>
       <el-divider direction="vertical"></el-divider>
-      <span><el-link type="warning" @click="backStage" style="font-size: large">Backstage</el-link></span>
+      <span><el-link class="LSLink" type="warning" @click="backStage">Backstage</el-link></span>
       <el-divider direction="vertical"></el-divider>
-      <span><el-link type="danger" @click="logout" style="font-size: large">Logout</el-link></span>
+      <span><el-link class="LSLink" type="danger" @click="logout">Logout</el-link></span>
     </div>
 
 <!--    <div v-if="!hasLogin">-->
-<!--      <span><el-link @click="login" type="primary" style="font-size: large">Login</el-link></span>-->
+<!--      <span><el-link class="LSLink" @click="login" type="primary">Login</el-link></span>-->
 <!--    </div>-->
 
   </div>
@@ -92,10 +92,14 @@ export default {
 </script>
 
 <style scoped>
-.maction {
+.LS {
   margin-top: 40px;
   margin-bottom: 60px;
   text-align: center;
+}
+
+.LSLink {
+  font-size: large
 }
 
 </style>

@@ -3,6 +3,7 @@
     <div class="myItem">
 
       <el-autocomplete
+          id="BAutocomplete"
           v-if="isPC"
           v-model="input"
           @keyup.enter.native="searchKeyword"
@@ -11,13 +12,13 @@
           placeholder="Keyword"
           @select="handleSelect"
           :popper-append-to-body="false"
-          clearable style="width: 20%;margin-top: 10px;margin-left: 65%">
+          clearable>
         <template slot-scope="{ item }">
           <div class="autocomplete-choose-name" v-html="item.value"></div>
         </template>
       </el-autocomplete>
 
-      <el-button v-if="isPC" @click="searchKeyword" type="success" plain style="margin-top: 10px;font-size: smaller;" icon="el-icon-search"></el-button>
+      <el-button v-if="isPC" @click="searchKeyword" type="success" plain icon="el-icon-search"></el-button>
     </div>
 
     <div class="block">
@@ -61,7 +62,7 @@
         </el-timeline-item>
       </el-timeline>
 
-      <el-pagination class="mpage"
+      <el-pagination class="mPage"
                      background
                      layout="prev, pager, next"
                      :current-page="parseInt(currentPage)"
@@ -162,28 +163,33 @@
       },
 
       blogStatus(id) {
-        this.$axios.get('/blogStatus/' + id).then(res => {
-          const status = res.data.data
-          if ((status === 1 && !localStorage.getItem("myToken")) || (status === 1 && JSON.parse(localStorage.getItem("myUserInfo")).role !== 'admin')) {
+        let role = JSON.parse(localStorage.getItem("myUserInfo")).role
+        if (role === 'admin') {
+          this.$router.push({name: 'BlogDetail', params: {blogId: id}})
+        } else {
+          this.$axios.get('/blogStatus/' + id).then(res => {
+            const status = res.data.data
+            if ((status === 1 && !localStorage.getItem("myToken")) || (status === 1 && role !== 'admin')) {
 
-            this.$prompt('Please input the password', 'Prompt', {
-              confirmButtonText: 'Confirm',
-              cancelButtonText: 'Cancel',
-            }).then(({ value }) => {
-              this.$axios.get('/blogToken/' + id + '/' + value).then(res => {
-                this.$router.push('/public/blog/' + id + '?token=' + value)
-              })
-            }).catch(() => {
-              this.$message({
-                type: 'info',
-                message: 'Contact with me to get the password'
+              this.$prompt('Please input the password', 'Prompt', {
+                confirmButtonText: 'Confirm',
+                cancelButtonText: 'Cancel',
+              }).then(({ value }) => {
+                this.$axios.get('/blogToken/' + id + '/' + value).then(res => {
+                  this.$router.push('/public/blog/' + id + '?token=' + value)
+                })
+              }).catch(() => {
+                this.$message({
+                  type: 'info',
+                  message: 'Contact with me to get the password'
+                });
               });
-            });
 
-          } else {
-            this.$router.push({name: 'BlogDetail', params: {blogId: id}})
-          }
-        })
+            } else {
+              this.$router.push({name: 'BlogDetail', params: {blogId: id}})
+            }
+          })
+        }
       },
 
       searchKeyword() {
@@ -341,74 +347,71 @@
 
 <style scoped>
 
-  .el-card {
-    max-width: 60%;
-  }
+.el-card {
+  max-width: 60%;
+}
 
-  .image {
-    width: 100%;
-    display: block;
-  }
+.image {
+  width: 100%;
+  display: block;
+}
 
-  .el-timeline-item {
-    margin-left: 25%;
-  }
+.el-timeline-item {
+  margin-left: 25%;
+}
 
-  .mpage {
-    margin: 0 auto;
-    text-align: center;
-  }
+.mPage {
+  margin: 0 auto;
+  text-align: center;
+}
 
-  a {
-    text-decoration: none;
-    color: black;
-    /*border-bottom: 1px dashed;*/
-    font-size: large;
-  }
+a {
+  text-decoration: none;
+  color: black;
+  font-size: large;
+}
 
-  .block {
-    margin-top: 3%;
-  }
+.block {
+  margin-top: 3%;
+}
 
+.myItem {
+  /*位于一行*/
+  /*display: flex;*/
+  /*flex-direction: row;*/
+  position: absolute;
+  width: 80%;
+  right: 0;
+  top: 0;
+  /*overflow-x: auto;*/
+}
 
-  .m-content {
-    /*max-width: 100%;*/
-    /*margin-top: 0;*/
-    text-align: center;
-
-  }
-
-  hr {
-    display: block;
-    height: 1px;
-    border: 0;
-    border-top: 1px solid;
-    padding: 0;
-    max-width: 20%;
-    color: lightgray;
-  }
-
-  h1 {
-    font-size: xx-large;
-    margin-top: 1%;
-    margin-bottom: 3%;
-  }
+hr {
+  display: block;
+  height: 1px;
+  border: 0;
+  border-top: 1px solid;
+  padding: 0;
+  max-width: 20%;
+  color: lightgray;
+}
 
 
-  .myItem {
-    /*位于一行*/
-    /*display: flex;*/
-    /*flex-direction: row;*/
-    position: absolute;
-    width: 80%;
-    right: 0;
-    top: 0;
-    /*overflow-x: auto;*/
-  }
+h1 {
+  font-size: xx-large;
+  margin-top: 1%;
+  margin-bottom: 3%;
+}
 
-  /deep/ .el-autocomplete-suggestion{
-    width: auto!important;
-  }
+/deep/ .el-autocomplete-suggestion{
+  width: auto!important;
+}
+
+.el-autocomplete {
+  width: 20%;
+  margin-top: 10px;
+  margin-left: 65%;
+}
 
 
 </style>

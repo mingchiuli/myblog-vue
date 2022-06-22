@@ -22,7 +22,6 @@
         v-loading="loading"
         :data="tableData"
         tooltip-effect="dark"
-        style="width: 100%"
         border
         stripe
         @selection-change="handleSelectionChange">
@@ -164,7 +163,7 @@
       </div>
     </el-dialog>
 
-    <Footer style="margin-top: 5%"></Footer>
+    <Footer id="SBFooter"></Footer>
 
   </div>
 </template>
@@ -423,10 +422,13 @@ export default {
 </script>
 
 <style scoped>
+
 .el-pagination {
   float: right;
   margin-top: 1%;
 }
 
-
+#SBFooter {
+  margin-top: 5%;
+}
 </style>

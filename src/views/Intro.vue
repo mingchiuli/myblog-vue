@@ -1,11 +1,9 @@
 <template>
   <div>
-<!--    <Sider style="width: 0; margin-left: 10%;"></Sider>-->
-    <div style="margin-top: 50px"></div>
-    <div style="margin-left: 78%">
-      <router-link style="font-size: large; margin-bottom: 5px;" :to="{name: 'Blogs', params: {currentPage : 1}}">Step into</router-link>
+    <div id="head">
+      <router-link id="link" :to="{name: 'Blogs', params: {currentPage : 1}}">Step into</router-link>
     </div>
-    <div class="mbody">
+    <div class="mBody">
       <div class="mIntro">
         Love is patient
         <br>
@@ -23,14 +21,14 @@
         <br>
         Love never ends
         <br>
-        <p style="text-align: right">The Teachings and Works of Jesus<br>1 Corinthians<br>Chapter 13</p>
+        <p id="bottom">The Teachings and Works of Jesus<br>1 Corinthians<br>Chapter 13</p>
       </div>
     </div>
-    <div>
-      <p style="text-align: center">
+    <div id="painting">
+      <p>
         <img src="http://81.68.192.120:8081/upload/img/20211118224937/aecd9f6e-bbef-43af-9540-ebac1c0c2132_winterpoem.jpg" class="mImg" alt="">
       </p>
-      <li style="text-align: center">Secret Garden《Winter Poem》</li>
+      <li>Secret Garden《Winter Poem》</li>
 
     </div>
     <Comment></Comment>
@@ -41,16 +39,15 @@
 
 <script>
 import Footer from "@/components/Footer";
-import Sider from "@/components/Sider";
 import Comment from "@/components/Comment";
 export default {
   name: "Intro",
-  components: {Comment, Sider, Footer},
+  components: {Comment, Footer},
 }
 </script>
 
 <style scoped>
-.mbody {
+.mBody {
   text-align: center;
   box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
   width: 70%;
@@ -99,7 +96,23 @@ a {
   font-size: medium;
 }
 
+#painting * {
+  text-align: center;
+}
 
+#head {
+  margin-left: 78%;
+  margin-top: 50px;
+}
+
+#link {
+  font-size: large;
+  margin-bottom: 5px;
+}
+
+#bottom {
+  text-align: right;
+}
 
 
 </style>

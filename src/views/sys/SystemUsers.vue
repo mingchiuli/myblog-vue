@@ -19,7 +19,6 @@
         v-loading="loading"
         :data="tableData"
         tooltip-effect="dark"
-        style="width: 100%"
         border
         stripe
         @selection-change="handleSelectionChange">
@@ -283,7 +282,7 @@
 
     </el-dialog>
 
-    <Footer style="margin-top: 5%"></Footer>
+    <Footer id="SUFooter"></Footer>
 
 
   </div>
@@ -624,5 +623,8 @@ export default {
   margin-top: 1%;
 }
 
+#SUFooter {
+  margin-top: 5%;
+}
 
 </style>

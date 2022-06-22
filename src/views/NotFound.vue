@@ -2,11 +2,11 @@
     <div>
 
       <div>
-        <h1 style="text-align: center;">Route error!</h1>
+        <h1>Route error!</h1>
         <hr>
-        <div class="mbody">
+        <div class="mBody">
           <div class="mIntro">
-            <h2 style="text-align: center; font-size: x-large; font-family: 'Kaiti SC',serif">The page at {{ url }} was not found. Feel confused? </h2>
+            <h2>The page at {{ url }} was not found. Feel confused? </h2>
             <p class="mTitle">Please go ahead and leave a message below to notify me. </p>
             <p class="mTitle">Email：mingchiuli@163.com</p>
             <p class="mTitle">It will be great if you could tell me the URL of the page and where/how you got this URL. Thanks!</p>
@@ -42,7 +42,7 @@ export default {
 </script>
 
 <style scoped>
-.mbody {
+.mBody {
   box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
   width: 70%;
   min-height: 100px;
@@ -96,6 +96,12 @@ h1 {
   font-size: xx-large;
   margin-top: 1%;
   margin-bottom: 3%;
+  text-align: center;
+}
+
+h2 {
+  text-align: center;
+  font-size: x-large;
 }
 
 </style>

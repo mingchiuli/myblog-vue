@@ -31,7 +31,6 @@
 				ref="multipleTable"
 				:data="tableData"
 				tooltip-effect="dark"
-				style="width: 100%"
 				border
 				stripe
 				@selection-change="handleSelectionChange">
@@ -170,7 +169,7 @@
 
 		</el-dialog>
 
-    <Footer style="margin-top: 5%"></Footer>
+    <Footer id="SRFooter"></Footer>
 
 	</div>
 </template>
@@ -398,9 +397,13 @@
 
 <style scoped>
 
-	.el-pagination {
-		float: right;
-		margin-top: 22px;
-	}
+#SRFooter {
+  margin-top: 5%;
+}
+
+.el-pagination {
+  float: right;
+  margin-top: 22px;
+}
 
 </style>

@@ -2,20 +2,20 @@
   <div>
 
     <el-container>
-      <el-header style="text-align: center; font-size: xx-large;">
+      <el-header>
         :)
       </el-header>
-      <el-main style="margin-top: 8%;margin-left: 20%;height: 100%">
+      <el-main>
         <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm" @submit.native.prevent>
-          <el-form-item label="Username" prop="username" style="width: 400px">
+          <el-form-item label="Username" prop="username">
             <el-input v-model="ruleForm.username"></el-input>
           </el-form-item>
-          <el-form-item label="Password" prop="password" style="width: 400px">
+          <el-form-item label="Password" prop="password">
             <el-input type="password" v-model="ruleForm.password"></el-input>
           </el-form-item>
-          <el-form-item label="Captcha" prop="code"  style="width: 380px;">
-            <div style="display: flex; flex-direction: row">
-              <el-input v-model="ruleForm.code"  style="width: 200px; float: bottom" maxlength="5" @keyup.enter.native="submitForm('ruleForm')"></el-input>
+          <el-form-item id="captcha" label="Captcha" prop="code">
+            <div>
+              <el-input style="" v-model="ruleForm.code" maxlength="5" @keyup.enter.native="submitForm('ruleForm')"></el-input>
               <el-image :src="captchaImg" class="captchaImg" @click="getCaptcha"></el-image>
             </div>
           </el-form-item>
@@ -128,23 +128,42 @@
   }
 </script>
 
-<style scoped>
-  .el-header {
-    background-color: #B3C0D1;
-    color: #333;
-    text-align: center;
-    line-height: 170%;
-    margin: 0 auto;
-    width: 100%;
-  }
+<style scoped lang="less">
+.demo-ruleForm {
+  max-width: 60%;
+  margin: 0 auto;
+}
 
-  .el-main {
-    height: 330px;
-  }
+.el-main {
+  margin-top: 8%;
+  margin-left: 20%;
+  height: 100%
+}
 
-  .demo-ruleForm {
-    max-width: 60%;
-    margin: 0 auto;
+.el-header {
+  background-color: #B3C0D1;
+  color: #333;
+  text-align: center;
+  line-height: 170%;
+  margin: 0 auto;
+  width: 100%;
+  font-size: xx-large;
+}
+
+.el-form-item {
+  width: 400px;
+}
+
+#captcha div {
+  display: flex;
+  flex-direction: row;
+}
+
+#captcha {
+  .el-input {
+    width: 200px;
+    float: bottom;
   }
+}
 
 </style>

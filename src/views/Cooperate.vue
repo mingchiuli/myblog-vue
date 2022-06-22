@@ -1,17 +1,16 @@
 <template>
-  <div style="width: 70%; margin-left: 15%">
-
+  <div id="First">
     <div>
-      <el-col style="margin-bottom: 5%; margin-top: 5%; text-align: center">
-        <el-card style="width: 100%; height: 150px; color: #333;">
-          <div style="padding-bottom: 1%; border-bottom: 1px solid #ccc">Online users <span style="font-size: 12px">Click the bubble to contact</span></div>
-          <div style="padding: 10px 0;float: left" v-for="user in users" v-if="user.username !== username" :key="user.username">
+      <el-col>
+        <el-card>
+          <div id="Second">Online users <span>Click the bubble to contact</span></div>
+          <div id="avatar" v-for="user in users" v-if="user.username !== username" :key="user.username">
             <div> {{user.username}} </div>
             <div>
               <el-avatar size="medium" :src="user.avatar"></el-avatar>
             </div>
-            <i class="el-icon-chat-dot-round" style="font-size: 16px; cursor: pointer" @click="chatUser = user.id"></i>
-            <span style="font-size: 12px;color: limegreen;" v-if="user.id === chatUser">chatting...</span>
+            <i class="el-icon-chat-dot-round" @click="chatUser = user.id"></i>
+            <span v-if="user.id === chatUser">chatting...</span>
           </div>
         </el-card>
       </el-col>
@@ -19,7 +18,6 @@
 
     <div>
       <el-input
-          style="width: 50%"
           v-if="user.number === 0"
           placeholder="Please enter the content"
           v-model="text"
@@ -45,7 +43,6 @@
     </el-form>
 
     <el-input
-        style="width: 50%"
         v-if="user.number === 1"
         placeholder="Please enter the content"
         v-model="text"
@@ -67,7 +64,6 @@
 
 
     <el-input
-        style="width: 50%"
         v-if="user.number === 2"
         placeholder="Please enter the content"
         v-model="text"
@@ -87,7 +83,7 @@
 
     </el-form>
 
-    <el-button style="float: right" v-if="user.role === 'admin'" type="primary" @click="submitForm('ruleForm')">Submit</el-button>
+    <el-button id="submitButton" v-if="user.role === 'admin'" type="primary" @click="submitForm('ruleForm')">Submit</el-button>
 
 
     <Footer></Footer>
@@ -506,5 +502,54 @@ export default {
 </script>
 
 <style scoped>
+
+#First {
+  width: 70%;
+  margin-left: 15%;
+}
+
+.el-col {
+  margin-bottom: 5%;
+  margin-top: 5%;
+  text-align: center;
+}
+
+.el-card {
+  width: 100%;
+  height: 150px;
+  color: #333;
+}
+
+#Second {
+  padding-bottom: 1%;
+  border-bottom: 1px solid #ccc;
+}
+
+#Second>span {
+  font-size: 12px;
+}
+
+#avatar {
+  padding: 10px 0;
+  float: left;
+}
+
+.el-icon-chat-dot-round {
+  font-size: 16px;
+  cursor: pointer;
+}
+
+#avatar>span {
+  font-size: 12px;
+  color: limegreen;
+}
+
+.el-input {
+  width: 50%;
+}
+
+#submitButton {
+  float: right;
+}
 
 </style>

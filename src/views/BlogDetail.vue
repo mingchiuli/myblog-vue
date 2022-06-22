@@ -8,10 +8,10 @@
 
     <div class="content" v-loading="loading">
       <!--                使用mavon-editor预览功能-->
-      <mavon-editor v-html="blog.content" :subfield="false"
+      <mavon-editor class="mavenEditor" v-html="blog.content" :subfield="false"
                     :editable="false"
                     default-open="preview"
-                    :navigation="true" :toolbars-flag="false" previewBackground="#ffffff" code-style="androidstudio" :scrollStyle="false" style="padding: 25px">
+                    :navigation="true" :toolbars-flag="false" previewBackground="#ffffff" code-style="androidstudio" :scrollStyle="false">
       </mavon-editor>
     </div>
 
@@ -306,6 +306,10 @@ pre.hljs::after {
   left: 0;
   box-sizing: border-box;
   z-index: 1;
+}
+
+.mavenEditor {
+  padding: 25px;
 }
 
 </style>

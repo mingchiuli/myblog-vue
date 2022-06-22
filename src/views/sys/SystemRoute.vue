@@ -11,7 +11,6 @@
         v-loading="loading"
 				:data="tableData"
         row-key="menuId"
-        style="width: 100%;margin-bottom: 20px;"
 				border
 				stripe
 				:tree-props="{children: 'children', hasChildren: 'hasChildren'}">

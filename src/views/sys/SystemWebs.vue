@@ -7,27 +7,27 @@
       <el-form-item>
         <el-button type="primary" @click="searchWeb">Search</el-button>
         <el-button type="primary" @click="dialogVisible = true">Add</el-button>
-        <a style="margin-left: 10px; font-size: medium" :href="'javascript:(function(){var site=%27http://81.68.192.120/sys/webs?title=%27+encodeURIComponent(document.title)+%27&url=%27+encodeURIComponent(document.URL)+%27&token=%27+%27' + token  + '%27;var win=window.open(site,%27_blank%27);win.focus();})()'">Collect me ！(Drag to browser favorites bar)</a>
+        <a id="SWA" :href="'javascript:(function(){var site=%27http://81.68.192.120/sys/webs?title=%27+encodeURIComponent(document.title)+%27&url=%27+encodeURIComponent(document.URL)+%27&token=%27+%27' + token  + '%27;var win=window.open(site,%27_blank%27);win.focus();})()'">Collect me ！(Drag to browser favorites bar)</a>
       </el-form-item>
     </el-form>
 
     <div class="wrapper">
       <div class="wrapper-content" v-for="web in webs">
-        <el-card class="box-card" style="height: 100%" v-loading="loading">
+        <el-card class="box-card" v-loading="loading">
           <div slot="header" class="clearfix">
             <el-link @click="go(web.link)">{{ web.title }}</el-link>
-            <el-button style="float: right; padding: 3px 0" type="text" @click="editWeb(web.id)">Edit</el-button>
+            <el-button class="SWButton" type="text" @click="editWeb(web.id)">Edit</el-button>
             <el-popconfirm title="Are you sure to delete？" @confirm="delWeb(web.id)">
-              <el-button style="float: right;padding: 3px 0" type="text" slot="reference">Delete</el-button>
+              <el-button class="SWButton" type="text" slot="reference">Delete</el-button>
             </el-popconfirm>
           </div>
           <div class="text item">
             {{ web.description }}
           </div>
-          <div style="font-size: 14px">Time stamp：{{ web.created }}</div>
+          <div class="SWContent">Time stamp：{{ web.created }}</div>
           <br v-if="web.score !== undefined"/>
-          <div style="font-size: 14px" v-if="web.score !== undefined">{{"Search Scores：" + web.score}}</div>
-          <p style="font-size: 14px" v-html="web.highlight" v-if="web.highlight !== undefined"></p>
+          <div class="SWContent" v-if="web.score !== undefined">{{"Search Scores：" + web.score}}</div>
+          <p class="SWContent" v-html="web.highlight" v-if="web.highlight !== undefined"></p>
         </el-card>
       </div>
     </div>
@@ -106,7 +106,7 @@
       </el-form>
     </el-dialog>
 
-    <el-pagination class="mpage"
+    <el-pagination class="mPage"
                    background
                    layout="prev, pager, next"
                    :current-page="current"
@@ -115,7 +115,7 @@
                    @current-change=pageSelect>
     </el-pagination>
 
-    <Footer style="margin-top: 5%"></Footer>
+    <Footer id="SWFooter"></Footer>
 
   </div>
 </template>
@@ -442,7 +442,7 @@ export default {
 
 <style scoped>
 
-.mpage {
+.mPage {
   margin: 0 auto;
   text-align: center;
 }
@@ -481,6 +481,25 @@ export default {
 
 .box-card {
   width: 100%;
+  height: 100%;
+}
+
+#SWFooter {
+  margin-top: 5%;
+}
+
+#SWA {
+  margin-left: 10px;
+  font-size: medium;
+}
+
+.SWButton {
+  float: right;
+  padding: 3px 0;
+}
+
+.SWContent {
+  font-size: 14px;
 }
 
 </style>

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h2>Publish Blog</h2>
+    <h2>Post</h2>
 
     <div class="m-content">
 
@@ -18,8 +18,8 @@
 
 
         <el-upload
+            id="BEUpdate"
             action="#"
-            style="width: 30%; margin-left: 35%"
             class="upload-demo"
             :on-remove="removeCover"
             :file-list="fileList"
@@ -29,16 +29,12 @@
         </el-upload>
         <br/>
 
-        <el-image :src="fileList.length === 0 ? '' : fileList[0].url" style="width: 30%">
+        <el-image :src="fileList.length === 0 ? '' : fileList[0].url">
         </el-image>
         <div>Cover Preview</div>
         <br/>
 
-<!--        <el-form-item label="封面" prop="link" v-loading="loading">-->
-<!--          <el-input v-model="contentForm.link"></el-input>-->
-<!--        </el-form-item>-->
-
-        <el-form-item label="内容" prop="content" v-loading="loading">
+        <el-form-item label="content" prop="content" v-loading="loading">
           <mavon-editor v-model="contentForm.content" :ishljs = "true" ref="md" code-style="androidstudio" @imgAdd="imgAdd" @imgDel="imgDel"></mavon-editor>
         </el-form-item>
 
@@ -266,19 +262,28 @@ import Footer from "@/components/Footer";
 </script>
 
 <style scoped>
-  .m-content {
-    text-align: center;
-  }
+h2 {
+  font-size: xx-large;
+  margin-top: 5%;
+  margin-bottom: 5%;
+  text-align: center;
+}
 
-  h2 {
-    font-size: xx-large;
-    margin-top: 5%;
-    margin-bottom: 5%;
-    text-align: center;
-  }
+.el-form-item {
+  max-width: 80%;
+  margin-left: 7.5%;
+}
 
-  .el-form-item {
-    max-width: 80%;
-    margin-left: 7%;
-  }
+.m-content {
+  text-align: center;
+}
+
+#BEUpdate {
+  width: 30%;
+  margin-left: 35%;
+}
+
+.el-image {
+  width: 30%;
+}
 </style>

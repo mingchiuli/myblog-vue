@@ -1,6 +1,6 @@
 <template>
   <div>
-    <el-button @click="drawer = true" type="success" plain style="margin-left: 10%;margin-top: 10px;font-size: smaller; " icon="el-icon-s-operation"></el-button>
+    <el-button id="SiderButton" @click="drawer = true" type="success" plain icon="el-icon-s-operation"></el-button>
 
     <el-drawer
         title="Bonjour, étranger."
@@ -10,9 +10,9 @@
         :before-close="handleClose">
 
       <div style="text-align: left">
-        <el-avatar :size="80" :src="avatar" style="margin-left: 40%"></el-avatar>
-        <div style="margin-left: 135px; font-size: 18px;">百川東到海</div>
-        <div style="margin-left: 135px; font-size: 18px;">何時復西歸</div>
+        <el-avatar id="SiderAvatar" :size="80" :src="avatar"></el-avatar>
+        <div class="poem">百川東到海</div>
+        <div class="poem">何時復西歸</div>
       </div>
 
       <el-tree
@@ -138,7 +138,20 @@ export default {
   font-size: 16px;
 }
 
+#SiderButton {
+  margin-left: 10%;
+  margin-top: 10px;
+  font-size: smaller;
+}
 
+#SiderAvatar {
+  margin-left: 40%;
+}
+
+.poem {
+  margin-left: 135px;
+  font-size: 18px;
+}
 
 
 </style>
