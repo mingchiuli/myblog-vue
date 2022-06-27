@@ -69,9 +69,15 @@ export default {
     },
 
 
+    setTimeoutTocAndCli() {
+      let _this = this
+      setTimeout(function () {
+        _this.tocAndCli()
+      }, 2000)
+    },
+
 
     tocAndCli() {
-
       this.$nextTick(() => {
         const aArr1 = $(
             ".v-note-wrapper a"

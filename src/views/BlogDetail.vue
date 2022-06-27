@@ -119,7 +119,7 @@ export default {
 
         this.createdCommon(res)
         this.loading = false
-        this.$refs.toc.tocAndCli()
+        this.$refs.toc.setTimeoutTocAndCli()
       })
 
     } else if (this.$route.query.token) {
@@ -132,7 +132,7 @@ export default {
 
         this.createdCommon(res)
         this.loading = false
-        this.$refs.toc.tocAndCli()
+        this.$refs.toc.setTimeoutTocAndCli()
       })
 
     } else {
@@ -144,7 +144,7 @@ export default {
 
         this.createdCommon(res)
         this.loading = false
-        this.$refs.toc.tocAndCli()
+        this.$refs.toc.setTimeoutTocAndCli()
 
 
       })

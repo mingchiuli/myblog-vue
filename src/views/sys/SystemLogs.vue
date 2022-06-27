@@ -90,7 +90,7 @@ export default {
           this.$message.error("websocket reconnection ...")
           this.connectWebSocket();
         }
-      }, 10000);
+      }, 2000);
     },
 
     connectWebSocket() {
@@ -102,15 +102,15 @@ export default {
           //debug日志，调试时候开启
           // console.log(str);
         },
-        reconnectDelay: 10000,//重连时间
-        heartbeatIncoming: 4000,
-        heartbeatOutgoing: 4000,
+        reconnectDelay: 2000,//重连时间
+        heartbeatIncoming: 2000,
+        heartbeatOutgoing: 2000,
       });
 
       stompClient.webSocketFactory = function () {
         //因为服务端监听的是/sysLog路径下面的请求，所以跟服务端保持一致
           return new SockJS(GLOBAL.url + '/sysLog', null, {
-          timeout: 10000
+          timeout: 40000
         });
       };
 
