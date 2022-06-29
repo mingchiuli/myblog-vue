@@ -207,9 +207,7 @@ export default {
         }
       })
 
-
       try {
-
         let nodes = this.$refs.menuTree.store._getAllNodes();
 
         for (let i in nodes) {

@@ -163,13 +163,19 @@
       },
 
       blogStatus(id) {
-        let role = JSON.parse(localStorage.getItem("myUserInfo")).role
+        let str = localStorage.getItem("myUserInfo")
+        let role = '';
+
+        if (str !== undefined) {
+          role = JSON.parse(str).role
+        }
+
         if (role === 'admin') {
           this.$router.push({name: 'BlogDetail', params: {blogId: id}})
         } else {
           this.$axios.get('/blogStatus/' + id).then(res => {
             const status = res.data.data
-            if ((status === 1 && !localStorage.getItem("myToken")) || (status === 1 && role !== 'admin')) {
+            if (status === 1) {
 
               this.$prompt('Please input the password', 'Prompt', {
                 confirmButtonText: 'Confirm',
