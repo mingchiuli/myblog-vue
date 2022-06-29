@@ -164,9 +164,9 @@
 
       blogStatus(id) {
         let str = localStorage.getItem("myUserInfo")
-        let role = '';
+        let role = 'anonymous';
 
-        if (str !== undefined) {
+        if (str !== null) {
           role = JSON.parse(str).role
         }
 
