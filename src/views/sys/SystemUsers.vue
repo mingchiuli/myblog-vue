@@ -33,13 +33,13 @@
       <el-table-column
           prop="id"
           label="id"
-          width="60"
+          width="100"
           align="center">
       </el-table-column>
       <el-table-column
           prop="username"
           label="Username"
-          width="90"
+          width="200"
           align="center">
       </el-table-column>
       <el-table-column
@@ -104,7 +104,7 @@
 
       <el-table-column
           prop="icon"
-          width="225"
+          width="355"
           label="Operation"
           align="center"
           fixed="right">

@@ -37,25 +37,25 @@
       <el-table-column
           prop="id"
           label="id"
-          width="60"
+          width="100"
           align="center">
       </el-table-column>
       <el-table-column
           prop="username"
           label="Author"
-          width="90"
+          width="200"
           align="center">
       </el-table-column>
       <el-table-column
           prop="title"
-          width="80"
+          width="180"
           label="Title"
           align="center">
       </el-table-column>
       <el-table-column
           prop="description"
           label="Description"
-          width="110"
+          width="200"
           align="center">
       </el-table-column>
 
@@ -79,7 +79,7 @@
       <el-table-column
           prop="content"
           label="Content"
-          width="175"
+          width="200"
           align="center">
       </el-table-column>
 
@@ -93,7 +93,7 @@
       <el-table-column
           prop="readSum"
           label="Read"
-          width="70"
+          width="100"
           align="center">
       </el-table-column>
 
