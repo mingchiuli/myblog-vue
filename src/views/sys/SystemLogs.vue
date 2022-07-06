@@ -97,7 +97,7 @@ export default {
       const _this = this
 
       stompClient = new Client({
-        connectHeaders: {"Authorization": localStorage.getItem("myToken")},
+        connectHeaders: {"Authorization": localStorage.getItem("myToken"), "Type": "Log"},
         debug: function (str) {
           //debug日志，调试时候开启
           // console.log(str);

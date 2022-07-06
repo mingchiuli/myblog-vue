@@ -339,7 +339,7 @@ export default {
       // }
       // this.stompClient = Stomp.client(socket);
       stompClient = new Client({
-        connectHeaders: {"Authorization": localStorage.getItem("myToken")},
+        connectHeaders: {"Authorization": localStorage.getItem("myToken"), "Type": "Cooperate"},
         debug: function (str) {
           //debug日志，调试时候开启
           // console.log(str);
