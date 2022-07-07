@@ -21,7 +21,7 @@
       <el-button v-if="isPC" @click="searchKeyword" type="success" plain icon="el-icon-search"></el-button>
     </div>
 
-    <div class="block">
+    <div class="block" v-loading="skipLoading">
 
       <el-timeline>
         <el-timeline-item v-if="loading" v-for="i in 5" :timestamp="'1900-01-01'" placement="top" color="#0bbd87">
@@ -94,6 +94,7 @@
         year: 0,
         count: 0,
         loading: false,
+        skipLoading: false,
         searchAbstract: [],
         timeout: null,
         isPC: false
@@ -173,8 +174,10 @@
         if (role === 'admin') {
           this.$router.push({name: 'BlogDetail', params: {blogId: id}})
         } else {
+          this.skipLoading = true
           this.$axios.get('/blogStatus/' + id).then(res => {
             const status = res.data.data
+            this.skipLoading = false
             if (status === 1) {
 
               this.$prompt('Please input the password', 'Prompt', {
@@ -192,6 +195,7 @@
               });
 
             } else {
+              this.skipLoading = false
               this.$router.push({name: 'BlogDetail', params: {blogId: id}})
             }
           })
