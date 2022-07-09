@@ -30,14 +30,14 @@
       </el-table-column>
       <el-table-column
           prop="title"
-          width="120"
+          width="150"
           label="Title"
           align="center">
       </el-table-column>
       <el-table-column
           prop="description"
           label="Description"
-          width="180"
+          width="250"
           align="center">
       </el-table-column>
 
@@ -61,13 +61,13 @@
       <el-table-column
           prop="content"
           label="Content"
-          width="405"
+          width="485"
           align="center">
       </el-table-column>
 
       <el-table-column
           prop="icon"
-          width="100"
+          width="200"
           label="Operation"
           align="center"
           fixed="right">
