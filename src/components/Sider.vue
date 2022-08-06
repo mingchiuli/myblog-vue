@@ -53,10 +53,7 @@ export default {
         //     label: '2021'
         //   }
         ]
-      }, {
-        label: 'my little airport'
-      }
-        ,{
+      },{
           label: 'Copyright'
         }],
       defaultProps: {
@@ -80,10 +77,6 @@ export default {
           break
         case 'About':
           this.$router.push("/")
-          break
-        case 'my little airport':
-          window.open().location.href = '/mla.html';
-          this.drawer = false
           break
         case 'Copyright':
           window.open().location.href = 'https://creativecommons.org/licenses/by-nc-sa/4.0/';

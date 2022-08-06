@@ -35,7 +35,7 @@
         <br/>
 
         <el-form-item label="content" prop="content" v-loading="loading">
-          <mavon-editor v-model="contentForm.content" :ishljs = "true" ref="md" code-style="androidstudio" @imgAdd="imgAdd" @imgDel="imgDel"></mavon-editor>
+          <mavon-editor v-model="contentForm.content" :subfield="false" :ishljs = "true" ref="md" code-style="androidstudio" @imgAdd="imgAdd" @imgDel="imgDel"></mavon-editor>
         </el-form-item>
 
         <el-form-item>
