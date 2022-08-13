@@ -13,7 +13,7 @@
           @select="handleSelect"
           :popper-append-to-body="false"
           clearable>
-        <template slot-scope="{ item }">
+        <template #default="{ item }">
           <div class="autocomplete-choose-name" v-html="item.value"></div>
         </template>
       </el-autocomplete>
