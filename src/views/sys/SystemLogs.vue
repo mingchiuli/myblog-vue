@@ -119,7 +119,14 @@ export default {
 
         stompClient.subscribe('/logs/log', (res) => {
           _this.loading = true
-          _this.msg += res.body + '<br>' + '<br>'
+          let str = res.body
+          if (str.includes("INFO")) {
+            _this.msg += '<p style="color: green">' + res.body + '</p>'
+          } else if (str.includes("ERROR")) {
+            _this.msg += '<p style="color: red">' + res.body + '</p>'
+          } else {
+            _this.msg += '<p style="color: yellow">' + res.body + '</p>'
+          }
           _this.loading = false
         });
       };
