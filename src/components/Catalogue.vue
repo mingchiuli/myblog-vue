@@ -264,6 +264,7 @@ export default {
   top: 10px;
   .el-tree-node__content {
   height: 26px !important;
+  overflow: auto;
 }
 }
 
