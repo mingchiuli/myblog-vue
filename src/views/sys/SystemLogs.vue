@@ -123,9 +123,9 @@ export default {
           if (str.includes("INFO")) {
             _this.msg += '<p style="color: green">' + res.body + '</p>'
           } else if (str.includes("ERROR")) {
-            _this.msg += '<p style="color: red">' + res.body + '</p>'
+            _this.msg += '<p style="color: darkred">' + res.body + '</p>'
           } else {
-            _this.msg += '<p style="color: yellow">' + res.body + '</p>'
+            _this.msg += '<p style="color: orange">' + res.body + '</p>'
           }
           _this.loading = false
         });

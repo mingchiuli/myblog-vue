@@ -504,8 +504,9 @@ export default {
 <style scoped>
 
 #First {
-  width: 70%;
-  margin-left: 15%;
+  width: 50%;
+  /*margin-left: 15%;*/
+  margin: 0 auto;
 }
 
 .el-col {
