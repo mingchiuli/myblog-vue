@@ -99,7 +99,7 @@ a {
 }
 
 hr {
-  display: block;
+  /*display: block;*/
   height: 1px;
   border: 0;
   border-top: 1px solid;
@@ -115,7 +115,8 @@ h1 {
 }
 
 #BPSider {
-  width: 0;
+  /*float: left;*/
+  margin-top: 10px;
   margin-left: 10%;
 }
 

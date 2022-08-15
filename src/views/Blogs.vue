@@ -4,7 +4,6 @@
 
       <el-autocomplete
           id="BAutocomplete"
-          v-if="isPC"
           v-model="input"
           @keyup.enter.native="searchKeyword"
           :trigger-on-focus="false"
@@ -18,7 +17,7 @@
         </template>
       </el-autocomplete>
 
-      <el-button v-if="isPC" @click="searchKeyword" type="success" plain icon="el-icon-search"></el-button>
+      <el-button @click="searchKeyword" type="success" plain icon="el-icon-search"></el-button>
     </div>
 
     <div class="block" v-loading="skipLoading">
@@ -385,16 +384,6 @@ a {
   margin-top: 3%;
 }
 
-.myItem {
-  /*位于一行*/
-  /*display: flex;*/
-  /*flex-direction: row;*/
-  position: absolute;
-  width: 80%;
-  right: 0;
-  top: 0;
-  /*overflow-x: auto;*/
-}
 
 hr {
   display: block;
@@ -417,10 +406,18 @@ h1 {
   width: auto!important;
 }
 
-.el-autocomplete {
-  width: 20%;
+.myItem {
+  position: absolute;
+  width: 400px;
+  right: 0;
+  top: 0;
   margin-top: 10px;
-  margin-left: 65%;
+}
+
+
+.el-autocomplete {
+  width: 50%;
+  margin-left: 95px;
 }
 
 

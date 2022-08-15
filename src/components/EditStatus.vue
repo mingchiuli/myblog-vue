@@ -66,7 +66,7 @@ export default {
 
 <style scoped>
 .status {
-  margin-left: 15%;
+  margin-left: 25%;
 }
 
 #ESlink {

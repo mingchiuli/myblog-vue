@@ -158,12 +158,8 @@ export default {
 .content {
   text-align: center;
   max-width: 70%;
-  margin-left: 15%;
+  margin: 0 auto;
   font-family: Source Han SC,serif;
-}
-
-.status {
-  margin-left: 15%;
 }
 
 
@@ -309,6 +305,8 @@ pre.hljs::after {
 }
 
 .mavenEditor {
+  margin: 0 auto;
+  width: 70%;
   padding: 25px;
 }
 

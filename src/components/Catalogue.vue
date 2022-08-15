@@ -258,16 +258,12 @@ export default {
 .toc-fixed {
   position: fixed;
   box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
-  max-width: 13%;
+  max-width: 15%;
   width: 20%;
-  right: 1%;
+  right: 5%;
   top: 10px;
-  max-height: 100%;
   .el-tree-node__content {
   height: 26px !important;
-  font-size: xx-large;
-  overflow-x: auto;
-  overflow-y: auto;
 }
 }
 

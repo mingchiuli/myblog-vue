@@ -128,13 +128,7 @@ export default {
 }
 
 .el-tree-node__label {
-  font-size: 16px;
-}
-
-#SiderButton {
-  margin-left: 10%;
-  margin-top: 10px;
-  font-size: smaller;
+  font-size: 16px !important;
 }
 
 #SiderAvatar {
@@ -142,7 +136,7 @@ export default {
 }
 
 .poem {
-  margin-left: 135px;
+  margin-left: 38.5%;
   font-size: 18px;
 }
 
