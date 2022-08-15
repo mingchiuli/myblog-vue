@@ -407,18 +407,20 @@ h1 {
 }
 
 .myItem {
+  display: flex;
+  flex-direction: row;
   position: absolute;
-  width: 400px;
-  right: 0;
+  width: 250px;
+  right: 65px;
   top: 0;
   margin-top: 10px;
 }
 
 
-.el-autocomplete {
-  width: 50%;
-  margin-left: 95px;
-}
+/*.el-autocomplete {*/
+/*  width: 150%;*/
+/*  !*margin-left: 95px;*!*/
+/*}*/
 
 
 </style>
