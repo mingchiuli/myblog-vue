@@ -14,9 +14,6 @@
           <el-input type="textarea" v-model="contentForm.description"></el-input>
         </el-form-item>
 
-
-
-
         <el-upload
             id="BEUpdate"
             action="#"
@@ -34,6 +31,11 @@
         <div>Cover Preview</div>
         <br/>
 
+        <div class="mRadio">
+          <el-radio v-model="contentForm.status" label="0">公开</el-radio>
+          <el-radio v-model="contentForm.status" label="1">加密</el-radio>
+        </div>
+
         <el-form-item label="content" prop="content" v-loading="loading">
           <mavon-editor v-model="contentForm.content" :subfield="false" :ishljs = "true" ref="md" code-style="androidstudio" @imgAdd="imgAdd" @imgDel="imgDel"></mavon-editor>
         </el-form-item>
@@ -43,7 +45,6 @@
           <el-button @click="resetForm('contentForm')">Reset</el-button>
         </el-form-item>
       </el-form>
-
 
     </div>
     <Footer></Footer>
@@ -63,7 +64,8 @@ import Footer from "@/components/Footer";
           title: '',
           description: '',
           content: '',
-          link: ''
+          link: '',
+          status: '',
         },
         created: '',
         loading: false,
@@ -188,12 +190,13 @@ import Footer from "@/components/Footer";
       },
 
       assignData(res) {
-        const blog = res.data.data
+        let blog = res.data.data
         this.contentForm.id = blog.id
         this.contentForm.title = blog.title
         this.contentForm.description = blog.description
         this.contentForm.content = blog.content
         this.contentForm.link = blog.link
+        this.contentForm.status = blog.status.toString()
         if (blog.link !== '') {
           this.fileList.push({name: 'Cover', url: blog.link})
         }
@@ -287,5 +290,9 @@ h2 {
 
 .el-image {
   width: 30%;
+}
+
+.mRadio {
+  margin-bottom: 15px;
 }
 </style>
