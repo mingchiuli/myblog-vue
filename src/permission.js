@@ -50,12 +50,6 @@ router.beforeEach((to, from, next) => {
     })
   }
 
-  // else if (from.name !== 'Blogs' && to.matched.some(record => record.meta.requireAuth) && !localStorage.getItem("myToken")) {
-  //
-  //   next({path: '/login'})
-  //
-  // }
-
   next()
 
 })

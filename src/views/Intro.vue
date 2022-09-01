@@ -5,7 +5,12 @@
     </div>
     <div class="mBody">
       <div class="mIntro">
-        Suppose one of you has a hundred sheep and loses one of them. Doesn't he leave the ninety-nine in the open country and go after the lost sheep until he finds it? And when he finds it, he joyfully puts it on his shoulders and goes home. Then he calls his friends and neighbors together and says, 'Rejoice with me; I have found my lost sheep.' I tell you that in the same way there will be more rejoicing in heaven over one sinner who repents than over ninety-nine righteous persons who do not need to repent.
+        <p>Suppose one of you has a hundred sheep and loses one of them. </p>
+        <p>Doesn't he leave the ninety-nine in the open country and go after the lost sheep until he finds it? </p>
+        <p>And when he finds it, he joyfully puts it on his shoulders and goes home. </p>
+        <p>Then he calls his friends and neighbors together and says,</p>
+        <b> 'Rejoice with me; I have found my lost sheep.'</b>
+        <p>I tell you that in the same way there will be more rejoicing in heaven over one sinner who repents than over ninety-nine righteous persons who do not need to repent.</p>
         <p id="bottom">The Teachings and Works of Jesus<br>Gospel of Luke<br>Chapter 15</p>
       </div>
     </div>

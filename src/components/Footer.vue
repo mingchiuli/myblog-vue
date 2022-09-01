@@ -1,13 +1,27 @@
 <template>
   <div class="footer">
     <hr>
-    <div class="copyright">&copy; <a href="/"> MingChiu Li </a> 2021-2022 </div>
+    <div class="copyright">&copy; <a href="/"> Mingchiu Li </a> {{yearBegin}}-{{yearEnd}} </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: "Footer"
+  name: "Footer",
+  data() {
+    return {
+      yearBegin: 2021,
+      yearEnd: 2021
+    }
+  },
+
+  created() {
+    this.$axios.get('/searchYears').then(res => {
+      let years = res.data.data
+      this.yearBegin = years[0]
+      this.yearEnd = years[years.length - 1]
+    })
+  }
 }
 </script>
 

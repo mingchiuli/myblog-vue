@@ -16,12 +16,6 @@
 <script>
 export default {
   name: "EditStatus",
-  data() {
-    return {
-
-    }
-  },
-
   props: {
     blog: {}
   },
