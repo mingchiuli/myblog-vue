@@ -7,6 +7,7 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
+    years: [],
     myToken: '',
     myUserInfo: JSON.parse(localStorage.getItem("myUserInfo")),
     users: [],
@@ -15,6 +16,9 @@ export default new Vuex.Store({
     url: ''
   },
   mutations: {
+    SET_YEARS(state, years) {
+      state.years = years
+    },
     // set
     SET_TOKEN: (state, token) => {
       state.myToken = token
@@ -49,6 +53,10 @@ export default new Vuex.Store({
     getUser: state => {
       return state.myUserInfo
     },
+
+    getYears: state => {
+      return state.years
+    }
   },
   actions: {
   },

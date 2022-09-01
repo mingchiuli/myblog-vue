@@ -18,9 +18,11 @@ export default {
   created() {
     this.$axios.get('/searchYears').then(res => {
       let years = res.data.data
+      this.$store.commit("SET_YEARS", years)
       this.yearBegin = years[0]
       this.yearEnd = years[years.length - 1]
     })
+
   }
 }
 </script>

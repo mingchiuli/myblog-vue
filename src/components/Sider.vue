@@ -89,11 +89,9 @@ export default {
     }
   },
   created() {
-    this.$axios.get('/searchYears').then(res => {
-      let years = res.data.data
-      years.forEach(year => {
-        this.data[2].children.push({"label": year})
-      })
+    let years = this.$store.getters.getYears
+    years.forEach(year => {
+      this.data[2].children.push({"label": year})
     })
   },
 
