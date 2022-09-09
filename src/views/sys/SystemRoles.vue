@@ -64,7 +64,7 @@
 					prop="status"
 					label="Status"
           align="center">
-				<template slot-scope="scope">
+				<template #default="scope">
 					<el-tag size="small" v-if="scope.row.status === 0" type="success">Normal</el-tag>
 					<el-tag size="small" v-else-if="scope.row.status === 1" type="danger">Disable</el-tag>
 				</template>
@@ -76,7 +76,7 @@
           align="center"
           fixed="right">
 
-				<template slot-scope="scope">
+				<template #default="scope">
 					<el-button type="text" @click="permHandle(scope.row.id)" style="color: orange">Permissions</el-button>
 					<el-divider direction="vertical"></el-divider>
 

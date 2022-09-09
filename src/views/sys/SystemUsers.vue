@@ -46,7 +46,7 @@
           label="Ava"
           width="50"
           align="center">
-        <template slot-scope="scope">
+        <template #default="scope">
           <el-avatar size="small" :src="scope.row.avatar"></el-avatar>
         </template>
       </el-table-column>
@@ -61,9 +61,9 @@
           width="75"
           label="Monitor"
           align="center">
-        <template slot-scope="scope">
+        <template #default="scope">
           <el-tag size="small" v-if="scope.row.monitor === 1" type="success">Online</el-tag>
-          <el-tag size="small" v-else-if="scope.row.monitor === 0" type="danger">Outline</el-tag>
+          <el-tag size="small" v-else-if="scope.row.monitor === undefined || scope.row.monitor === 0" type="danger">Outline</el-tag>
         </template>
       </el-table-column>
 
@@ -72,7 +72,7 @@
           width="80"
           label="Status"
           align="center">
-        <template slot-scope="scope">
+        <template #default="scope">
           <el-tag size="small" v-if="scope.row.status === 0" type="success">Normal</el-tag>
           <el-tag size="small" v-else-if="scope.row.status === 1" type="danger">Locked</el-tag>
         </template>
@@ -97,7 +97,7 @@
           label="Role"
           width="75"
           align="center">
-        <template slot-scope="scope">
+        <template #default="scope">
           <el-tag size="small" type="primary">{{ scope.row.role }}</el-tag>
         </template>
       </el-table-column>
@@ -109,7 +109,7 @@
           align="center"
           fixed="right">
 
-        <template slot-scope="scope">
+        <template #default="scope">
           <el-button v-if="scope.row.monitor === 1 && scope.row.id !== 1" type="text" @click="roleKick(scope.row.id)">Kick</el-button>
           <el-divider v-if="scope.row.monitor === 1 && scope.row.id !== 1" direction="vertical"></el-divider>
           <el-button type="text" @click="infoHandle(scope.row.id)">Info</el-button>

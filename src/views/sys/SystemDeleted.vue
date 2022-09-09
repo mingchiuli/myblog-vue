@@ -46,7 +46,7 @@
           width="80"
           label="Status"
           align="center">
-        <template slot-scope="scope">
+        <template #default="scope">
           <el-tag size="small" v-if="scope.row.status === 0" type="success">Normal</el-tag>
           <el-tag size="small" v-else-if="scope.row.status === 1" type="danger">Hidden</el-tag>
         </template>
@@ -72,7 +72,7 @@
           align="center"
           fixed="right">
 
-        <template slot-scope="scope">
+        <template #default="scope">
           <el-button type="text" @click="editHandle(scope.row.id)">Resume</el-button>
         </template>
       </el-table-column>
