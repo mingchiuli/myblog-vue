@@ -18,7 +18,6 @@ router.beforeEach((to, from, next) => {
     }).then(res => {
 
       let temp = []
-
       res.data.data.forEach(item => {
         //有孩子说明是后台路由
         if (item.children.length !== 0) {

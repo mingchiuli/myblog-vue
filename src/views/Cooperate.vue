@@ -168,11 +168,11 @@ export default {
       let target = 'content' + num
       try {
         stompClient.publish({
-          destination: '/app/sync/' + this.user.id,
+          destination: '/app/sync/' + this.user.id + '/' + this.blogId,
           body: this[target] === '' ? ' ' : this[target]
         })
       } catch (e) {
-        console.log(e)
+        // console.log(e)
       }
     },
 
@@ -239,7 +239,7 @@ export default {
       }
 
       stompClient.publish({
-        destination: '/app/chat/' + this.user.username + '/' + this.chatUser,
+        destination: '/app/chat/' + this.user.username + '/' + this.chatUser + '/' + this.blogId,
         body: this.text
       })
 
@@ -289,22 +289,19 @@ export default {
 
         const blog = res.data.data.blog
         const users = res.data.data.users
+        //
+        //
+        // let username = JSON.parse(localStorage.getItem("myUserInfo")).username;
+        let user = JSON.parse(localStorage.getItem("myUserInfo"))
+        this.username = user.username
 
-
-        let username = JSON.parse(localStorage.getItem("myUserInfo")).username;
-        this.username = username
-
-        for (let i = 0; i < users.length; i++) {
-          let user = users[i]
+        users.forEach(user => {
           this['user' + user.number] = true
-
-
           this.blogId = this.$route.params.blogId
-
-          if (username === user.username) {
+          if (this.username === user.username) {
             this.user = user
           }
-        }
+        })
 
         this.ruleForm.id = blog.id
         this.ruleForm.title = blog.title
@@ -349,7 +346,7 @@ export default {
         heartbeatOutgoing: 4000,
       });
 
-      stompClient.webSocketFactory = function () {
+      stompClient.webSocketFactory = function() {
         //因为服务端监听的是/ws路径下面的请求，所以跟服务端保持一致
         return new SockJS(GLOBAL.url + '/cooperate', null, {
           timeout: 10000
@@ -365,19 +362,17 @@ export default {
 
         stompClient.subscribe('/user/' + this.wsBlogId + '/topic/users', (res) => {
 
+
           let users = JSON.parse(res.body);
           this.$store.commit("SET_USERS", users)
-
-          for (let i = 0; i < users.length; i++) {
-            let user = users[i]
+          let username = JSON.parse(localStorage.getItem("myUserInfo")).username;
+          users.forEach(user => {
             this['user' + user.number] = true
-
-            let username = JSON.parse(localStorage.getItem("myUserInfo")).username;
-
+            this.blogId = this.$route.params.blogId
             if (username === user.username) {
               this.user = user
             }
-          }
+          })
 
         });
 
@@ -388,7 +383,7 @@ export default {
           this.$store.commit("SET_USERS", users)
         });
 
-        stompClient.subscribe('/topic/content', (res) => {
+        stompClient.subscribe('/topic/content/' + this.wsBlogId , (res) => {
 
           this.loading = true
 
@@ -400,12 +395,18 @@ export default {
 
           let target = 'contentBlank'
 
-          for (let i = 0; i < this.users.length; i++) {
-            if (this.users[i].id === from) {
-              target += this.users[i].number
-              break
+          this.users.forEach(user => {
+            if (user.id === from) {
+              target += user.number
             }
-          }
+          })
+
+          // for (let i = 0; i < this.users.length; i++) {
+          //   if (this.users[i].id === from) {
+          //     target += this.users[i].number
+          //     break
+          //   }
+          // }
 
           this[target] = content
 
@@ -419,13 +420,12 @@ export default {
         //可以把初始化聊天室的过程放到axios请求中，stompClient.onConnect只放订阅内容。
         //以后进行修改
         // stompClient.subscribe('/user/' + JSON.parse(localStorage.getItem("myUserInfo")).id + '/queue/chat', (res) => {
-        stompClient.subscribe('/user/' + this.user.id + '/queue/chat', (res) => {
-
+        stompClient.subscribe('/user/' + this.user.id + '/' + this.wsBlogId + '/queue/chat', (res) => {
           let obj = JSON.parse(res.body)
 
           this.$message({
             showClose: true,
-            message: obj.from + ' say to you: ' + obj.message,
+            message: obj.from + ' : ' + obj.message,
             type: 'success',
             duration: 20 * 1000,
             onClose:() => {
@@ -459,8 +459,9 @@ export default {
             headers: { Authorization: localStorage.getItem("myToken") },
           })
         } catch (e) {
-          console.log(e)
+          this.$store.commit("SET_USERS", '')
         }
+        this.$store.commit("SET_USERS", '')
         stompClient.deactivate()
       }
     },
