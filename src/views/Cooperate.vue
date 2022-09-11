@@ -361,8 +361,6 @@ export default {
         })
 
         stompClient.subscribe('/user/' + this.wsBlogId + '/topic/users', (res) => {
-
-
           let users = JSON.parse(res.body);
           this.$store.commit("SET_USERS", users)
           let username = JSON.parse(localStorage.getItem("myUserInfo")).username;
@@ -385,6 +383,8 @@ export default {
 
         stompClient.subscribe('/topic/content/' + this.wsBlogId , (res) => {
 
+          // console.log(res)
+
           this.loading = true
 
           let msg = JSON.parse(res.body)
@@ -396,7 +396,7 @@ export default {
           let target = 'contentBlank'
 
           this.users.forEach(user => {
-            if (user.id === from) {
+            if (user.id === parseInt(from)) {
               target += user.number
             }
           })
