@@ -395,11 +395,12 @@ export default {
 
           let target = 'contentBlank'
 
-          this.users.forEach(user => {
-            if (user.id === parseInt(from)) {
+          for (let user in this.users) {
+            if (user.id === from) {
               target += user.number
+              break
             }
-          })
+          }
 
           // for (let i = 0; i < this.users.length; i++) {
           //   if (this.users[i].id === from) {
