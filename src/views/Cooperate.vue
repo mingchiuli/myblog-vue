@@ -383,8 +383,6 @@ export default {
 
         stompClient.subscribe('/topic/content/' + this.wsBlogId , (res) => {
 
-          // console.log(res)
-
           this.loading = true
 
           let msg = JSON.parse(res.body)
@@ -395,19 +393,12 @@ export default {
 
           let target = 'contentBlank'
 
-          for (let user in this.users) {
-            if (user.id === from) {
-              target += user.number
+          for (let i = 0; i < this.users.length; i++) {
+            if (this.users[i].id === parseInt(from)) {
+              target += this.users[i].number
               break
             }
           }
-
-          // for (let i = 0; i < this.users.length; i++) {
-          //   if (this.users[i].id === from) {
-          //     target += this.users[i].number
-          //     break
-          //   }
-          // }
 
           this[target] = content
 
@@ -437,7 +428,7 @@ export default {
         stompClient.subscribe('/topic/over', (res) => {
           let from = res.body
 
-          if (this.user.id !== from) {
+          if (this.user.id !== parseInt(from)) {
             this.disconnectWebSocket()
             this.$router.push('/public/blogs/1')
           }
