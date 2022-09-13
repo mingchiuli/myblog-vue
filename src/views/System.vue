@@ -8,7 +8,7 @@
 
       <el-container>
 
-        <el-header>
+        <el-header height="65px">
           <BackHeader></BackHeader>
         </el-header>
         <el-main>
@@ -41,13 +41,11 @@ export default {
 .el-container {
   padding: 0;
   margin: 0;
-  height: 100%;
+  height: 950px;
 }
 
 .header-avatar {
-  float: right;
   width: 210px;
-  display: flex;
   justify-content: space-around;
   align-items: center;
 }
@@ -60,14 +58,13 @@ export default {
   background-color: #f6f6f6;
   color: #333;
   text-align: center;
-  line-height: 60px;
+  line-height: 65px;
 }
 
 .el-aside {
   background-color: #ffffff;
   color: #ffffff;
   line-height: 20px;
-  width: 241px;
 }
 
 .el-main {
