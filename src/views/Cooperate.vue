@@ -498,7 +498,6 @@ export default {
 
 #First {
   width: 50%;
-  /*margin-left: 15%;*/
   margin: 0 auto;
 }
 
@@ -543,7 +542,8 @@ export default {
 }
 
 #submitButton {
-  float: right;
+  position: relative;
+  left: 90%;
 }
 
 </style>
