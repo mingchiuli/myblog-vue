@@ -57,7 +57,7 @@ hr {
 a {
   text-decoration: none;
   color: black;
-  font-size: 20px;
+  font-size: 17px;
 }
 
 </style>
