@@ -51,7 +51,7 @@
         <el-timeline-item :timestamp="blog.created" placement="top" v-for="blog in blogs" color="#0bbd87">
           <p v-if="blog.score !== undefined">{{"Search Scores：" + blog.score}}</p>
           <el-card class="el-card">
-            <img :src="blog.link ? blog.link : 'http://81.68.192.120:8081/upload/img/20211118224937/5f1c825e-9060-40b3-a66a-33f35a6104d3_ScreenShot2022-08-01at2.29.34PM.png'" class="image" alt="">
+            <img :src="blog.link ? blog.link : 'http://81.68.192.120:30081/upload/img/20211118224937/5f1c825e-9060-40b3-a66a-33f35a6104d3_ScreenShot2022-08-01at2.29.34PM.png'" class="image" alt="">
             <h4>
               <el-link style="color: black" type="info" plain @click="blogStatus(blog.id)">{{blog.title}}</el-link>
             </h4>

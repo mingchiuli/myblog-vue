@@ -37,7 +37,7 @@ export default {
   data() {
     return {
 
-      avatar: 'http://81.68.192.120:8081/upload/img/20211118224937/14a6def2-b546-4968-9bad-2d3b3f62997f_ul164125579-7.jpg',
+      avatar: 'http://81.68.192.120:30081/upload/img/20211118224937/14a6def2-b546-4968-9bad-2d3b3f62997f_ul164125579-7.jpg',
 
       input: '',
       drawer: false,

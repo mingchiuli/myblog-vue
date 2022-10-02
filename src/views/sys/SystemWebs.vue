@@ -7,7 +7,7 @@
       <el-form-item>
         <el-button type="primary" @click="searchWeb">Search</el-button>
         <el-button type="primary" @click="dialogVisible = true">Add</el-button>
-        <a id="SWA" :href="'javascript:(function(){var site=%27http://81.68.192.120/sys/webs?title=%27+encodeURIComponent(document.title)+%27&url=%27+encodeURIComponent(document.URL)+%27&token=%27+%27' + token  + '%27;var win=window.open(site,%27_blank%27);win.focus();})()'">Collect me ！(Drag to browser favorites bar)</a>
+        <a id="SWA" :href="'javascript:(function(){var site=%27http://119.91.233.182/sys/webs?title=%27+encodeURIComponent(document.title)+%27&url=%27+encodeURIComponent(document.URL)+%27&token=%27+%27' + token  + '%27;var win=window.open(site,%27_blank%27);win.focus();})()'">Collect me ！(Drag to browser favorites bar)</a>
       </el-form-item>
     </el-form>
 
