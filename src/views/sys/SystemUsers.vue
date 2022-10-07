@@ -110,8 +110,8 @@
           fixed="right">
 
         <template #default="scope">
-          <el-button v-if="scope.row.monitor === 1 && scope.row.id !== 1" type="text" @click="roleKick(scope.row.id)">Kick</el-button>
-          <el-divider v-if="scope.row.monitor === 1 && scope.row.id !== 1" direction="vertical"></el-divider>
+          <el-button v-if="scope.row.monitor === 1" type="text" @click="roleKick(scope.row.id)">Kick</el-button>
+          <el-divider v-if="scope.row.monitor === 1" direction="vertical"></el-divider>
           <el-button type="text" @click="infoHandle(scope.row.id)">Info</el-button>
           <el-divider direction="vertical"></el-divider>
 
@@ -551,7 +551,6 @@ export default {
           "Authorization": localStorage.getItem("myToken")
         }
       }).then(res => {
-
         this.tableData = res.data.data.records
         this.size = res.data.data.size
         this.current = res.data.data.current
