@@ -50,9 +50,7 @@ export default {
       });
       // 是要插入评论的地方
       disqus.render(document.getElementById('disqus'));
-      // document.getElementById('disqus').appendChild(disqus)
       document.getElementById('utterance').appendChild(utterances);
-
     },
 
 
