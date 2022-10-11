@@ -233,11 +233,22 @@ export default {
       //展开他的所有父节点
       if (node.parent)
         this.expand(node.parent)
+    },
+
+    debounce(fn, interval = 100) {
+      let timeout = null;
+      return function () {
+        clearTimeout(timeout);
+        timeout = setTimeout(() => {
+          fn.apply(this, arguments);
+        }, interval);
+      };
+
     }
   },
 
   mounted() {
-    window.addEventListener('scroll', this.roll)
+    window.addEventListener('scroll', this.debounce(() => this.roll()))
   },
 
   destroyed() {
