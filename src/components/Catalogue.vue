@@ -200,12 +200,18 @@ export default {
 
       let temp
 
-      this.catalogue.forEach(item => {
-        let dist = scrolled - item.dist
+      for (let i = 0; i < this.catalogue.length; i++) {
+        let dist = scrolled - this.catalogue[i].dist
         if (dist > -41) {
-          temp = item
+          temp = this.catalogue[i]
+        } else {
+          break
         }
-      })
+      }
+
+      if (temp === undefined) {
+        temp = this.catalogue[0]
+      }
 
       try {
         let nodes = this.$refs.menuTree.store._getAllNodes();
