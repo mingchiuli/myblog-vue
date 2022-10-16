@@ -1,93 +1,97 @@
 <template>
-  <div id="First">
-    <div>
-      <el-col>
-        <el-card>
-          <div id="Second">Online users <span>Click the bubble to contact</span></div>
-          <div id="avatar" v-for="user in users" v-if="user.username !== username" :key="user.username">
-            <div> {{user.username}} </div>
-            <div>
-              <el-avatar size="medium" :src="user.avatar"></el-avatar>
+  <div>
+    <div id="First">
+      <div>
+        <el-col>
+          <el-card>
+            <div id="Second">Online users <span>Click the bubble to contact</span></div>
+            <div id="avatar" v-for="user in users" v-if="user.username !== username" :key="user.username">
+              <div> {{user.username}} </div>
+              <div>
+                <el-avatar size="medium" :src="user.avatar"></el-avatar>
+              </div>
+              <i class="el-icon-chat-dot-round" @click="chatUser = user.id"></i>
+              <span v-if="user.id === chatUser">chatting...</span>
             </div>
-            <i class="el-icon-chat-dot-round" @click="chatUser = user.id"></i>
-            <span v-if="user.id === chatUser">chatting...</span>
-          </div>
-        </el-card>
-      </el-col>
-    </div>
+          </el-card>
+        </el-col>
+      </div>
 
-    <div>
+      <div>
+        <el-input
+            v-if="user.number === 0"
+            placeholder="Please enter the content"
+            v-model="text"
+            clearable>
+        </el-input>
+        <el-button v-if="user.number === 0" type="primary" icon="el-icon-edit" @click="send"></el-button>
+      </div>
+
+      <el-input v-if="user.role === 'admin'" v-model="ruleForm.title" placeholder="title"></el-input>
+      <el-input v-if="user.role === 'admin'" type="textarea" v-model="ruleForm.description" placeholder="description"></el-input>
+
+
+      <el-form v-loading="loading" :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm1">
+
+        <mavon-editor v-if="user.number === 0" v-model="content0" :ishljs = "true" ref="md" @imgAdd="imgAdd" @imgDel="imgDel" code-style="androidstudio"></mavon-editor>
+
+        <mavon-editor v-if="user.number !== 0 & user0" v-model="contentBlank0" :subfield="false"
+                      :editable="false"
+                      default-open="preview"
+                      :navigation="true" :toolbars-flag="false" previewBackground="#ffffff" :scrollStyle="false" code-style="androidstudio">
+        </mavon-editor>
+
+      </el-form>
+
       <el-input
-          v-if="user.number === 0"
+          v-if="user.number === 1"
           placeholder="Please enter the content"
           v-model="text"
           clearable>
       </el-input>
-      <el-button v-if="user.number === 0" type="primary" icon="el-icon-edit" @click="send"></el-button>
+      <el-button v-if="user.number === 1" type="primary" icon="el-icon-edit" @click="send"></el-button>
+
+      <el-form v-loading="loading" :model="ruleForm" :rules="rules" ref="ruleForm2" label-width="100px" class="demo-ruleForm2">
+
+        <mavon-editor v-if="user.number === 1" v-model="content1" :ishljs = "true" ref="md" @imgAdd="imgAdd" @imgDel="imgDel" code-style="androidstudio"></mavon-editor>
+
+        <mavon-editor v-else-if="user.number !== 1 & user1" v-model="contentBlank1" :subfield="false"
+                      :editable="false"
+                      default-open="preview"
+                      :navigation="true" :toolbars-flag="false" previewBackground="#ffffff" :scrollStyle="false" code-style="androidstudio">
+        </mavon-editor>
+
+      </el-form>
+
+
+      <el-input
+          v-if="user.number === 2"
+          placeholder="Please enter the content"
+          v-model="text"
+          clearable>
+      </el-input>
+      <el-button v-if="user.number === 2" type="primary" icon="el-icon-edit" @click="send"></el-button>
+
+      <el-form v-loading="loading" :model="ruleForm" :rules="rules" ref="ruleForm2" label-width="100px" class="demo-ruleForm2">
+
+        <mavon-editor v-if="user.number === 2" v-model="content2" :ishljs = "true" ref="md" @imgAdd="imgAdd" @imgDel="imgDel" code-style="androidstudio"></mavon-editor>
+
+        <mavon-editor v-else-if="user.number !== 2 & user2" v-model="contentBlank2" :subfield="false"
+                      :editable="false"
+                      default-open="preview"
+                      :navigation="true" :toolbars-flag="false" previewBackground="#ffffff" :scrollStyle="false" code-style="androidstudio">
+        </mavon-editor>
+
+      </el-form>
+
+      <el-button id="submitButton" v-if="user.role === 'admin'" type="primary" @click="submitForm('ruleForm')">Submit</el-button>
+
+
     </div>
-
-    <el-input v-if="user.role === 'admin'" v-model="ruleForm.title" placeholder="title"></el-input>
-    <el-input v-if="user.role === 'admin'" type="textarea" v-model="ruleForm.description" placeholder="description"></el-input>
-
-
-    <el-form v-loading="loading" :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm1">
-
-      <mavon-editor v-if="user.number === 0" v-model="content0" :ishljs = "true" ref="md" @imgAdd="imgAdd" @imgDel="imgDel" code-style="androidstudio"></mavon-editor>
-
-      <mavon-editor v-if="user.number !== 0 & user0" v-model="contentBlank0" :subfield="false"
-                    :editable="false"
-                    default-open="preview"
-                    :navigation="true" :toolbars-flag="false" previewBackground="#ffffff" :scrollStyle="false" code-style="androidstudio">
-      </mavon-editor>
-
-    </el-form>
-
-    <el-input
-        v-if="user.number === 1"
-        placeholder="Please enter the content"
-        v-model="text"
-        clearable>
-    </el-input>
-    <el-button v-if="user.number === 1" type="primary" icon="el-icon-edit" @click="send"></el-button>
-
-    <el-form v-loading="loading" :model="ruleForm" :rules="rules" ref="ruleForm2" label-width="100px" class="demo-ruleForm2">
-
-      <mavon-editor v-if="user.number === 1" v-model="content1" :ishljs = "true" ref="md" @imgAdd="imgAdd" @imgDel="imgDel" code-style="androidstudio"></mavon-editor>
-
-      <mavon-editor v-else-if="user.number !== 1 & user1" v-model="contentBlank1" :subfield="false"
-                    :editable="false"
-                    default-open="preview"
-                    :navigation="true" :toolbars-flag="false" previewBackground="#ffffff" :scrollStyle="false" code-style="androidstudio">
-      </mavon-editor>
-
-    </el-form>
-
-
-    <el-input
-        v-if="user.number === 2"
-        placeholder="Please enter the content"
-        v-model="text"
-        clearable>
-    </el-input>
-    <el-button v-if="user.number === 2" type="primary" icon="el-icon-edit" @click="send"></el-button>
-
-    <el-form v-loading="loading" :model="ruleForm" :rules="rules" ref="ruleForm2" label-width="100px" class="demo-ruleForm2">
-
-      <mavon-editor v-if="user.number === 2" v-model="content2" :ishljs = "true" ref="md" @imgAdd="imgAdd" @imgDel="imgDel" code-style="androidstudio"></mavon-editor>
-
-      <mavon-editor v-else-if="user.number !== 2 & user2" v-model="contentBlank2" :subfield="false"
-                    :editable="false"
-                    default-open="preview"
-                    :navigation="true" :toolbars-flag="false" previewBackground="#ffffff" :scrollStyle="false" code-style="androidstudio">
-      </mavon-editor>
-
-    </el-form>
-
-    <el-button id="submitButton" v-if="user.role === 'admin'" type="primary" @click="submitForm('ruleForm')">Submit</el-button>
-
-
     <Footer></Footer>
   </div>
+
+
 
 
 </template>
