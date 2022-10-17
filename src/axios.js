@@ -32,9 +32,6 @@ request.interceptors.response.use(response => {
             router.push("/login")
         }
 
-        console.log(res)
-
-
         Element.Message.error(res.msg, {duration: 3 * 1000})
 
       return Promise.reject(res.msg)
@@ -62,9 +59,6 @@ request.interceptors.response.use(response => {
               store.commit("REMOVE_INFO")
               router.push("/login")
           }
-
-
-          console.log()
 
           Element.Message.error(error.response.data.msg, {duration: 3 * 1000})
           return Promise.reject(error)
