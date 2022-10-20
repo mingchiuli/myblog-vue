@@ -91,7 +91,7 @@
       </el-table-column>
 
       <el-table-column
-          prop="readSum"
+          prop="readCount"
           label="Read"
           width="100"
           align="center">
