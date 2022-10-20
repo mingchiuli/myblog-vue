@@ -1,7 +1,7 @@
 <template>
   <div class="footer">
     <hr>
-    <div class="copyright">&copy; <a href="/"> Powered by Java 11 on Kubernetes</a> {{yearBegin}}-{{yearEnd}} </div>
+    <div class="copyright">&copy; <a href="/"> Powered by Java 17 on Kubernetes</a> {{yearBegin}}-{{yearEnd}} </div>
   </div>
 </template>
 
