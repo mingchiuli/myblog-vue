@@ -46,23 +46,14 @@ export default {
 
   methods: {
     stop() {
-      this.$axios.get('/stopMQ', {
-        headers: {
-          "Authorization": localStorage.getItem("myToken")
-        }
-      }).then(res => {
-        if (res.data.code === 200) {
-          this.$message.success("Operation successful!")
-        }
+      stompClient.publish({
+        destination: '/app/stopMQ'
       })
     },
 
     show() {
-      this.$axios.get('/startMQ', {
-        headers: {
-          "Authorization": localStorage.getItem("myToken")
-        }
-      }).then(res => {
+      stompClient.publish({
+        destination: '/app/startMQ'
       })
     },
 
@@ -147,14 +138,8 @@ export default {
 
     disconnectWebSocket() {
       if (stompClient !== null) {
-
-        this.$axios.get('/stopMQ', {
-          headers: {
-            "Authorization": localStorage.getItem("myToken")
-          }
-        }).then(res => {
-          stompClient.deactivate()
-        })
+        this.stop()
+        stompClient.deactivate()
       }
     },
 
