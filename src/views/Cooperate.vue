@@ -361,7 +361,8 @@ export default {
       stompClient.onConnect = (frame) => {
 
         stompClient.publish({
-          destination: '/app/pushUser/' + this.$route.params.blogId
+
+          destination: '/app/pushUser/' + JSON.parse(localStorage.getItem("myUserInfo")).id + '/' + this.$route.params.blogId
         })
 
         stompClient.subscribe('/user/' + this.wsBlogId + '/topic/users', (res) => {
