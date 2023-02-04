@@ -130,7 +130,7 @@
 
 <style scoped lang="less">
 .demo-ruleForm {
-  max-width: 60%;
+  width: 60%;
   margin: 0 auto;
 }
 

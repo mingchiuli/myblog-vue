@@ -117,7 +117,8 @@ h1 {
 #BPSider {
   /*float: left;*/
   margin-top: 10px;
-  margin-left: 10%;
+  margin-left: 5%;
+  /*margin-left: 50px;*/
 }
 
 

@@ -5,8 +5,8 @@
       <el-divider direction="vertical"></el-divider>
       <span><el-link class="LSLink" type="success" @click="add">Post</el-link></span>
       <el-divider direction="vertical"></el-divider>
-      <span><el-link class="LSLink" type="warning" @click="backStage">Backstage</el-link></span>
-      <el-divider direction="vertical"></el-divider>
+      <span><el-link class="LSLink" type="warning" @click="backStage" v-if="isPC">Backstage</el-link></span>
+      <el-divider direction="vertical" v-if="isPC"></el-divider>
       <span><el-link class="LSLink" type="danger" @click="logout">Logout</el-link></span>
     </div>
 
@@ -27,6 +27,7 @@ export default {
         username: '',
         avatar: ''
       },
+      isPC: false
     }
   },
   methods: {
@@ -68,6 +69,11 @@ export default {
     }
   },
   created() {
+    this.flag =  navigator.userAgent.match(/(phone|pod|iPhone|iPod|ios|Android|Moblie|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowerNG|WebOS|Symbian|Windows Phone)/i);
+    if (this.flag === null) {
+      this.isPC = true;
+    }
+
 
     if(this.$store.getters.getUser) {
       this.user.username = this.$store.getters.getUser.username

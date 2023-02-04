@@ -5,12 +5,12 @@
     <div class="m-content">
 
       <el-form :model="contentForm" :rules="rules" ref="contentForm" label-width="100px" class="demo-contentForm">
-        <el-form-item label="title" prop="title">
+        <el-form-item class="uni" label="title" prop="title">
           <el-input v-model="contentForm.title"></el-input>
         </el-form-item>
 
 <!--        el-form-item的prop="description"疑似没用-->
-        <el-form-item label="description" prop="description">
+        <el-form-item class="uni" label="description" prop="description">
           <el-input type="textarea" v-model="contentForm.description"></el-input>
         </el-form-item>
 
@@ -36,13 +36,14 @@
           <el-radio v-model="contentForm.status" label="1">加密</el-radio>
         </div>
 
-        <el-form-item label="content" prop="content" v-loading="loading">
-          <mavon-editor v-model="contentForm.content" :subfield="false" :ishljs = "true" ref="md" code-style="androidstudio" @imgAdd="imgAdd" @imgDel="imgDel"></mavon-editor>
-        </el-form-item>
+<!--        <el-form-item label="content" prop="content" v-loading="loading">-->
+        <div id="editor" v-loading="loading">
+          <mavon-editor style="height: 100%" v-model="contentForm.content" :subfield="false" :ishljs = "true" ref="md" code-style="androidstudio" @imgAdd="imgAdd" @imgDel="imgDel"></mavon-editor>
+        </div>
+<!--        </el-form-item>-->
 
-        <el-form-item>
+        <el-form-item id="submit">
           <el-button type="primary" @click="submitForm('contentForm')">Submit</el-button>
-          <el-button @click="resetForm('contentForm')">Reset</el-button>
         </el-form-item>
       </el-form>
 
@@ -91,6 +92,12 @@ import Footer from "@/components/Footer";
       };
     },
     methods: {
+      isPC() {
+        let flag =  navigator.userAgent.match(/(phone|pod|iPhone|iPod|ios|Android|Moblie|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowerNG|WebOS|Symbian|Windows Phone)/i);
+        return flag === null;
+      },
+
+
       removeCover(file) {
         const formdata = new FormData()
         formdata.append('url', file.url)
@@ -150,9 +157,6 @@ import Footer from "@/components/Footer";
             return false;
           }
         });
-      },
-      resetForm(formName) {
-        this.$refs[formName].resetFields();
       },
 
 
@@ -216,7 +220,6 @@ import Footer from "@/components/Footer";
 
           this.assignData(res)
 
-          this.loading = false
         })
         //是其他小伙伴操作
       } else if (blogId && localStorage.getItem("myUserInfo")) {
@@ -224,7 +227,6 @@ import Footer from "@/components/Footer";
 
           this.assignData(res)
 
-          this.loading = false
         })
       } else {
         //是添加操作
@@ -246,7 +248,6 @@ import Footer from "@/components/Footer";
             }).then(res => {
 
               this.assignData(res)
-              this.loading = false
             })
 
           } else {
@@ -254,11 +255,22 @@ import Footer from "@/components/Footer";
             this.$axios.get('/blog/' + id).then(res => {
 
               this.assignData(res)
-              this.loading = false
             })
           }
         })
       }
+
+      setTimeout(() => {
+        let ele = document.querySelector("#editor");
+
+        if (this.isPC()) {
+          ele.style.width = '50%'
+        } else {
+          ele.style.width = '300px'
+        }
+      }, 100)
+      this.loading = false
+
 
     }
   }
@@ -279,8 +291,24 @@ h2 {
 
 .m-content {
   text-align: center;
-  width: 70%;
-  margin: 0 auto;
+  /*width: 70%;*/
+  /*margin: 0 auto;*/
+}
+
+.uni {
+  margin: 2% auto;
+  width: 50%;
+  height: 100%;
+}
+
+#editor {
+  margin: auto;
+  width: 50%
+}
+
+#submit {
+  margin-left: 37.5%;
+  margin-top: 1%;
 }
 
 #BEUpdate {

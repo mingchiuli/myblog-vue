@@ -1,23 +1,23 @@
 <template>
   <div>
 
-    <Catalogue :props="defaultProps" ref="toc" v-show="catalog" v-if="isPC" @isCatalog="showCatalog"></Catalogue>
+    <div class="m-content">
+      <Catalogue :props="defaultProps" ref="toc" v-show="catalog" v-if="isPC" @isCatalog="showCatalog"></Catalogue>
 
+      <EditStatus v-if="hasLogin" :blog="blog"></EditStatus>
 
-    <EditStatus v-if="hasLogin" :blog="blog"></EditStatus>
+      <div v-loading="loading" id="editor">
+        <!--使用mavon-editor预览功能-->
+        <mavon-editor class="mavon-editor" v-html="blog.content" :subfield="false"
+                      :editable="false"
+                      default-open="preview"
+                      :navigation="true" :toolbars-flag="false" previewBackground="#ffffff" code-style="androidstudio" :scrollStyle="false">
+        </mavon-editor>
+      </div>
 
-    <div class="content" v-loading="loading">
-      <!--                使用mavon-editor预览功能-->
-      <mavon-editor class="mavenEditor" v-html="blog.content" :subfield="false"
-                    :editable="false"
-                    default-open="preview"
-                    :navigation="true" :toolbars-flag="false" previewBackground="#ffffff" code-style="androidstudio" :scrollStyle="false">
-      </mavon-editor>
+      <BackTop></BackTop>
+      <Comment id="editor"></Comment>
     </div>
-
-    <BackTop></BackTop>
-
-    <Comment></Comment>
 
   </div>
 </template>
@@ -82,11 +82,12 @@ export default {
       this.catalog = val1
     },
 
-    isPCorMobile() {
+    isPCOrMobile() {
       this.flag =  navigator.userAgent.match(/(phone|pod|iPhone|iPod|ios|Android|Moblie|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowerNG|WebOS|Symbian|Windows Phone)/i);
       if (this.flag === null) {
         this.isPC = true;
       }
+      return this.flag === null
     },
 
 
@@ -102,7 +103,7 @@ export default {
   },
 
   created() {
-    this.isPCorMobile()
+    this.isPCOrMobile()
 
     this.$emit("yearCount", 0, -1)
 
@@ -119,7 +120,9 @@ export default {
 
         this.createdCommon(res)
         this.loading = false
-        this.$refs.toc.setTimeoutTocAndCli()
+        if (this.isPC) {
+          this.$refs.toc.setTimeoutTocAndCli()
+        }
       })
 
     } else if (this.$route.query.token) {
@@ -132,7 +135,9 @@ export default {
 
         this.createdCommon(res)
         this.loading = false
-        this.$refs.toc.setTimeoutTocAndCli()
+        if (this.isPC) {
+          this.$refs.toc.setTimeoutTocAndCli()
+        }
       })
 
     } else {
@@ -144,24 +149,31 @@ export default {
 
         this.createdCommon(res)
         this.loading = false
-        this.$refs.toc.setTimeoutTocAndCli()
-
-
+        if (this.isPC) {
+          this.$refs.toc.setTimeoutTocAndCli()
+        }
       })
     }
+
+    setTimeout(() => {
+      let ele = document.querySelector("#editor");
+
+      if (this.isPCOrMobile()) {
+        ele.style.width = '50%'
+      } else {
+        ele.style.width = '350px'
+      }
+    }, 100)
   },
 }
 </script>
 
 <style lang="less">
 
-.content {
-  text-align: center;
-  max-width: 70%;
-  margin: 0 auto;
-  font-family: Source Han SC,serif;
+#editor {
+  margin: auto;
+  width: 50%
 }
-
 
 a {
   text-decoration: none;
@@ -189,15 +201,6 @@ h1 {
   font-size: xx-large;
   margin-top: 1%;
   margin-bottom: 3%;
-}
-
-//使用v-html填充内容以后，这个样式就不用变更了
-div.v-note-wrapper .v-note-panel .v-note-navigation-wrapper.transition {
-  /*display: none;*/
-}
-
-.Comment {
-  max-width: 70%;
 }
 
 
@@ -304,9 +307,7 @@ pre.hljs::after {
   z-index: 1;
 }
 
-.mavenEditor {
-  margin: 0 auto;
-  width: 70%;
+.mavon-editor {
   padding: 25px;
 }
 

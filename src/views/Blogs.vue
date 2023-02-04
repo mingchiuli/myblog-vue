@@ -101,6 +101,14 @@
     },
     methods: {
 
+      isPCOrMobile() {
+        this.flag =  navigator.userAgent.match(/(phone|pod|iPhone|iPod|ios|Android|Moblie|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowerNG|WebOS|Symbian|Windows Phone)/i);
+        if (this.flag === null) {
+          this.isPC = true;
+        }
+        return this.flag === null
+      },
+
       changeStyle(status, className) {
         let dom = document.querySelectorAll(className);
         dom[0].style.display = status;
@@ -116,13 +124,6 @@
 
         this.total = res.data.data.total
         this.pageSize = res.data.data.size
-      },
-
-      isPCorMobile() {
-        this.flag = navigator.userAgent.match(/(phone|pod|iPhone|iPod|ios|Android|Moblie|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowerNG|WebOS|Symbian|Windows Phone)/i);
-        if (this.flag === null) {
-          this.isPC = true;
-        }
       },
 
       querySearchAsyncCommon(res, cb) {
@@ -319,6 +320,16 @@
 
     created() {
 
+      setTimeout(() => {
+        let ele = document.querySelector(".block");
+
+        if (this.isPCOrMobile()) {
+          ele.style.width = '45%'
+        } else {
+          ele.style.width = '300px'
+        }
+      }, 100)
+
       if (localStorage.getItem('myToken')) {
         this.$store.state.hasLogin = true
       }
@@ -327,7 +338,7 @@
     },
 
     mounted() {
-      this.isPCorMobile()
+      this.isPCOrMobile()
     },
 
     watch: {
@@ -356,8 +367,13 @@
 
 <style scoped>
 
-.el-card {
-  max-width: 60%;
+.el-timeline {
+  padding: 0;
+}
+
+.block {
+  width: 50%;
+  margin: auto;
 }
 
 .image {
@@ -365,9 +381,6 @@
   display: block;
 }
 
-.el-timeline-item {
-  margin-left: 25%;
-}
 
 .mPage {
   margin: 0 auto;
@@ -379,11 +392,6 @@ a {
   color: black;
   font-size: large;
 }
-
-.block {
-  margin-top: 3%;
-}
-
 
 hr {
   display: block;
