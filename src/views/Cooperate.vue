@@ -224,7 +224,6 @@ export default {
         this.username = user.username
 
         users.forEach(user => {
-          this['user' + user.number] = true
           this.blogId = this.$route.params.blogId
           if (this.username === user.username) {
             this.user = user
@@ -313,13 +312,14 @@ export default {
         stompClient.subscribe('/topic/content/' + this.wsBlogId , (res) => {
 
           if (!this.writing) {
-            this.loading = true
 
             let msg = JSON.parse(res.body)
 
-            this.content = msg.content
+            let from = msg.from
 
-            this.loading = false
+            if (parseInt(from) !== this.user.id) {
+              this.content = msg.content
+            }
           }
         });
 
@@ -448,7 +448,7 @@ export default {
 
 #submitButton {
   position: relative;
-  left: 90%;
+  left: 88%;
 }
 
 </style>
