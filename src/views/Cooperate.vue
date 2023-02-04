@@ -24,6 +24,14 @@
             clearable>
         </el-input>
         <el-button type="primary" icon="el-icon-edit" @click="send"></el-button>
+        <el-switch
+            style="margin-left: 20px"
+            v-model="writing"
+            active-text="writing"
+            inactive-text="waiting"
+            active-color="#13ce66"
+            inactive-color="#ff4949">
+        </el-switch>
       </div>
 
       <el-input v-if="user.role === 'admin'" v-model="ruleForm.title" placeholder="title"></el-input>
@@ -32,7 +40,7 @@
 
       <el-form v-loading="loading" :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm1">
 
-        <mavon-editor v-model="content" :ishljs = "true" ref="md" @imgAdd="imgAdd" @imgDel="imgDel" code-style="androidstudio"></mavon-editor>
+        <mavon-editor v-model="content" :ishljs = "true" ref="md" :editable="writing" @imgAdd="imgAdd" @imgDel="imgDel" code-style="androidstudio"></mavon-editor>
 
       </el-form>
 
@@ -70,6 +78,7 @@ export default {
       created: '',
       wsBlogId: 0,
       loading: false,
+      writing: false,
 
       ruleForm: {
         id: '',
@@ -103,6 +112,7 @@ export default {
         this.$store.state.users = val
       }
     }
+
   },
 
   methods: {
@@ -302,13 +312,15 @@ export default {
 
         stompClient.subscribe('/topic/content/' + this.wsBlogId , (res) => {
 
-          this.loading = true
+          if (!this.writing) {
+            this.loading = true
 
-          let msg = JSON.parse(res.body)
+            let msg = JSON.parse(res.body)
 
-          this.content = msg.content
+            this.content = msg.content
 
-          this.loading = false
+            this.loading = false
+          }
         });
 
 
