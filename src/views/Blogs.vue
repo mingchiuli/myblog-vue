@@ -67,7 +67,7 @@
                      :current-page="parseInt(currentPage)"
                      :page-size="pageSize"
                      :total="total"
-                     :page-count="3"
+                     :pager-count="5"
                      @current-change=pageSelect>
       </el-pagination>
 
