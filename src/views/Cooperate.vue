@@ -19,12 +19,11 @@
 
       <div>
         <el-input
-            v-if="user.number === 0"
             placeholder="Please enter the content"
             v-model="text"
             clearable>
         </el-input>
-        <el-button v-if="user.number === 0" type="primary" icon="el-icon-edit" @click="send"></el-button>
+        <el-button type="primary" icon="el-icon-edit" @click="send"></el-button>
       </div>
 
       <el-input v-if="user.role === 'admin'" v-model="ruleForm.title" placeholder="title"></el-input>
@@ -33,54 +32,7 @@
 
       <el-form v-loading="loading" :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm1">
 
-        <mavon-editor v-if="user.number === 0" v-model="content0" :ishljs = "true" ref="md" @imgAdd="imgAdd" @imgDel="imgDel" code-style="androidstudio"></mavon-editor>
-
-        <mavon-editor v-if="user.number !== 0 & user0" v-model="contentBlank0" :subfield="false"
-                      :editable="false"
-                      default-open="preview"
-                      :navigation="true" :toolbars-flag="false" previewBackground="#ffffff" :scrollStyle="false" code-style="androidstudio">
-        </mavon-editor>
-
-      </el-form>
-
-      <el-input
-          v-if="user.number === 1"
-          placeholder="Please enter the content"
-          v-model="text"
-          clearable>
-      </el-input>
-      <el-button v-if="user.number === 1" type="primary" icon="el-icon-edit" @click="send"></el-button>
-
-      <el-form v-loading="loading" :model="ruleForm" :rules="rules" ref="ruleForm2" label-width="100px" class="demo-ruleForm2">
-
-        <mavon-editor v-if="user.number === 1" v-model="content1" :ishljs = "true" ref="md" @imgAdd="imgAdd" @imgDel="imgDel" code-style="androidstudio"></mavon-editor>
-
-        <mavon-editor v-else-if="user.number !== 1 & user1" v-model="contentBlank1" :subfield="false"
-                      :editable="false"
-                      default-open="preview"
-                      :navigation="true" :toolbars-flag="false" previewBackground="#ffffff" :scrollStyle="false" code-style="androidstudio">
-        </mavon-editor>
-
-      </el-form>
-
-
-      <el-input
-          v-if="user.number === 2"
-          placeholder="Please enter the content"
-          v-model="text"
-          clearable>
-      </el-input>
-      <el-button v-if="user.number === 2" type="primary" icon="el-icon-edit" @click="send"></el-button>
-
-      <el-form v-loading="loading" :model="ruleForm" :rules="rules" ref="ruleForm2" label-width="100px" class="demo-ruleForm2">
-
-        <mavon-editor v-if="user.number === 2" v-model="content2" :ishljs = "true" ref="md" @imgAdd="imgAdd" @imgDel="imgDel" code-style="androidstudio"></mavon-editor>
-
-        <mavon-editor v-else-if="user.number !== 2 & user2" v-model="contentBlank2" :subfield="false"
-                      :editable="false"
-                      default-open="preview"
-                      :navigation="true" :toolbars-flag="false" previewBackground="#ffffff" :scrollStyle="false" code-style="androidstudio">
-        </mavon-editor>
+        <mavon-editor v-model="content" :ishljs = "true" ref="md" @imgAdd="imgAdd" @imgDel="imgDel" code-style="androidstudio"></mavon-editor>
 
       </el-form>
 
@@ -91,9 +43,6 @@
     <Footer></Footer>
   </div>
 
-
-
-
 </template>
 
 
@@ -103,7 +52,7 @@ let stompClient
 
 import SockJS from 'sockjs-client';
 import Footer from "@/components/Footer";
-import { Client, Message } from '@stomp/stompjs';
+import {Client} from '@stomp/stompjs';
 import GLOBAL from '@/Global'
 
 export default {
@@ -117,19 +66,10 @@ export default {
       blogId: 0,
       username: "",
       messages: [],
-      contentBlank0: '',
-      contentBlank1: '',
-      contentBlank2: '',
-      content0: '',
-      content1: '',
-      content2: '',
+      content: '',
       created: '',
-      user0: false,
-      user1: false,
-      user2: false,
       wsBlogId: 0,
       loading: false,
-
 
       ruleForm: {
         id: '',
@@ -168,15 +108,12 @@ export default {
   methods: {
 
     sync() {
-      let num = this.user.number
-      let target = 'content' + num
       try {
         stompClient.publish({
           destination: '/app/sync/' + this.user.id + '/' + this.blogId,
-          body: this[target] === '' ? ' ' : this[target]
+          body: this.content === '' ? ' ' : this.content
         })
       } catch (e) {
-        // console.log(e)
       }
     },
 
@@ -184,28 +121,7 @@ export default {
       this.$refs[formName].validate((valid) => {
         if (valid) {
           //把管理员包含进来
-          let num = this.user.number
-
-          let count = 0
-
-          for (let i = 0; i < 3; i++) {
-            if (this['user' + i]) {
-              count++
-            }
-          }
-
-          for (let i = 0; i < count; i++) {
-
-            if (num !== i) {
-              let temp = 'contentBlank' + i
-              this.ruleForm.content += this[temp]
-              this.ruleForm.content += '\n'
-            } else {
-              let temp = 'content' + num
-              this.ruleForm.content += this[temp]
-              this.ruleForm.content += '\n'
-            }
-          }
+          this.ruleForm.content = this.content
 
           this.$axios.post('/blog/edit', this.ruleForm, {
             headers: {
@@ -284,7 +200,7 @@ export default {
 
     initWebSocket() {
       this.loading = true
-      this.$axios.get('/blogWSCooperate/' + this.$route.params.blogId + '/' + this.$route.params.coNumber,{
+      this.$axios.get('/blogWSCooperate/' + this.$route.params.blogId,{
         headers: {
           "Authorization": localStorage.getItem("myToken")
         }
@@ -293,9 +209,7 @@ export default {
 
         const blog = res.data.data.blog
         const users = res.data.data.users
-        //
-        //
-        // let username = JSON.parse(localStorage.getItem("myUserInfo")).username;
+
         let user = JSON.parse(localStorage.getItem("myUserInfo"))
         this.username = user.username
 
@@ -310,7 +224,7 @@ export default {
         this.ruleForm.id = blog.id
         this.ruleForm.title = blog.title
         this.ruleForm.description = blog.description
-        this.content0 = blog.content
+        this.content = blog.content
         this.created = blog.created
         this.wsBlogId = blog.id
         this.loading = false
@@ -392,20 +306,7 @@ export default {
 
           let msg = JSON.parse(res.body)
 
-          let from = msg.from
-
-          let content = msg.content
-
-          let target = 'contentBlank'
-
-          for (let i = 0; i < this.users.length; i++) {
-            if (this.users[i].id === parseInt(from)) {
-              target += this.users[i].number
-              break
-            }
-          }
-
-          this[target] = content
+          this.content = msg.content
 
           this.loading = false
         });
@@ -470,26 +371,13 @@ export default {
   },
 
   watch: {
-    content0: {
+    content: {
       handler: function () {
         this.sync()
       },
       deep: false,
       // immediate: false
-    },
-    content1: {
-      handler: function () {
-        this.sync()
-      },
-      deep: false,
-    },
-    content2: {
-      handler: function () {
-        this.sync()
-      },
-      deep: false,
-    },
-
+    }
   },
 
   destroyed: function () {
@@ -503,7 +391,7 @@ export default {
 
 #First {
   width: 50%;
-  margin: 0 auto;
+  margin: auto;
 }
 
 .el-col {

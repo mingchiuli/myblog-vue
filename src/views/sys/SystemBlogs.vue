@@ -146,23 +146,6 @@
         :total="total">
     </el-pagination>
 
-
-    <el-dialog
-        title="Please select the position"
-        :visible.sync="coVisible"
-        width="400px"
-        :before-close="coHandleClose">
-
-      <el-radio-group v-model="coNumber">
-        <el-radio-button label="0" :disabled="coDisabled.index0" @click.native="elTarget"></el-radio-button>
-        <el-radio-button label="1" :disabled="coDisabled.index1" @click.native="elTarget"></el-radio-button>
-        <el-radio-button label="2" :disabled="coDisabled.index2" @click.native="elTarget"></el-radio-button>
-      </el-radio-group>
-      <div style="text-align: right">
-        <el-button type="primary" :disabled="elGetTarget" @click="coConfirm">Get into</el-button>
-      </div>
-    </el-dialog>
-
     <Footer id="SBFooter"></Footer>
 
   </div>
@@ -181,10 +164,6 @@ export default {
       multipleSelection: [],
       delBtlStatus: true,
       tableData: [],
-      coVisible: false,
-      coNumber: -1,
-      coBlogId: 0,
-      coDisabled: {},
       elGetTarget: true,
       loading: false,
 
@@ -261,30 +240,9 @@ export default {
       })
     },
 
-    elTarget() {
-      this.elGetTarget = false
-    },
-
-    coHandleClose() {
-      this.coVisible = false
-    },
-
-    coConfirm() {
-      this.$router.push('/cooperate/' + this.coBlogId + '/' + this.coNumber)
-    },
-
     cooperate(id) {
+      this.$router.push('/cooperate/' + id)
 
-      const _this = this
-      this.$axios.get('/coStatus/' + id, {
-        headers: {
-          "Authorization": localStorage.getItem("myToken")
-        }
-      }).then(res => {
-        _this.coDisabled = res.data.data
-        this.coBlogId = id;
-        this.coVisible = true;
-      })
     },
 
     statusHandle(id, status) {

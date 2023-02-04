@@ -291,8 +291,6 @@ h2 {
 
 .m-content {
   text-align: center;
-  /*width: 70%;*/
-  /*margin: 0 auto;*/
 }
 
 .uni {
