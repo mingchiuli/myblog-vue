@@ -16,7 +16,7 @@
     </div>
     <div id="painting">
       <p>
-        <img src="http://81.68.192.120:30081/upload/img/20211118224937/aecd9f6e-bbef-43af-9540-ebac1c0c2132_winterpoem.jpg" class="mImg" alt="">
+        <img src="https://bloglmc.oss-cn-hangzhou.aliyuncs.com/aecd9f6e-bbef-43af-9540-ebac1c0c2132_winterpoem.webp" class="mImg" alt="">
       </p>
       <li>Secret Garden《Winter Poem》</li>
 

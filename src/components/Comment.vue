@@ -65,7 +65,10 @@ export default {
 <style scoped>
 
 #commentDiv {
-  margin-top: 15px
+  /*margin-top: 15px*/
+
+  margin: auto;
+  width: 50%
 }
 
 </style>
