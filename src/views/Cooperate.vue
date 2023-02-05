@@ -319,7 +319,9 @@ export default {
 
           if (parseInt(from) !== this.user.id) {
             this.content = msg.content
-            this.writing = false
+            if (this.writing) {
+              this.writing = false
+            }
           }
         });
 
