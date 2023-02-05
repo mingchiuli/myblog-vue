@@ -118,12 +118,14 @@ export default {
   methods: {
 
     sync() {
-      try {
-        stompClient.publish({
-          destination: '/app/sync/' + this.user.id + '/' + this.blogId,
-          body: this.content === '' ? ' ' : this.content
-        })
-      } catch (e) {
+      if (this.writing) {
+        try {
+          stompClient.publish({
+            destination: '/app/sync/' + this.user.id + '/' + this.blogId,
+            body: this.content === '' ? ' ' : this.content
+          })
+        } catch (e) {
+        }
       }
     },
 
@@ -311,15 +313,13 @@ export default {
 
         stompClient.subscribe('/topic/content/' + this.wsBlogId , (res) => {
 
-          if (!this.writing) {
+          let msg = JSON.parse(res.body)
 
-            let msg = JSON.parse(res.body)
+          let from = msg.from
 
-            let from = msg.from
-
-            if (parseInt(from) !== this.user.id) {
-              this.content = msg.content
-            }
+          if (parseInt(from) !== this.user.id) {
+            this.content = msg.content
+            this.writing = false
           }
         });
 

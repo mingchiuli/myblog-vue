@@ -36,11 +36,9 @@
           <el-radio v-model="contentForm.status" label="1">加密</el-radio>
         </div>
 
-<!--        <el-form-item label="content" prop="content" v-loading="loading">-->
         <div id="editor" v-loading="loading">
           <mavon-editor style="height: 100%" v-model="contentForm.content" :subfield="false" :ishljs = "true" ref="md" code-style="androidstudio" @imgAdd="imgAdd" @imgDel="imgDel"></mavon-editor>
         </div>
-<!--        </el-form-item>-->
 
         <el-form-item id="submit">
           <el-button type="primary" @click="submitForm('contentForm')">Submit</el-button>
@@ -306,7 +304,6 @@ h2 {
 
 #submit {
   margin-left: 37.5%;
-  margin-top: 1%;
 }
 
 #BEUpdate {
