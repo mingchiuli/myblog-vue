@@ -394,7 +394,7 @@ export default {
     }
   },
 
-  destroyed: function () {
+  destroyed: () => {
     clearInterval(this.webSocketTimer);
     this.disconnectWebSocket();
   },
