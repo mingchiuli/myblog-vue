@@ -282,10 +282,10 @@ export default {
       this.$refs[formName].validate((valid) => {
         if (valid) {
           let token = ''
-          if (sessionStorage.getItem("myToken")) {
-            token = sessionStorage.getItem("myToken")
-          } else {
+          if (localStorage.getItem("myToken")) {
             token = localStorage.getItem("myToken")
+          } else {
+            token = sessionStorage.getItem("myToken")
           }
 
           this.$axios.post('/addWebsite', this.editForm, {

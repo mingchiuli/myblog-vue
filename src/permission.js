@@ -17,6 +17,11 @@ router.beforeEach((to, from, next) => {
       }
     }).then(res => {
 
+      if (res.data.code !== 200) {
+        store.commit("REMOVE_INFO")
+        router.push("/login")
+      }
+
       let temp = []
       res.data.data.forEach(item => {
         //有孩子说明是后台路由
