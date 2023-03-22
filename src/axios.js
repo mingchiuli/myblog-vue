@@ -8,7 +8,7 @@ import Global from "@/Global";
 axios.defaults.baseURL = Global.url
 
 const request = axios.create({
-    timeout: 5000
+    timeout: 10000
 })
 
 
